@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.9, created on 2015-11-02 06:28:19
+<?php /* Smarty version Smarty-3.0.9, created on 2015-11-02 07:56:08
          compiled from "C:/xampp/htdocs/MAGNUS/templates\index_asignatura.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:109825636f473af17a8-92249426%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:5686563709080ddd85-31523683%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'c96077c8ce167299b3170a107c4ce22defe8528c' => 
     array (
       0 => 'C:/xampp/htdocs/MAGNUS/templates\\index_asignatura.tpl',
-      1 => 1446442088,
+      1 => 1446446990,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '109825636f473af17a8-92249426',
+  'nocache_hash' => '5686563709080ddd85-31523683',
   'function' => 
   array (
   ),
@@ -67,7 +67,7 @@ editar_asignatura.php?id=<?php echo $_smarty_tpl->getVariable('asignaturas')->va
 							<i class="material-icons center iconos-accion">create</i>
 						</a>
 
-						<a>
+						<a class="boton-eliminar-asig" href="#modal-eliminar-asig">
 							<i class="material-icons center iconos-accion">delete</i>
 							<form action="<?php echo $_smarty_tpl->getVariable('gvar')->value['l_global'];?>
 eliminar_asignatura.php" method="POST">
@@ -86,5 +86,19 @@ crear_asignatura.php">
 			<i class="material-icons left">add</i>
 			Crear Asignatura
 		</a>
+
+		<div id="modal-eliminar-asig" class="modal">
+			<div class="modal-content">
+				<h5>Eliminar Asignatura</h5>
+				<p>¿Está seguro que desea eliminar esta asignatura?</p>
+			</div>
+			<div class="modal-footer">
+				<a class="modal-action modal-close waves-effect waves-green btn-flat" href="#!">No</a>
+				<a id="conf-eliminar-asig" class="modal-action modal-close waves-effect waves-green btn-flat" href="#!">Sí</a>
+			</div>
+		</div>
+
+		<input value=<?php echo $_smarty_tpl->getVariable('msj')->value;?>
+ id="msj-index-asig" name="msj-index-asig" type="hidden">
 	</div>
 </main>

@@ -21,7 +21,7 @@
 							<i class="material-icons center iconos-accion">create</i>
 						</a>
 
-						<a>
+						<a class="boton-eliminar-asig" href="#modal-eliminar-asig">
 							<i class="material-icons center iconos-accion">delete</i>
 							<form action="{$gvar.l_global}eliminar_asignatura.php" method="POST">
 								<input value="{$asignaturas[i]->get('id')}" id="id" name="id" type="hidden">
@@ -37,5 +37,18 @@
 			<i class="material-icons left">add</i>
 			Crear Asignatura
 		</a>
+
+		<div id="modal-eliminar-asig" class="modal">
+			<div class="modal-content">
+				<h5>Eliminar Asignatura</h5>
+				<p>¿Está seguro que desea eliminar esta asignatura?</p>
+			</div>
+			<div class="modal-footer">
+				<a class="modal-action modal-close waves-effect waves-green btn-flat" href="#!">No</a>
+				<a id="conf-eliminar-asig" class="modal-action modal-close waves-effect waves-green btn-flat" href="#!">Sí</a>
+			</div>
+		</div>
+
+		<input value={$msj} id="msj-index-asig" name="msj-index-asig" type="hidden">
 	</div>
 </main>

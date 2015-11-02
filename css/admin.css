@@ -54,3 +54,15 @@ main {
 .iconos-accion {
 	color: #66BB6A;
 }
+
+.toast_exito {
+	background-color: white;
+	color: #66BB6A;
+	border: 2px #66BB6A solid;
+}
+
+.toast_error {
+	background-color: white;
+	color: #D50000;
+	border: 2px #D50000 solid;
+}
