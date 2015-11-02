@@ -1,24 +1,24 @@
-<?php /* Smarty version Smarty-3.0.9, created on 2015-10-30 20:47:28
+<?php /* Smarty version Smarty-3.0.9, created on 2015-11-02 09:51:07
          compiled from "C:/xampp/htdocs/MAGNUS/templates\crear_asignatura.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:209695633c950362db7-26633892%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:4353563723fb7eee11-65372418%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '9eb389f78279a6a889d7603e644e644b831aae59' => 
     array (
       0 => 'C:/xampp/htdocs/MAGNUS/templates\\crear_asignatura.tpl',
-      1 => 1446234420,
+      1 => 1446454260,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '209695633c950362db7-26633892',
+  'nocache_hash' => '4353563723fb7eee11-65372418',
   'function' => 
   array (
   ),
   'has_nocache_code' => false,
 )); /*/%%SmartyHeaderCode%%*/?>
 <main>
-	<div id="create-asig-principal-box" class="white container principal z-depth-1">
+	<div id="div-principal-crear-asig" class="white container principal z-depth-1">
 		<h5 class="center-align">Crear Asignatura</h5>
 
 		<div class="row">
@@ -26,21 +26,21 @@ $_smarty_tpl->decodeProperties(array (
 crear_asignatura.php" method="POST">
 				<div class="row">
 					<div class="input-field col s6">
-						<input id="id" name="id" type="text" class="create-asig-input validate">
+						<input id="id" name="id" type="text" class="input-crear-asig validate">
           				<label for="id">Código</label>
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="input-field col s12">
-						<input id="nombre" name="nombre" type="text" class="create-asig-input validate">
+						<input id="nombre" name="nombre" type="text" class="input-crear-asig validate">
           				<label for="nombre">Nombre</label>
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="input-field col s12">
-						<input id="escuela" name="escuela" type="text" class="create-asig-input validate">
+						<input id="escuela" name="escuela" type="text" class="input-crear-asig validate">
           				<label for="escuela">Escuela</label>
 					</div>
 				</div>
@@ -51,10 +51,10 @@ crear_asignatura.php" method="POST">
 			</form>
 		</div>
 
-		<div class="row inferior-buttons">
+		<div class="row botones-inferiores">
 			<div class="col s4">
 				<div class="container">
-					<a style="width: 100%;" class="waves-effect waves-light green lighten-1 btn modal-asig-trigger asig-button" href="#modal-asig-group-1">
+					<a class="waves-effect waves-light green lighten-1 btn" href="#!">
 						<i class="material-icons left">add</i>
 						Crear Grupo
 					</a>
@@ -63,7 +63,7 @@ crear_asignatura.php" method="POST">
 
 			<div class="col s4">
 				<div class="container">
-					<a class="waves-effect waves-light green lighten-1 btn modal-asig-trigger asig-button" href="#modal-asig-create">
+					<a class="waves-effect waves-light green lighten-1 btn boton-crear-asig" href="#modal-guardar-asig">
 						<i class="material-icons left">save</i>
 						Guardar
 					</a>
@@ -72,7 +72,7 @@ crear_asignatura.php" method="POST">
 
 			<div class="col s4">
 				<div class="container">
-					<a class="waves-effect waves-light green lighten-1 btn modal-asig-trigger" href="#modal-asig-cancel">
+					<a class="waves-effect waves-light green lighten-1 btn boton-crear-asig" href="#modal-cancelar-asig">
 						<i class="material-icons left">clear</i>
 						Cancelar
 					</a>
@@ -80,48 +80,32 @@ crear_asignatura.php" method="POST">
 			</div>
 		</div>
 
-		<div id="modal-asig-group-1" class="modal">
-			<div class="modal-content">
-				<h5>Crear Grupo</h5>
-				<p>¿Está seguro que desea guardar esta asignatura y proceder a crear un grupo para ésta?</p>
-			</div>
-			<div class="modal-footer">
-				<a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">No</a>
-				<a id="conf-group-create-1" class=" modal-action modal-close waves-effect waves-green btn-flat asig-button" href="#!">Sí</a>
-			</div>
-		</div>
-
-		<div id="modal-asig-create" class="modal">
+		<div id="modal-guardar-asig" class="modal">
 			<div class="modal-content">
 				<h5>Guardar Asignatura</h5>
 				<p>¿Está seguro que desea guardar esta asignatura?</p>
 			</div>
 			<div class="modal-footer">
-				<a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">No</a>
-				<a id="conf-asig-create" href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Sí</a>
+				<a class="modal-action modal-close waves-effect waves-green btn-flat" href="#!">No</a>
+				<a id="conf-guardar-asig" class="modal-action modal-close waves-effect waves-green btn-flat" href="#!">Sí</a>
 			</div>
 		</div>
 
-		<div id="modal-asig-cancel" class="modal">
+		<div id="modal-cancelar-asig" class="modal">
 			<div class="modal-content">
 				<h5>Cancelar Asignatura</h5>
 				<p>¿Está seguro que desea salir y perder el progreso?</p>
 			</div>
 			<div class="modal-footer">
-				<a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">No</a>
-				<a href="<?php echo $_smarty_tpl->getVariable('gvar')->value['l_global'];?>
-index_asignatura.php" class=" modal-action modal-close waves-effect waves-green btn-flat">Sí</a>
+				<a class="modal-action modal-close waves-effect waves-green btn-flat" href="#!">No</a>
+				<a class="modal-action modal-close waves-effect waves-green btn-flat" href="<?php echo $_smarty_tpl->getVariable('gvar')->value['l_global'];?>
+index_asignatura.php">Sí</a>
 			</div>
 		</div>
 
-		<div id="group-box">
-			<div style="display: none;"><?php echo $_smarty_tpl->getVariable('profesores')->value;?>
+		<div class="datos-ocultos"><?php echo $_smarty_tpl->getVariable('asignaturas')->value;?>
 </div>
-			<div style="display: none;"><?php echo $_smarty_tpl->getVariable('asignaturas')->value;?>
-</div>
-		</div>
-
-		<input value=<?php echo $_smarty_tpl->getVariable('option')->value;?>
- id="option-crear-asignatura" name="option-crear-asignatura" type="hidden">
+		<input value=<?php echo $_smarty_tpl->getVariable('msj')->value;?>
+ id="msj-crear-asig" name="msj-crear-asig" type="hidden">
 	</div>
 </main>

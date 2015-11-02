@@ -55,6 +55,22 @@ main {
 	color: #66BB6A;
 }
 
+.botones-inferiores .container{
+	width: 80%;
+}
+
+.botones-inferiores .container a{
+	width: 100%;
+}
+
+.datos-ocultos {
+	display: none;
+}
+
+label.active {
+	white-space: nowrap;
+}
+
 .toast_exito {
 	background-color: white;
 	color: #66BB6A;
