@@ -1,0 +1,56 @@
+body {
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+	background-image: url('../images/background.jpg');
+}
+
+main {
+	flex: 1 0 auto;
+}
+
+.logo {
+	-moz-transition:width .5s, height .5s;
+	-ms-transition:width .5s, height .5s;
+	-o-transition:width .5s, height .5s;
+	-webkit-transition:width .5s, height .5s;
+	background: no-repeat url(../images/logo_contenedor.png);
+	float: left;
+	height: 135px;
+	margin-left: 10px;
+	position: absolute;
+	text-align: center;
+	transition: width .5s, height .5s;
+	width: 234px;
+	z-index: 2;
+}
+
+.principal {
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	border: 2px #66BB6A solid;
+	margin-top: 30px;
+	margin-bottom: 20px;
+	padding: 20px 30px 30px;
+}
+
+.principal h5 {
+	font-weight: bold;
+	color: #66BB6A;
+	margin-bottom: 30px;
+}
+
+.principal table {
+	border: 2px #66BB6A solid;
+	margin-bottom: 30px;
+}
+
+.principal thead {
+	font-weight: bold;
+	color: #66BB6A;
+}
+
+.iconos-accion {
+	color: #66BB6A;
+}
