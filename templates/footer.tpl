@@ -31,9 +31,9 @@
 	</div>
 </footer>
 
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
 {literal}
-	<script src="{/literal}{$gvar.l_global}{literal}js/jquery-2.1.4.min.js" language="Javascript"></script>
-	<script src="{/literal}{$gvar.l_global}{literal}js/materialize.min.js" language="Javascript"></script>
 	<script src="{/literal}{$gvar.l_global}{literal}js/admin.js" language="Javascript"></script>
 {/literal}
 </body>
