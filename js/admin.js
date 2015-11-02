@@ -67,7 +67,7 @@ function verif_datos_crear_asig () {
     $label_escuela = $('#div-principal-crear-asig label[for="escuela"]');
     $creditos = $('#div-principal-crear-asig #creditos');
     $label_creditos = $('#div-principal-crear-asig label[for="creditos"]');
-    $correcto = [true, true];
+    $correcto = [true, true, true, true];
 
     if ($id.val().length === 0) {
         $id.addClass('invalid');
@@ -75,16 +75,24 @@ function verif_datos_crear_asig () {
         $label_id.attr('data-error', "Campo Obligatorio");
         $correcto[0] = false;
     } else {
-        $asignaturas = JSON.parse($('#div-principal-crear-asig .datos-ocultos:first').text());
+        if ($.isNumeric($id.val())) {
+            $asignaturas = JSON.parse($('#div-principal-crear-asig .datos-ocultos:first').text());
 
-        $.each($asignaturas, function (index, element) {
-            if (element.id === $id.val()) {
-                $id.addClass('invalid');
-                $label_id.addClass('active');
-                $label_id.attr('data-error', "Código ya asignado");
-                $correcto[1] = false;
-            };
-        });
+            $.each($asignaturas, function (index, element) {
+                if (element.id === $id.val()) {
+                    $id.addClass('invalid');
+                    $label_id.addClass('active');
+                    $label_id.attr('data-error', "Código ya asignado");
+                    $correcto[1] = false;
+                };
+            });
+        } else {
+            $id.addClass('invalid');
+            $label_id.addClass('active');
+            $label_id.attr('data-error', "Campo Numérico");
+            $correcto[2] = false;
+        }
+        
     }
 
     if ($nombre.val().length === 0) {
@@ -106,6 +114,11 @@ function verif_datos_crear_asig () {
         $label_creditos.addClass('active');
         $label_creditos.attr('data-error', "Campo Obligatorio");
         $correcto[0] = false;
+    } else if (!$.isNumeric($creditos.val())) {
+        $creditos.addClass('invalid');
+        $label_creditos.addClass('active');
+        $label_creditos.attr('data-error', "Campo Numérico");
+        $correcto[3] = false;
     }
 
     return $correcto;
@@ -130,24 +143,32 @@ function verif_datos_crear_grupo(horario) {
 $('#conf-guardar-asig').on('click',function () {
     $correcto = verif_datos_crear_asig();
     
-    if ($correcto[0] && $correcto[1]) {
+    if ($correcto[0] && $correcto[1] && $correcto[2] && $correcto[3]) {
         $form = $('#div-principal-crear-asig').find('form:first');
         $form.submit();
     } else {
         if (!$correcto[0]) {
             Materialize.toast('Hay campos obligatorios sin diligenciar', 10000, 'rounded toast_error');  
-        };
+        }
         
         if (!$correcto[1]) {
             Materialize.toast("El código ya pertenece a otra asignatura", 10000, "rounded toast_error");
-        };
+        }
+
+        if (!$correcto[2]) {
+            Materialize.toast("El código debe ser un valor numérico", 10000, "rounded toast_error");
+        }
+
+        if (!$correcto[3]) {
+            Materialize.toast("Los créditos deben ser un valor numérico", 10000, "rounded toast_error");
+        }
     }
 });
 
 $('#conf-crear-grupo-asig').on('click', function (e) {
     $correcto_asig = verif_datos_crear_asig();
 
-    if ($correcto_asig[0] && $correcto_asig[1]) {
+    if ($correcto_asig[0] && $correcto_asig[1] && $correcto_asig[2] && $correcto_asig[3]) {
         $('.input-crear-asig').attr('readonly', true);
         $('.botones-inferiores').hide();
 
@@ -185,11 +206,19 @@ $('#conf-crear-grupo-asig').on('click', function (e) {
     } else {
         if (!$correcto_asig[0]) {
             Materialize.toast('Hay campos obligatorios sin diligenciar', 10000, 'rounded toast_error');  
-        };
+        }
         
         if (!$correcto_asig[1]) {
             Materialize.toast("El código ya pertenece a otra asignatura", 10000, "rounded toast_error");
-        };
+        }
+
+        if (!$correcto_asig[2]) {
+            Materialize.toast("El código debe ser un valor numérico", 10000, "rounded toast_error");
+        }
+
+        if (!$correcto_asig[3]) {
+            Materialize.toast("Los créditos deben ser un valor numérico", 10000, "rounded toast_error");
+        }
     }
 }); //Cargar Crear Grupo por AJAX desde Crear Asignatura
 
