@@ -1,24 +1,18 @@
 <?php
 
-class asignatura extends object_standard implements JsonSerializable
+class profesor extends object_standard implements JsonSerializable
 {
 
 	protected $id;
 	protected $nombre;
 	protected $escuela;
-	protected $creditos;
 
 	var $components = array();
 	var $auxiliars = array();
 
 	public function metadata()
 	{
-		return array(
-			"id" => array(),
-			"nombre" => array(),
-			"escuela" => array(),
-			"creditos" => array()
-		);
+		return array("id" => array(), "nombre" => array(), "escuela" => array());
 	}
 
 	public function primary_key()
@@ -38,8 +32,7 @@ class asignatura extends object_standard implements JsonSerializable
 		return [
 			'id' => $this->get('id'),
 			'nombre' => $this->get('nombre'),
-			'escuela' => $this->get('escuela'),
-			'creditos' => $this->get('creditos')
+			'escuela' => $this->get('escuela')
 		];
 	}
 }

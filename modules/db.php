@@ -97,8 +97,9 @@ class db
 					$id = $object->get('id');
 					$nombre = $object->get('nombre');
 					$escuela = $object->get('escuela');
+					$creditos = $object->get('creditos');
 
-					$this->do_operation("INSERT INTO asignatura(id, nombre, escuela) VALUES('$id', '$nombre', '$escuela');");	
+					$this->do_operation("INSERT INTO asignatura(id, nombre, escuela, creditos) VALUES('$id', '$nombre', '$escuela', '$creditos');");	
 				break;
 			}
 			break;

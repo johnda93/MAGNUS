@@ -17,10 +17,11 @@
 <body class="white">
     <header>
     <div class="logo"></div>
+
         <nav class="green lighten-1">
             <div class="nav-wrapper">
-                
                 <!--<a href="#" class="brand-logo">MAGNUS: Administración</a>-->
+                
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li><a href="{$gvar.l_global}index_asignatura.php"><i class="material-icons left">library_books</i>Asignaturas</a></li>
                     <li><a href="{$gvar.l_global}index_profesor.php"><i class="material-icons left">face</i>Profesores</a></li>

@@ -71,6 +71,35 @@ label.active {
 	white-space: nowrap;
 }
 
+.secundario {
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	border: 2px #66BB6A solid;
+	width: 100%;
+	padding: 20px 30px 10px;
+}
+
+.secundario h5 {
+	font-weight: bold;
+	color: #66BB6A;
+	margin-bottom: 20px;
+}
+
+.secundario tbody tr td {
+	font-weight: bold;
+	color: #66BB6A;
+}
+
+.bloque-horario {
+	width: 100%;
+	border: 2px #66BB6A solid;
+}
+
+.bloque-activo {
+	background-color: #66BB6A;
+}
+
 .toast_exito {
 	background-color: white;
 	color: #66BB6A;

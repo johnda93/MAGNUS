@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.9, created on 2015-11-02 08:22:40
+<?php /* Smarty version Smarty-3.0.9, created on 2015-11-02 17:49:51
          compiled from "C:/xampp/htdocs/MAGNUS/templates\admin_header.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:136335636f2307215e6-40151835%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:207495637942fafe654-94341595%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'c0630623454fa9da40e9856a9adad5072d1c0180' => 
     array (
       0 => 'C:/xampp/htdocs/MAGNUS/templates\\admin_header.tpl',
-      1 => 1446448940,
+      1 => 1446482959,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '136335636f2307215e6-40151835',
+  'nocache_hash' => '207495637942fafe654-94341595',
   'function' => 
   array (
   ),
@@ -38,10 +38,11 @@ css/admin.css); </style>
 <body class="white">
     <header>
     <div class="logo"></div>
+
         <nav class="green lighten-1">
             <div class="nav-wrapper">
-                
                 <!--<a href="#" class="brand-logo">MAGNUS: Administración</a>-->
+                
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li><a href="<?php echo $_smarty_tpl->getVariable('gvar')->value['l_global'];?>
 index_asignatura.php"><i class="material-icons left">library_books</i>Asignaturas</a></li>

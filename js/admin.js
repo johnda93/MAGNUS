@@ -51,6 +51,8 @@ $(document).ready(function () {
             $label_escuela.addClass('active');
             $label_escuela.attr('data-error', "Campo Obligatorio");
         }
+    } else if ($mensaje === "error-crear-asig-prof") {
+        Materialize.toast("El profesor a asignar al grupo no existe", 60000, "rounded toast_error");
     }
 });
 
@@ -63,6 +65,8 @@ function verif_datos_crear_asig () {
     $label_nombre = $('#div-principal-crear-asig label[for="nombre"]');
     $escuela = $('#div-principal-crear-asig #escuela');
     $label_escuela = $('#div-principal-crear-asig label[for="escuela"]');
+    $creditos = $('#div-principal-crear-asig #creditos');
+    $label_creditos = $('#div-principal-crear-asig label[for="creditos"]');
     $correcto = [true, true];
 
     if ($id.val().length === 0) {
@@ -97,25 +101,31 @@ function verif_datos_crear_asig () {
         $correcto[0] = false;
     }
 
+    if ($creditos.val().length === 0) {
+        $creditos.addClass('invalid');
+        $label_creditos.addClass('active');
+        $label_creditos.attr('data-error', "Campo Obligatorio");
+        $correcto[0] = false;
+    }
+
     return $correcto;
 };
 
-function modales_verif_datos_crear_asig () {
-    $correcto = verif_datos_crear_asig();
-    
-    if ($correcto[0] && $correcto[1]) {
-        $form = $('#div-principal-crear-asig').find('form:first');
-        $form.submit();
-    } else {
-        if (!$correcto[0]) {
-            Materialize.toast('Hay campos obligatorios sin diligenciar', 10000, 'rounded toast_error');  
-        };
-        
-        if (!$correcto[1]) {
-            Materialize.toast("El código ya pertenece a otra asignatura", 10000, "rounded toast_error");
-        };
+function verif_datos_crear_grupo(horario) {
+    $profesor1 = $('#lista_desplegable_profesor_1').val();
+    $correcto = [true, true];
+
+    if ($profesor1 === null) {
+        $('.select-wrapper:first input').addClass('validate invalid');
+        $correcto[0] = false;
     }
-}
+
+    if (horario.length < 2) {
+        $correcto[1] = false;
+    }
+
+    return $correcto;
+};
 
 $('#conf-guardar-asig').on('click',function () {
     $correcto = verif_datos_crear_asig();
@@ -132,6 +142,110 @@ $('#conf-guardar-asig').on('click',function () {
             Materialize.toast("El código ya pertenece a otra asignatura", 10000, "rounded toast_error");
         };
     }
+});
+
+$('#conf-crear-grupo-asig').on('click', function (e) {
+    $correcto_asig = verif_datos_crear_asig();
+
+    if ($correcto_asig[0] && $correcto_asig[1]) {
+        $('.input-crear-asig').attr('readonly', true);
+        $('.botones-inferiores').hide();
+
+        $.get("templates/crear_grupo.tpl", function (result) {
+            $profesores = JSON.parse($('#div-crear-grupo div:first').text());
+
+            $('#div-crear-grupo').html(result);
+
+            $nombre_asignatura = $('#div-principal-crear-asig #nombre').val();
+
+            $('#div-crear-grupo div:first h5:first').html("Crear grupo para " + $nombre_asignatura);
+
+            $lista_desplegable_1 = '<option value="" disabled selected></option>'
+
+            $.each($profesores, function (index, element) {
+                $lista_desplegable_1 += '<option value="' + element.id + '">' + element.nombre + ' - ' + element.escuela + '</option>';
+            });
+
+            $('#lista_desplegable_profesor_1').html($lista_desplegable_1);
+
+            $lista_desplegable_2 = '<option value="" disabled selected></option>'
+
+            $.each($profesores, function (index, element) {
+                $lista_desplegable_2 += '<option value="' + element.id + '">' + element.nombre + ' - ' + element.escuela + '</option>';
+            });
+
+            $('#lista_desplegable_profesor_2').html($lista_desplegable_2);
+
+            $('select').material_select();
+
+            $('.boton-crear-grupo').leanModal({
+                dismissible: false
+            }); // Activar modales para Crear Grupo
+        });
+    } else {
+        if (!$correcto_asig[0]) {
+            Materialize.toast('Hay campos obligatorios sin diligenciar', 10000, 'rounded toast_error');  
+        };
+        
+        if (!$correcto_asig[1]) {
+            Materialize.toast("El código ya pertenece a otra asignatura", 10000, "rounded toast_error");
+        };
+    }
+}); //Cargar Crear Grupo por AJAX desde Crear Asignatura
+
+$('#div-crear-grupo').on('click', '.bloque-horario', function (e) {
+    if (!$(this).hasClass('bloque-activo')) {
+        $(this).addClass('bloque-activo');
+    } else {
+        $(this).removeClass('bloque-activo');
+    }
+});
+
+$('#div-crear-grupo').on('click', '#conf-guardar-grupo-asig', function (e) {
+    $horario = [];
+
+    $('.bloque-activo').each(function (index, element) {
+
+        $hora = $(element).parent().parent().find('td:first').text();
+        $numero_dia = $(element).parent().index();
+
+        switch($numero_dia) {
+            case 1: $dia = "Lunes"; break;
+            case 2: $dia = "Martes"; break;
+            case 3: $dia = "Miercoles"; break;
+            case 4: $dia = "Jueves"; break;
+            case 5: $dia = "Viernes"; break;
+            case 6: $dia = "Sabado"; break;
+            case 7: $dia = "Domingo"; break;
+        }
+
+        $horario.push({dia : $dia, hora : $hora});
+    });
+
+    $correcto_grupo = verif_datos_crear_grupo($horario);
+
+    if ($correcto_grupo[0] && $correcto_grupo[1]) {
+        $('#div-principal-crear-asig #profesor1').val($('#lista_desplegable_profesor_1').val());
+        $('#div-principal-crear-asig #profesor2').val($('#lista_desplegable_profesor_2').val());
+        $('#div-principal-crear-asig #horario').val(JSON.stringify($horario));
+        $('#div-principal-crear-asig').find('form:first').submit();
+    } else {
+        $offset = $('#div-crear-grupo').offset();
+
+        window.scrollTo(0, $offset.top - 20);
+    }
+
+    if (!$correcto_grupo[0]) {
+        Materialize.toast('Seleccione un Profesor 1', 10000, 'rounded toast_error');
+    }
+
+    if (!$correcto_grupo[1]) {
+        Materialize.toast('Seleccione por lo menos dos bloques en el horario', 10000, 'rounded toast_error');
+    }
+}); //Guardar Grupo
+
+$('#div-crear-grupo').on('click', '#conf-cancelar-grupo-asig', function (e) {
+    $('#div-principal-crear-asig').find('form:first').submit();
 });
 
 //-------------------------------------------------------------------------------
