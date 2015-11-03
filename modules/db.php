@@ -247,11 +247,40 @@ class db
 		$info = array();
 		switch($options['lvl1'])
 		{																																																																																																										
-			case "user":
+			case "usuario_registrado":
 			switch($options['lvl2'])
 			{
 				case "all": 
 					//
+				break;
+				case "one_login_user":
+					$nombre = mysqli_real_escape_string($this->cn, $data['nombre']);
+					$contraseña = $data['contraseña'];
+					//$result = $this->get_data("SELECT user, password FROM user WHERE user='$user';");
+					$info = $this->get_data("SELECT * FROM usuario_registrado;");
+					//$hasher = new PasswordHash(8, FALSE);
+					//if ($hasher->CheckPassword($password, $result[0]->password))
+						//$info = $this->get_data("SELECT * FROM user WHERE user = '$user';");
+					//unset($hasher);
+				break;
+			}
+			break;
+
+			case "usuario_administrador":
+			switch($options['lvl2'])
+			{
+				case "all": 
+					//
+				break;
+				case "one_login_admin":
+					$nombre = mysqli_real_escape_string($this->cn, $data['nombre']);
+					$contraseña = $data['contraseña'];
+					//$result = $this->get_data("SELECT user, password FROM user WHERE user='$user';");
+					$info = $this->get_data("SELECT nombre, contraseña FROM usuario_administrador WHERE nombre='$nombre' AND  contraseña = '$contraseña';");
+					//$hasher = new PasswordHash(8, FALSE);
+					//if ($hasher->CheckPassword($password, $result[0]->password))
+						//$info = $this->get_data("SELECT * FROM user WHERE user = '$user';");
+					//unset($hasher);
 				break;
 			}
 			break;

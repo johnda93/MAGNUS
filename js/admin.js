@@ -56,6 +56,47 @@ $(document).ready(function () {
     }
 });
 
+//--------------------------------Login-------------------------------
+function verif_datos_login(){
+
+    $contraseña = $('#div-principal-login #contraseña');
+    $label_contraseña = $('#div-principal-login label[for="contraseña"]');
+    $nombre = $('#div-principal-login #nombre');
+    $label_nombre = $('#div-principal-login label[for="nombre"]');
+    $correcto = true;
+
+     if ($nombre.val().length === 0) {
+        $nombre.addClass('invalid');
+        $label_nombre.addClass('active');
+        $label_nombre.attr('data-error', "Campo Obligatorio");
+        $correcto = false;
+    }
+
+    if ($contraseña.val().length === 0) {
+        $contraseña.addClass('invalid');
+        $label_contraseña.addClass('active');
+        $label_contraseña.attr('data-error', "Campo Obligatorio");
+        $correcto = false;
+    }
+
+    return $correcto;
+
+}
+
+$('#conf-login').on('click',function () {
+    $correcto = verif_datos_login();
+    
+    if ($correcto) {
+        $form = $('#div-principal-login').find('form');
+        $form.submit();
+    } else {
+        Materialize.toast('Hay campos obligatorios sin diligenciar', 10000, 'rounded toast_error');  
+    }
+});
+
+
+//---------------------------------------------------------------
+
 //--------------------------------Crear Asignatura-------------------------------
 
 function verif_datos_crear_asig () {
