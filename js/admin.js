@@ -1,13 +1,4 @@
-function getCookie(cname) {
-    var name = cname + "=";
-    var ca = document.cookie.split(';');
-    for(var i=0; i<ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0)==' ') c = c.substring(1);
-        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
-    }
-    return "";
-}
+$.ajaxSetup({ cache:false });
 
 $(document).ready(function () {
     $('.boton-crear-asig').leanModal({
@@ -22,10 +13,12 @@ $(document).ready(function () {
         dismissible: false
     }); //Activar modales para Eliminar Profesor
 
-    $cookies = document.cookie;
-
-    if (getCookie("eliminar_asignatura") === "exito") {
-        Materialize.toast("Asignatura eliminada correctamente", 60000, "rounded toast_exito");
+    if (Cookies.get("eliminar_profesor") === "true") {
+        Cookies.remove("eliminar_profesor");
+        Materialize.toast("Profesor eliminado correctamente", 60000, "rounded toast_exito");
+    } else if (Cookies.get("eliminar_profesor") === "false") {
+        Cookies.remove("eliminar_profesor");
+        Materialize.toast("El profesor a eliminar no existe", 60000, "rounded toast_error");
     };
 
 	$mensaje = $('#msj-index-asig').val();
@@ -327,13 +320,13 @@ $('.boton-eliminar-prof').on('click', function (e) {
                     success : function (result) {
                                 $mensaje = JSON.parse(result);
 
-                                window.location.href = "index_profesor.php";
-
                                 if ($mensaje.exito === true) {
-                                    document.cookie = "eliminar_asignatura = exito";
-                                } else {
-                                    Materialize.toast("La asignatura a eliminar no existe", 60000, "rounded toast_error");
+                                    Cookies.set("eliminar_profesor", "true");
+                                } else if ($mensaje.exito === false){
+                                    Cookies.set("eliminar_profesor", "false");
                                 }
+
+                                window.location.replace("index_profesor.php");
                              }
                 }
             );

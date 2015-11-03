@@ -231,7 +231,8 @@ class db
 				case "normal": 
 					$id = $object->get('id');
 
-					//$this->do_operation("DELETE FROM grupo WHERE profesor1 = '$id';");
+					$this->do_operation("DELETE FROM grupo WHERE profesor1 = '$id';");
+					$this->do_operation("UPDATE grupo SET profesor2 = NULL WHERE profesor2 = '$id';");
 					$this->do_operation("DELETE FROM profesor WHERE id = '$id';");
 				break;
 			}

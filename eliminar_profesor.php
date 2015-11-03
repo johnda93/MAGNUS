@@ -14,6 +14,7 @@ class c_eliminar_profesor extends super_controller {
 		$profesor = $this->orm->get_objects("profesor");
 		$this->orm->close();
 
+		$mensaje = array();
 		$mensaje['exito'] = true;
 
 		if (is_empty($profesor)) {
