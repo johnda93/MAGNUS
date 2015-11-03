@@ -1,3 +1,14 @@
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+    }
+    return "";
+}
+
 $(document).ready(function () {
     $('.boton-crear-asig').leanModal({
         dismissible: false
@@ -6,6 +17,16 @@ $(document).ready(function () {
 	$('.boton-eliminar-asig').leanModal({
         dismissible: false
     }); //Activar modales para Eliminar Asignatura
+
+    $('.boton-eliminar-prof').leanModal({
+        dismissible: false
+    }); //Activar modales para Eliminar Profesor
+
+    $cookies = document.cookie;
+
+    if (getCookie("eliminar_asignatura") === "exito") {
+        Materialize.toast("Asignatura eliminada correctamente", 60000, "rounded toast_exito");
+    };
 
 	$mensaje = $('#msj-index-asig').val();
 
@@ -286,6 +307,39 @@ $('.boton-eliminar-asig').on('click', function (e) {
 
     $('#modal-eliminar-asig').on('click', '#conf-eliminar-asig', function (e) {
         $boton_eliminar.find('form').submit();
+    });
+});
+
+//-------------------------------------------------------------------------------
+
+//-------------------------------Eliminar Profesor-------------------------------
+
+$('.boton-eliminar-prof').on('click', function (e) {
+    $boton_eliminar = $(this);
+
+    $('#modal-eliminar-prof').on('click', '#conf-eliminar-prof', function (e) {
+        $form = $boton_eliminar.find('form');
+        $form.submit(function () {
+            $form.ajaxSubmit(
+                {
+                    url     : $form.attr('action'),
+                    type    : $form.attr('method'),
+                    success : function (result) {
+                                $mensaje = JSON.parse(result);
+
+                                window.location.href = "index_profesor.php";
+
+                                if ($mensaje.exito === true) {
+                                    document.cookie = "eliminar_asignatura = exito";
+                                } else {
+                                    Materialize.toast("La asignatura a eliminar no existe", 60000, "rounded toast_error");
+                                }
+                             }
+                }
+            );
+        });
+
+        $form.trigger('submit');
     });
 });
 
