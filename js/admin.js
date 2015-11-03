@@ -9,9 +9,21 @@ $(document).ready(function () {
         dismissible: false
     }); //Activar modales para Eliminar Asignatura
 
+    $('.boton-crear-prof').leanModal({
+        dismissible: false
+    }); //Activar modales para Crear Profesor
+
     $('.boton-eliminar-prof').leanModal({
         dismissible: false
     }); //Activar modales para Eliminar Profesor
+
+    if (Cookies.get("crear_profesor") === "true") {
+        Cookies.remove("crear_profesor");
+        Materialize.toast("Profesor creado correctamente", 60000, "rounded toast_exito");
+    } else if (Cookies.get("crear_profesor") === "false") {
+        Cookies.remove("crear_profesor");
+        Materialize.toast("La cédula ya pertenece a otro profesor", 60000, "rounded toast_error");
+    };
 
     if (Cookies.get("eliminar_profesor") === "true") {
         Cookies.remove("eliminar_profesor");
@@ -305,18 +317,19 @@ $('.boton-eliminar-asig').on('click', function (e) {
 
 //-------------------------------------------------------------------------------
 
-//-------------------------------Eliminar Profesor-------------------------------
+//-----------------------------Eliminar Profesor---------------------------------
 
 $('.boton-eliminar-prof').on('click', function (e) {
     $boton_eliminar = $(this);
 
     $('#modal-eliminar-prof').on('click', '#conf-eliminar-prof', function (e) {
         $form = $boton_eliminar.find('form');
-        $form.submit(function () {
-            $form.ajaxSubmit(
+        $form.submit(function (event) {
+            $.ajax(
                 {
-                    url     : $form.attr('action'),
-                    type    : $form.attr('method'),
+                    url     : 'eliminar_profesor.php',
+                    type    : 'post',
+                    data    : $form.serialize(),
                     success : function (result) {
                                 $mensaje = JSON.parse(result);
 
@@ -330,10 +343,62 @@ $('.boton-eliminar-prof').on('click', function (e) {
                              }
                 }
             );
+
+            event.preventDefault();
         });
 
         $form.trigger('submit');
     });
 });
+
+//-------------------------------------------------------------------------------
+
+//-------------------------------Crear Profesor-------------------------------
+
+$('#conf-crear-prof').on('click', function (e) {
+    $form = $('#div-principal-crear-prof').find('form');
+
+    $form.submit(function (event) {
+        $.ajax(
+        {
+            url     : 'crear_profesor.php',
+            type    : 'post',
+            data    : $form.serialize(),
+            success : function (result) {
+                $mensaje = JSON.parse(result);
+
+                if ($mensaje.id1 === true) {
+                    Cookies.set("crear_profesor", "true");
+                    window.location.replace("index_profesor.php");
+                } else {
+                    Cookies.set("crear_profesor", "false");
+                    window.location.replace("crear_profesor.php");
+                }
+
+                if ($mensaje.id2 === false) {
+                    Cookies.set("crear_profesor_id", "false");
+                    window.location.replace("crear_profesor.php");
+                }
+
+                if ($mensaje.nombre === false) {
+                    Cookies.set("crear_profesor_nombre", "false");
+                    window.location.replace("crear_profesor.php");
+                }
+
+                if ($mensaje.escuela === false) {
+                    Cookies.set("crear_profesor_escuela", "false");
+                    window.location.replace("crear_profesor.php");
+                }
+            }
+
+            
+        });
+
+        event.preventDefault();
+    });
+
+    $form.trigger('submit');
+});
+
 
 //-------------------------------------------------------------------------------

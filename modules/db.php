@@ -125,19 +125,6 @@ class db
 			}
 			break;
 
-			case "dia":
-			switch($options['lvl2'])
-			{
-				case "normal":
-					$grupo = $object->get('grupo');
-					$nombre = $object->get('nombre');
-					$hora = $object->get('hora');
-
-					$this->do_operation("INSERT INTO dia(grupo, nombre, hora) VALUES('$grupo', '$nombre', '$hora');");	
-				break;
-			}
-			break;
-
 			case "profesor":
 			switch($options['lvl2'])
 			{

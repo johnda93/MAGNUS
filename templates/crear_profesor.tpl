@@ -1,29 +1,9 @@
-<?php /* Smarty version Smarty-3.0.9, created on 2015-11-03 21:12:51
-         compiled from "C:/xampp/htdocs/MAGNUS/templates\crear_profesor.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:30042563915432d5d96-49337786%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
-$_smarty_tpl->decodeProperties(array (
-  'file_dependency' => 
-  array (
-    '1f558dbb7172201ea83498ecd44e39f79abe8031' => 
-    array (
-      0 => 'C:/xampp/htdocs/MAGNUS/templates\\crear_profesor.tpl',
-      1 => 1446581565,
-      2 => 'file',
-    ),
-  ),
-  'nocache_hash' => '30042563915432d5d96-49337786',
-  'function' => 
-  array (
-  ),
-  'has_nocache_code' => false,
-)); /*/%%SmartyHeaderCode%%*/?>
 <main>
 	<div id="div-principal-crear-prof" class="white container principal z-depth-1">
 		<h5 class="center-align">Crear Profesor</h5>
 
 		<div class="row">
-			<form class="col s6" action="<?php echo $_smarty_tpl->getVariable('gvar')->value['l_global'];?>
-crear_profesor.php" method="POST">
+			<form class="col s6" action="{$gvar.l_global}crear_profesor.php" method="POST">
 				<div class="row">
 					<div class="input-field col s6">
 						<input id="id" name="id" type="text" class="input-crear-prof validate">
@@ -85,8 +65,7 @@ crear_profesor.php" method="POST">
 			</div>
 			<div class="modal-footer">
 				<a class="modal-action modal-close waves-effect waves-green btn-flat" href="#!">No</a>
-				<a class="modal-action modal-close waves-effect waves-green btn-flat" href="<?php echo $_smarty_tpl->getVariable('gvar')->value['l_global'];?>
-index_profesor.php">Sí</a>
+				<a class="modal-action modal-close waves-effect waves-green btn-flat" href="{$gvar.l_global}index_profesor.php">Sí</a>
 			</div>
 		</div>
 	</div>
