@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.9, created on 2015-10-24 02:23:20
+<?php /* Smarty version Smarty-3.0.9, created on 2015-11-03 13:40:49
          compiled from "C:/xampp/htdocs/MAGNUS/templates\index_profesor.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:2334562acf78e05f27-92341673%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:5285638ab51c2ca14-70939483%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '48b75ebaebfa54e30524e593e388e17c30ed6443' => 
     array (
       0 => 'C:/xampp/htdocs/MAGNUS/templates\\index_profesor.tpl',
-      1 => 1445645930,
+      1 => 1446554446,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '2334562acf78e05f27-92341673',
+  'nocache_hash' => '5285638ab51c2ca14-70939483',
   'function' => 
   array (
   ),
@@ -64,10 +64,11 @@ $_smarty_tpl->tpl_vars['smarty']->value['section']['i']['last']       = ($_smart
 						<a href="<?php echo $_smarty_tpl->getVariable('gvar')->value['l_global'];?>
 editar_profesor.php?id=<?php echo $_smarty_tpl->getVariable('profesores')->value[$_smarty_tpl->getVariable('smarty')->value['section']['i']['index']]->get('id');?>
 ">
-							<i class="material-icons center action-icons">create</i>
+							<i class="material-icons center iconos-accion">create</i>
 						</a>
-						<a class="prof-delete-button" href="#modal-prof-delete">
-							<i class="material-icons center action-icons">delete</i>
+
+						<a href="#!">
+							<i class="material-icons center iconos-accion">delete</i>
 							<form action="<?php echo $_smarty_tpl->getVariable('gvar')->value['l_global'];?>
 eliminar_profesor.php" method="POST">
 								<input value="<?php echo $_smarty_tpl->getVariable('profesores')->value[$_smarty_tpl->getVariable('smarty')->value['section']['i']['index']]->get('id');?>
@@ -80,21 +81,10 @@ eliminar_profesor.php" method="POST">
 			</tbody>
 		</table>
 
-		<a style="margin-top: 20px;" class="waves-effect waves-light green lighten-1 btn" href="<?php echo $_smarty_tpl->getVariable('gvar')->value['l_global'];?>
+		<a class="waves-effect waves-light green lighten-1 btn" href="<?php echo $_smarty_tpl->getVariable('gvar')->value['l_global'];?>
 crear_profesor.php">
 			<i class="material-icons left">add</i>
 			Crear Profesor
 		</a>
-
-		<div id="modal-prof-delete" class="modal">
-			<div class="modal-content">
-				<h5>Eliminar Profesor</h5>
-				<p>¿Está seguro que desea eliminar este profesor?</p>
-			</div>
-			<div class="modal-footer">
-				<a class="modal-action modal-close waves-effect waves-green btn-flat" href="#!">No</a>
-				<a id="conf-prof-delete" class="modal-action modal-close waves-effect waves-green btn-flat" href="#!">Sí</a>
-			</div>
-		</div>
 	</div>
 </main>
