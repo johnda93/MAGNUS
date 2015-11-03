@@ -1,3 +1,4 @@
+$.ajaxSetup({ cache:false });
 $(document).ready(function () {
     $('.boton-crear-asig').leanModal({
         dismissible: false
@@ -6,6 +7,11 @@ $(document).ready(function () {
 	$('.boton-eliminar-asig').leanModal({
         dismissible: false
     }); //Activar modales para Eliminar Asignatura
+
+    if(Cookies.get("login")==="false"){
+        Cookies.remove("login");
+        Materialize.toast("Nombre de usuario o contraseña no valido", 60000, "rounded toast_error");
+    }
 
 	$mensaje = $('#msj-index-asig').val();
 
@@ -88,7 +94,28 @@ $('#conf-login').on('click',function () {
     
     if ($correcto) {
         $form = $('#div-principal-login').find('form');
-        $form.submit();
+        $form.submit(function(){
+            $form.ajaxSubmit(
+                {
+                    url: 'login.php',
+                    type: 'post',
+                    success: function(result){
+                        $mensaje = JSON.parse(result);
+                        console.log($mensaje);
+                        if($mensaje.exito === "admin"){
+                            window.location.replace("index_asignatura.php");
+                        }else if ($mensaje.exito === "user"){
+                            window.location.replace("login.php");
+                        }else{
+                            Cookies.set("login", "false");
+                            window.location.replace("login.php");
+                        }
+
+                    }
+                });
+        });
+
+        $form.trigger('submit');
     } else {
         Materialize.toast('Hay campos obligatorios sin diligenciar', 10000, 'rounded toast_error');  
     }

@@ -257,7 +257,7 @@ class db
 					$nombre = mysqli_real_escape_string($this->cn, $data['nombre']);
 					$contraseña = $data['contraseña'];
 					//$result = $this->get_data("SELECT user, password FROM user WHERE user='$user';");
-					$info = $this->get_data("SELECT * FROM usuario_registrado;");
+					$info = $this->get_data("SELECT nombre, contraseña FROM usuario_registrado WHERE nombre='$nombre' AND  contraseña = '$contraseña';");
 					//$hasher = new PasswordHash(8, FALSE);
 					//if ($hasher->CheckPassword($password, $result[0]->password))
 						//$info = $this->get_data("SELECT * FROM user WHERE user = '$user';");

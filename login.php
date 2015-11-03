@@ -21,16 +21,25 @@ class c_login extends super_controller {
 
 		$this->orm->close();
 
+		$mensaje = array();
+		$mensaje['exito'] = "user";
+
 
 		if(!is_empty($admin)){
-			header("Location: " . $gvar['l_global'] . "index_asignatura.php");
-			die();
+			$mensaje['exito'] = "admin";
+			$_SESSION['usuario']['usuario'] = $admin[0]->get('nombre');
+			$_SESSION['usuario']['tipo'] = "admin";
+			$this->session = $_SESSION;
 		}elseif (!is_empty($user)) {
-			//header("Location: " . $gvar['l_global'] . "login.php");
-			//die();
+			$mensaje['exito'] = "user";
+			$_SESSION['usuario']['usuario'] = $user[0]->get('nombre');
+			$_SESSION['usuario']['tipo'] = "user";
+			$this->session = $_SESSION;
 		}else{
-			
+			$mensaje['exito'] = "false";
 		}
+
+		echo json_encode($mensaje);
 	}
 
 	public function display()
@@ -47,10 +56,12 @@ class c_login extends super_controller {
 		try {
 			if (isset($this->post->nombre)) {
 				$this->login();
+			} else {
+				$this->display();
 			}
 		} catch (Exception $e) {
 		}
-		$this->display();
+		
 	}
 }
 
