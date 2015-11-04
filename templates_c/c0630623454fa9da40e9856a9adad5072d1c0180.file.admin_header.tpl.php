@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.9, created on 2015-11-03 20:51:52
+<?php /* Smarty version Smarty-3.0.9, created on 2015-11-04 16:37:21
          compiled from "C:/xampp/htdocs/MAGNUS/templates\admin_header.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:207495637942fafe654-94341595%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:373563a263139cac4-75260487%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'c0630623454fa9da40e9856a9adad5072d1c0180' => 
     array (
       0 => 'C:/xampp/htdocs/MAGNUS/templates\\admin_header.tpl',
-      1 => 1446575966,
+      1 => 1446651433,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '207495637942fafe654-94341595',
+  'nocache_hash' => '373563a263139cac4-75260487',
   'function' => 
   array (
   ),
@@ -48,7 +48,8 @@ css/admin.css); </style>
 index_asignatura.php"><i class="material-icons left">library_books</i>Asignaturas</a></li>
                     <li><a href="<?php echo $_smarty_tpl->getVariable('gvar')->value['l_global'];?>
 index_profesor.php"><i class="material-icons left">face</i>Profesores</a></li>
-                    <li><a href="#"><i class="material-icons left">power_settings_new</i>Cerrar Sesión</a></li>
+                    <li><a href="<?php echo $_smarty_tpl->getVariable('gvar')->value['l_global'];?>
+logout.php"><i class="material-icons left">power_settings_new</i>Cerrar Sesión</a></li>
                 </ul>
             </div>
         </nav>

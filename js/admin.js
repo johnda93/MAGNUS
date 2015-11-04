@@ -101,7 +101,7 @@ $('#conf-login').on('click',function () {
                     type: 'post',
                     success: function(result){
                         $mensaje = JSON.parse(result);
-                        console.log($mensaje);
+                        
                         if($mensaje.exito === "admin"){
                             window.location.replace("index_asignatura.php");
                         }else if ($mensaje.exito === "user"){
