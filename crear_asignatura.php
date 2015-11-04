@@ -37,6 +37,8 @@ class c_crear_asignatura extends super_controller {
 			$this->orm->insert_data("normal", $asignatura);
 			$this->orm->close();
 
+			$id_asig = $this->post->id;
+
 			session_start();
 			$_SESSION['redirected'] = true;
 			
@@ -52,7 +54,7 @@ class c_crear_asignatura extends super_controller {
 				$this->orm->connect();
 				$this->orm->insert_data("normal", $grupo);
 				$this->orm->close();
-
+				
 				header("Location: " . $gvar['l_global'] . "editar_asignatura.php?id=$id_asig&msj=exito-crear-asig");
 			}
 
