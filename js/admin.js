@@ -3,6 +3,10 @@ $(document).ready(function () {
         dismissible: false
     }); //Activar modales para Crear Asignatura
 
+    $('.boton-editar-asig').leanModal({
+        dismissible: false
+    }); //Activar modales para Crear Asignatura
+
 	$('.boton-eliminar-asig').leanModal({
         dismissible: false
     }); //Activar modales para Eliminar Asignatura
@@ -15,6 +19,8 @@ $(document).ready(function () {
         Materialize.toast("Asignatura eliminada correctamente", 60000, "rounded toast_exito");
     } else if ($mensaje === "error-eliminar-asig") {
     	Materialize.toast("La asignatura a eliminar no existe", 60000, "rounded toast_error");
+    } else if ($mensaje === "exito-editar-asig") {
+        Materialize.toast("Asignatura editada correctamente", 60000, "rounded toast_exito");
     }
 
     $mensaje = $('#msj-crear-asig').val();
@@ -53,6 +59,12 @@ $(document).ready(function () {
         }
     } else if ($mensaje === "error-crear-asig-prof") {
         Materialize.toast("El profesor a asignar al grupo no existe", 60000, "rounded toast_error");
+    }
+
+    $mensaje = $('#msj-editar-asig').val();
+
+    if ($mensaje === "exito-crear-asig") {
+        Materialize.toast("Asignatura creada correctamente", 60000, "rounded toast_exito");
     }
 });
 
@@ -275,6 +287,15 @@ $('#div-crear-grupo').on('click', '#conf-guardar-grupo-asig', function (e) {
 
 $('#div-crear-grupo').on('click', '#conf-cancelar-grupo-asig', function (e) {
     $('#div-principal-crear-asig').find('form:first').submit();
+});
+
+//-------------------------------------------------------------------------------
+
+//------------------------------Editar Asignatura------------------------------
+
+$('#conf-editar-asig').on('click',function () {
+    $form = $('#div-principal-editar-asig').find('form:first');
+    $form.submit();
 });
 
 //-------------------------------------------------------------------------------
