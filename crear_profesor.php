@@ -7,30 +7,41 @@ class c_crear_profesor extends super_controller {
 	private $mensaje = array(
 		"id1" => true,
 		"id2" => true,
+		"id3" => true,
 		"nombre" => true,
 		"escuela" => true,
 	);
 
 	public function validar_id() {
-		$cod['profesor']['id'] = $this->post->id;
-		$options['profesor']['lvl2'] = "one";
+		$profesor = new profesor();
+		$profesor->set('id', $this->post->id);
 
-		$this->orm->connect();
-		$this->orm->read_data(array("profesor"), $options, $cod);
-		$profesor = $this->orm->get_objects("profesor");
-		$this->orm->close();
+		if (is_empty($this->post->id)) {
+			$this->mensaje['id2'] = false;
+		} else {
+			if ($profesor->validar_id_numerico()) {
+				$cod['profesor']['id'] = $this->post->id;
+				$options['profesor']['lvl2'] = "one";
 
-		if (!is_empty($profesor)) {
-			$this->mensaje['id1'] = false;
+				$this->orm->connect();
+				$this->orm->read_data(array("profesor"), $options, $cod);
+				$profesor = $this->orm->get_objects("profesor");
+				$this->orm->close();
+
+				if (!is_empty($profesor)) {
+					$this->mensaje['id1'] = false;
+				}
+			} else {
+				$this->mensaje['id3'] = false;
+			}	
 		}
-
+		
 		echo json_encode($this->mensaje);
 	}
 
 	public function crear() {
-		if (is_empty($this->post->id)) {
-			$this->mensaje['id2'] = false;
-		} 
+		$profesor = new profesor();
+		$profesor->set('id', $this->post->id);
 
 		if (is_empty($this->post->nombre)) {
 			$this->mensaje['nombre'] = false;
@@ -40,12 +51,18 @@ class c_crear_profesor extends super_controller {
 			$this->mensaje['escuela'] = false;
 		}
 
-		if($this->mensaje['id2'] AND $this->mensaje['nombre'] AND $this->mensaje['escuela']) {
-			$profesor = new profesor($this->post);
+		if (is_empty($this->post->id)) {
+			$this->mensaje['id2'] = false;
+		} else if (!$profesor->validar_id_numerico()) {
+			$this->mensaje['id3'] = false;
+		} else {
+			if ($this->mensaje['nombre'] && $this->mensaje['escuela']) {
+				$profesor = new profesor($this->post);
 
-			$this->orm->connect();
-			$this->orm->insert_data("normal", $profesor);
-			$this->orm->close();
+				$this->orm->connect();
+				$this->orm->insert_data("normal", $profesor);
+				$this->orm->close();
+			}
 		}
 
 		echo json_encode($this->mensaje);

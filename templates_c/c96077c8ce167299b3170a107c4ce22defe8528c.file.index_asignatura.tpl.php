@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.0.9, created on 2015-11-03 20:43:18
+<?php /* Smarty version Smarty-3.0.9, created on 2015-11-05 18:05:08
          compiled from "C:/xampp/htdocs/MAGNUS/templates\index_asignatura.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:5686563709080ddd85-31523683%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_smarty_tpl->decodeProperties(array (
     'c96077c8ce167299b3170a107c4ce22defe8528c' => 
     array (
       0 => 'C:/xampp/htdocs/MAGNUS/templates\\index_asignatura.tpl',
-      1 => 1446572871,
+      1 => 1446739375,
       2 => 'file',
     ),
   ),

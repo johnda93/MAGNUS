@@ -27,6 +27,20 @@ class profesor extends object_standard implements JsonSerializable
 		}
 	}
 
+	public function validar_id_numerico()
+	{
+		if (is_numeric($this->id) && $this->id > 0) {
+			if ($this->id + 0 > 0) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+		
+	}
+
 	public function jsonSerialize()
 	{
 		return [

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.0.9, created on 2015-11-03 20:43:23
+<?php /* Smarty version Smarty-3.0.9, created on 2015-11-05 18:05:11
          compiled from "C:/xampp/htdocs/MAGNUS/templates\crear_asignatura.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:239845637d3c8117ce0-55056335%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_smarty_tpl->decodeProperties(array (
     '9eb389f78279a6a889d7603e644e644b831aae59' => 
     array (
       0 => 'C:/xampp/htdocs/MAGNUS/templates\\crear_asignatura.tpl',
-      1 => 1446572871,
+      1 => 1446739375,
       2 => 'file',
     ),
   ),
