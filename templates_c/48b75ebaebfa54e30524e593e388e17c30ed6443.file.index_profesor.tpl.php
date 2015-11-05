@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.0.9, created on 2015-11-03 19:51:36
+<?php /* Smarty version Smarty-3.0.9, created on 2015-11-05 06:58:16
          compiled from "C:/xampp/htdocs/MAGNUS/templates\index_profesor.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:92356390238c49007-13498943%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_smarty_tpl->decodeProperties(array (
     '48b75ebaebfa54e30524e593e388e17c30ed6443' => 
     array (
       0 => 'C:/xampp/htdocs/MAGNUS/templates\\index_profesor.tpl',
-      1 => 1446576686,
+      1 => 1446694908,
       2 => 'file',
     ),
   ),

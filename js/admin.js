@@ -43,6 +43,10 @@ $(document).ready(function () {
     	Materialize.toast("La asignatura a eliminar no existe", 60000, "rounded toast_error");
     }
 
+
+
+
+
     $mensaje = $('#msj-crear-asig').val();
 
     if ($mensaje === "error-crear-asig-id") {
@@ -355,18 +359,70 @@ $('.boton-eliminar-prof').on('click', function (e) {
 
 //-------------------------------Crear Profesor-------------------------------
 
-$('#conf-crear-prof').on('click', function (e) {
+function validar_campo_vacio (campo) {
+    $id_campo = campo.attr('id');
+    $label = campo.parent().parent().parent().find('label[for="' + $id_campo + '"]');
+
+    if (campo.val().length === 0) {
+        campo.addClass('invalid');
+        $label.addClass('active');
+        $label.attr('data-error', "Campo Obligatorio");
+    } else {
+        if (campo.hasClass('invalid')) {
+            campo.removeClass('invalid');
+        }
+    }
+}
+
+$('.input-crear-prof').on('blur change keyup', function () {
+    validar_campo_vacio($(this));
+});
+
+$('#div-principal-crear-prof #id').on('change keyup', function () {
     $form = $('#div-principal-crear-prof').find('form');
 
     $form.submit(function (event) {
-        $.ajax(
-        {
-            url     : 'crear_profesor.php',
+        $.ajax({
+            url     : 'crear_profesor.php?option=validar_id',
             type    : 'post',
             data    : $form.serialize(),
             success : function (result) {
                 $mensaje = JSON.parse(result);
+console.log("VID");
+                $id = $('#div-principal-crear-prof #id');
+                $label_id = $('#div-principal-crear-prof label[for="id"]');
 
+                if ($mensaje.id1 === false) {
+                    $id.addClass('invalid');
+                    $label_id.addClass('active');
+                    $label_id.attr('data-error', "Cédula ya asignada");
+                } else {
+                    if ($id.hasClass('invalid')) {
+                        $id.removeClass('invalid');
+                    }
+                }
+            }
+        });
+
+        event.preventDefault();
+        event.stopImmediatePropagation();
+    });
+
+    $form.trigger('submit');
+    $form.off('submit');
+});
+
+$('#conf-crear-prof').on('click', function (e) {
+    $form = $('#div-principal-crear-prof').find('form');
+
+    $form.submit(function (event) {
+        $.ajax({
+            url     : 'crear_profesor.php?option=crear',
+            method  : 'post',
+            data    : $form.serialize(),
+            success : function (result) {
+                $mensaje = JSON.parse(result);
+                console.log($mensaje);
                 if ($mensaje.id1 === true) {
                     Cookies.set("crear_profesor", "true");
                     window.location.replace("index_profesor.php");
@@ -389,15 +445,15 @@ $('#conf-crear-prof').on('click', function (e) {
                     Cookies.set("crear_profesor_escuela", "false");
                     window.location.replace("crear_profesor.php");
                 }
-            }
-
-            
+            }    
         });
-
+    
+        event.stopImmediatePropagation();
         event.preventDefault();
     });
 
     $form.trigger('submit');
+    $form.off('submit');
 });
 
 

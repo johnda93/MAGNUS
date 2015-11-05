@@ -11,6 +11,22 @@ class c_crear_profesor extends super_controller {
 		"escuela" => true,
 	);
 
+	public function validar_id() {
+		$cod['profesor']['id'] = $this->post->id;
+		$options['profesor']['lvl2'] = "one";
+
+		$this->orm->connect();
+		$this->orm->read_data(array("profesor"), $options, $cod);
+		$profesor = $this->orm->get_objects("profesor");
+		$this->orm->close();
+
+		if (!is_empty($profesor)) {
+			$this->mensaje['id1'] = false;
+		}
+
+		echo json_encode($this->mensaje);
+	}
+
 	public function crear() {
 		if (is_empty($this->post->id)) {
 			$this->mensaje['id2'] = false;
@@ -31,7 +47,8 @@ class c_crear_profesor extends super_controller {
 			$this->orm->insert_data("normal", $profesor);
 			$this->orm->close();
 		}
-		
+
+		echo json_encode($this->mensaje);
 	}
 	
 	public function display()
@@ -47,7 +64,7 @@ class c_crear_profesor extends super_controller {
 	{
 		try {
 			if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-				$this->crear();
+				$this->{$this->get->option}();
 			} else {
 				$this->display();
 			}
@@ -58,9 +75,9 @@ class c_crear_profesor extends super_controller {
 			if ($arr[0] === "Duplicate") {
 				$this->mensaje['id1'] = false;
 			}
-		}
 
-		echo json_encode($this->mensaje);
+			echo json_encode($this->mensaje);
+		}	
 	}
 }
 
