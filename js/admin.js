@@ -94,11 +94,12 @@ $('#conf-login').on('click',function () {
     
     if ($correcto) {
         $form = $('#div-principal-login').find('form');
-        $form.submit(function(){
+        $form.submit(function(e){
             $form.ajaxSubmit(
                 {
                     url: 'login.php',
                     type: 'post',
+                    data: $form.serialize(),
                     success: function(result){
                         $mensaje = JSON.parse(result);
                         
@@ -113,6 +114,7 @@ $('#conf-login').on('click',function () {
 
                     }
                 });
+            e.preventDefault();
         });
 
         $form.trigger('submit');

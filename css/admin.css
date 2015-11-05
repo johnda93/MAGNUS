@@ -25,6 +25,10 @@ main {
 	z-index: 2;
 }
 
+.consultar-asignatura{
+	margin-left: -50%;
+}
+
 .principal {
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
