@@ -5,10 +5,8 @@ require('configs/include.php');
 class c_logout extends super_controller {
 	
 	public function logout(){
-
-		unset($_SESSION['usuario']['usuario']);
-		unset($_SESSION['usuario']['tipo']);
-		$this->session = $_SESSION;
+		session_destroy();
+		unset($this->session);
 	}
 
 	public function display()
@@ -17,6 +15,7 @@ class c_logout extends super_controller {
 	
 	public function run()
 	{
+		$this->logout();
 		header("Location: " . $gvar['l_global'] . "login.php");
 			
 	}

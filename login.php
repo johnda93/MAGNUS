@@ -4,6 +4,18 @@ require('configs/include.php');
 
 class c_login extends super_controller {
 	
+	public function comrpobar_sesion()
+	{
+		if (!is_empty($this->session) && $this->session['usuario']['tipo'] = 'user') {
+			//header("Location: " . $gvar['l_global'] . "logout.php");
+			return;
+		}
+		if (!is_empty($this->session) && $this->session['usuario']['tipo'] = 'admin') {
+			header("Location: " . $gvar['l_global'] . "index_asignatura.php");
+			return;			
+		} 
+	}
+
 	public function login(){
 
 		$options['usuario_registrado']['lvl2'] = "one_login_user";
@@ -54,6 +66,7 @@ class c_login extends super_controller {
 	public function run()
 	{
 		try {
+			$this->comrpobar_sesion();
 			if (isset($this->post->nombre)) {
 				$this->login();
 			} else {
