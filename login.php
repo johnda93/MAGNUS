@@ -4,15 +4,19 @@ require('configs/include.php');
 
 class c_login extends super_controller {
 	
-	public function comrpobar_sesion()
+	public function comprobar_sesion()
 	{
-		if (!is_empty($this->session) && $this->session['usuario']['tipo'] = 'user') {
+		if (!is_empty($_SESSION) && !$_SESSION['permisos']) {
+			$_SESSION['permisos'] = true;
+			$this->engine->assign('permisos', "true");
+		}
+		if (!is_empty($_SESSION) && $_SESSION['usuario']['tipo'] = 'user') {
 			//header("Location: " . $gvar['l_global'] . "logout.php");
 			return;
 		}
-		if (!is_empty($this->session) && $this->session['usuario']['tipo'] = 'admin') {
+		if (!is_empty($_SESSION) && $_SESSION['usuario']['tipo'] = 'admin') {
 			header("Location: " . $gvar['l_global'] . "index_asignatura.php");
-			return;			
+			return;	
 		} 
 	}
 
@@ -41,14 +45,12 @@ class c_login extends super_controller {
 			$mensaje['exito'] = "admin";
 			$_SESSION['usuario']['usuario'] = $admin[0]->get('nombre');
 			$_SESSION['usuario']['tipo'] = "admin";
-			$this->session = $_SESSION;
 		}
 		elseif (!is_empty($user)){
 
 			$mensaje['exito'] = "user";
 			$_SESSION['usuario']['usuario'] = $user[0]->get('nombre');
 			$_SESSION['usuario']['tipo'] = "user";
-			$this->session = $_SESSION;
 		}else{
 			
 			$mensaje['exito'] = "false";
@@ -69,7 +71,7 @@ class c_login extends super_controller {
 	public function run()
 	{
 		try {
-			$this->comrpobar_sesion();
+			$this->comprobar_sesion();
 			if (isset($this->post->nombre)) {
 				$this->login();
 			} else {

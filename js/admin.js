@@ -8,9 +8,10 @@ $(document).ready(function () {
         dismissible: false
     }); //Activar modales para Eliminar Asignatura
 
-    if(Cookies.get("login")==="false"){
-        Cookies.remove("login");
-        Materialize.toast("Nombre de usuario o contraseña no valido", 60000, "rounded toast_error");
+    $permiso = $('#permiso-login').val();
+
+    if ($permiso === "true") {
+        Materialize.toast("No tiene permisos suficientes para acceder a esa página", 60000, "rounded toast_error");
     }
 
 	$mensaje = $('#msj-index-asig').val();
@@ -108,8 +109,7 @@ $('#conf-login').on('click',function () {
                         }else if ($mensaje.exito === "user"){
                             window.location.replace("login.php");
                         }else{
-                            Cookies.set("login", "false");
-                            window.location.replace("login.php");
+                            Materialize.toast("Nombre de usuario o contraseña no valido", 60000, "rounded toast_error");
                         }
 
                     }

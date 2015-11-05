@@ -69,6 +69,15 @@ class super_controller
 		
 		$this->engine->assign('gvar',$gvar); //assign vars
 	}
+
+	public function comrpobar_permisos()
+	{
+		if (is_empty($this->session) || $this->session['usuario']['tipo'] != 'admin') {
+			$_SESSION['permisos'] = false;
+			header("Location: " . $gvar['l_global'] . "login.php");
+			return;
+		}
+	}
 }
 
 ?>

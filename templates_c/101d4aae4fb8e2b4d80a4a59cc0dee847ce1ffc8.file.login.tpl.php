@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.9, created on 2015-11-03 22:25:14
+<?php /* Smarty version Smarty-3.0.9, created on 2015-11-05 20:36:17
          compiled from "C:/xampp/htdocs/MAGNUS/templates\login.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:297115639263ae033b2-29776948%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:7110563bafb1f2af15-03665627%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '101d4aae4fb8e2b4d80a4a59cc0dee847ce1ffc8' => 
     array (
       0 => 'C:/xampp/htdocs/MAGNUS/templates\\login.tpl',
-      1 => 1446585415,
+      1 => 1446752092,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '297115639263ae033b2-29776948',
+  'nocache_hash' => '7110563bafb1f2af15-03665627',
   'function' => 
   array (
   ),
@@ -50,4 +50,7 @@ login.php" method="POST">
 				</div>
 			</div>
 		</div>
+
+		<input value=<?php echo $_smarty_tpl->getVariable('permisos')->value;?>
+ id="permiso-login" name="permiso-login" type="hidden">
 </main>

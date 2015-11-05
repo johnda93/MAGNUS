@@ -4,6 +4,7 @@ require('configs/include.php');
 
 class c_index_asignatura extends super_controller {
 
+
 	public function display()
 	{
 		$options['asignatura']['lvl2'] = "all";
@@ -35,6 +36,7 @@ class c_index_asignatura extends super_controller {
 	
 	public function run()
 	{
+		$this->comrpobar_permisos();
 		$this->display();
 	}
 }
