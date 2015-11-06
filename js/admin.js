@@ -19,6 +19,18 @@ $(document).ready(function () {
         Materialize.toast("No tiene permisos suficientes para acceder a esa página", 60000, "rounded toast_error");
     }
 
+    $('.boton-eliminar-prof').leanModal({
+        dismissible: false
+    }); //Activar modales para Eliminar Profesor
+
+    if (Cookies.get("eliminar_profesor") === "true") {
+        Cookies.remove("eliminar_profesor");
+        Materialize.toast("Profesor eliminado correctamente", 60000, "rounded toast_exito");
+    } else if (Cookies.get("eliminar_profesor") === "false") {
+        Cookies.remove("eliminar_profesor");
+        Materialize.toast("El profesor a eliminar no existe", 60000, "rounded toast_error");
+    };
+
     if (Cookies.get("crear_asignatura") === "true") {
         Cookies.remove("crear_asignatura");
         Materialize.toast("Asignatura creada correctamente", 60000, "rounded toast_exito");
@@ -70,7 +82,8 @@ function validar_campo_numerico (campo) {
 
 
 //--------------------------------Login-------------------------------
-function verif_datos_login(){
+
+function verif_datos_login () {
 
     $contraseña = $('#div-principal-login #contraseña');
     $label_contraseña = $('#div-principal-login label[for="contraseña"]');
@@ -536,5 +549,37 @@ $('.boton-eliminar-asig').on('click', function (e) {
     });
 });
 
+//-------------------------------------------------------------------------------
+
+//-------------------------------Eliminar Profesor-------------------------------
+
+$('.boton-eliminar-prof').on('click', function (e) {
+    $boton_eliminar = $(this);
+
+    $('#modal-eliminar-prof').on('click', '#conf-eliminar-prof', function (e) {
+        $form = $boton_eliminar.find('form');
+        $form.submit(function () {
+            $form.ajaxSubmit(
+                {
+                    url     : $form.attr('action'),
+                    type    : $form.attr('method'),
+                    success : function (result) {
+                                $mensaje = JSON.parse(result);
+
+                                if ($mensaje.exito === true) {
+                                    Cookies.set("eliminar_profesor", "true");
+                                } else if ($mensaje.exito === false){
+                                    Cookies.set("eliminar_profesor", "false");
+                                }
+
+                                window.location.replace("index_profesor.php");
+                             }
+                }
+            );
+        });
+
+        $form.trigger('submit');
+    });
+});
 
 //-------------------------------------------------------------------------------

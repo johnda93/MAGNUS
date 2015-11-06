@@ -21,7 +21,7 @@
 							<i class="material-icons center iconos-accion">create</i>
 						</a>
 
-						<a href="#!">
+						<a class="boton-eliminar-prof" href="#modal-eliminar-prof">
 							<i class="material-icons center iconos-accion">delete</i>
 							<form action="{$gvar.l_global}eliminar_profesor.php" method="POST">
 								<input value="{$profesores[i]->get('id')}" id="id" name="id" type="hidden">
@@ -37,5 +37,16 @@
 			<i class="material-icons left">add</i>
 			Crear Profesor
 		</a>
+
+		<div id="modal-eliminar-prof" class="modal">
+			<div class="modal-content">
+				<h5>Eliminar Profesor</h5>
+				<p>¿Está seguro que desea eliminar este profesor?</p>
+			</div>
+			<div class="modal-footer">
+				<a class="modal-action modal-close waves-effect waves-green btn-flat" href="#!">No</a>
+				<a id="conf-eliminar-prof" class="modal-action modal-close waves-effect waves-green btn-flat" href="#!">Sí</a>
+			</div>
+		</div>
 	</div>
 </main>
