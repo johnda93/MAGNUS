@@ -107,8 +107,7 @@ class c_editar_profesor extends super_controller {
 
 				array_push($horarios2, $horario);
 			}
-		}
-		
+		}		
 
 		//--------------------------------------------------------
 
