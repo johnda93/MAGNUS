@@ -48,7 +48,5 @@
 				<a id="conf-eliminar-asig" class="modal-action modal-close waves-effect waves-green btn-flat" href="#!">Sí</a>
 			</div>
 		</div>
-
-		<input value={$msj} id="msj-index-asig" name="msj-index-asig" type="hidden">
 	</div>
 </main>

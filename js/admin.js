@@ -1,3 +1,5 @@
+$.ajaxSetup({ cache:false });
+
 $(document).ready(function () {
     $('.boton-crear-asig').leanModal({
         dismissible: false
@@ -312,15 +314,14 @@ $('.boton-eliminar-asig').on('click', function (e) {
     $('#modal-eliminar-asig').on('click', '#conf-eliminar-asig', function (e) {
         $form = $boton_eliminar.find('form');
         $form.submit(function (event) {
-            $form.ajaxSubmit(
-                {
+            $.ajax({
                     url     : 'eliminar_asignatura.php',
                     type    : 'post',
                     data    : $form.serialize(),
                     success : function (result) {
                         $mensaje = JSON.parse(result);
 
-        
+                        Cookies.remove("eliminar_asignatura");
 
                         if ($mensaje.exito) {
                             Cookies.set("eliminar_asignatura", "true");
@@ -330,13 +331,14 @@ $('.boton-eliminar-asig').on('click', function (e) {
 
                         window.location.replace("index_asignatura.php");
                     }
-                }
-            );
+            });
 
             event.preventDefault();
+            event.stopImmediatePropagation();
         });
 
         $form.trigger('submit');
+        $form.off('submit');
     });
 });
 
