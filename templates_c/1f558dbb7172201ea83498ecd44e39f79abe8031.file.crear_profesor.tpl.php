@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.9, created on 2015-11-06 04:12:56
+<?php /* Smarty version Smarty-3.0.9, created on 2015-11-06 06:10:07
          compiled from "C:/xampp/htdocs/MAGNUS/templates\crear_profesor.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:14108563adcee14e0d6-52761745%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:4450563c362f955143-40681018%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '1f558dbb7172201ea83498ecd44e39f79abe8031' => 
     array (
       0 => 'C:/xampp/htdocs/MAGNUS/templates\\crear_profesor.tpl',
-      1 => 1446773492,
+      1 => 1446784815,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '14108563adcee14e0d6-52761745',
+  'nocache_hash' => '4450563c362f955143-40681018',
   'function' => 
   array (
   ),

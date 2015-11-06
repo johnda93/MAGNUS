@@ -6,6 +6,7 @@
 			<form class="col s6" action="{$gvar.l_global}editar_profesor.php" method="POST">
 				<div class="row">
 					<div class="input-field col s6">
+						<input value="{$profesor->get('id')}" id="id-viejo" name="id_viejo" type="hidden">
 						<input value="{$profesor->get('id')}" id="id" name="id" type="text" class="input-editar-prof validate">
           				<label for="id">Cédula</label>
 					</div>
@@ -19,7 +20,7 @@
 				</div>
 				<div class="row">
 					<div class="input-field col s12">
-						<input value="{$profesor->get('escuela')}" id="escuela" name="escuela" type="text" class="input-edita-prof validate">
+						<input value="{$profesor->get('escuela')}" id="escuela" name="escuela" type="text" class="input-editar-prof validate">
           				<label for="escuela">Escuela</label>
 					</div>
 				</div>
@@ -96,7 +97,7 @@
 
 			<div class="col s6">
 				<div class="container">
-					<a class="waves-effect waves-light green lighten-1 btn boton-editar-prof">
+					<a class="waves-effect waves-light green lighten-1 btn boton-editar-prof" href="#modal-cancelar-prof">
 						<i class="material-icons left">clear</i>
 						Cancelar
 					</a>

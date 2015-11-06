@@ -176,8 +176,9 @@ class db
 					$id = $object->get('id');
 					$nombre = $object->get('nombre');
 					$escuela = $object->get('escuela');
+					$id_viejo= $object->auxiliars['id_viejo'];
 
-					$this->do_operation("UPDATE profesor SET id = '$id', nombre = '$nombre', escuela = '$escuela' WHERE id = '$id';");	
+					$this->do_operation("UPDATE profesor SET id = '$id', nombre = '$nombre', escuela = '$escuela' WHERE id = '$id_viejo';");	
 				break;
 			}
 			break;

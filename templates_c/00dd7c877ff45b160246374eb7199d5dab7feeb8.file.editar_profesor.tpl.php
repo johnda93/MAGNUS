@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.9, created on 2015-11-06 04:16:45
+<?php /* Smarty version Smarty-3.0.9, created on 2015-11-06 06:04:28
          compiled from "C:/xampp/htdocs/MAGNUS/templates\editar_profesor.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:17577563c1b9d140695-84413006%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:25781563c34dcd805c2-16611293%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '00dd7c877ff45b160246374eb7199d5dab7feeb8' => 
     array (
       0 => 'C:/xampp/htdocs/MAGNUS/templates\\editar_profesor.tpl',
-      1 => 1446779669,
+      1 => 1446786228,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '17577563c1b9d140695-84413006',
+  'nocache_hash' => '25781563c34dcd805c2-16611293',
   'function' => 
   array (
   ),
@@ -26,6 +26,8 @@ $_smarty_tpl->decodeProperties(array (
 editar_profesor.php" method="POST">
 				<div class="row">
 					<div class="input-field col s6">
+						<input value="<?php echo $_smarty_tpl->getVariable('profesor')->value->get('id');?>
+" id="id-viejo" name="id_viejo" type="hidden">
 						<input value="<?php echo $_smarty_tpl->getVariable('profesor')->value->get('id');?>
 " id="id" name="id" type="text" class="input-editar-prof validate">
           				<label for="id">Cédula</label>
@@ -42,7 +44,7 @@ editar_profesor.php" method="POST">
 				<div class="row">
 					<div class="input-field col s12">
 						<input value="<?php echo $_smarty_tpl->getVariable('profesor')->value->get('escuela');?>
-" id="escuela" name="escuela" type="text" class="input-edita-prof validate">
+" id="escuela" name="escuela" type="text" class="input-editar-prof validate">
           				<label for="escuela">Escuela</label>
 					</div>
 				</div>
@@ -219,7 +221,7 @@ $_smarty_tpl->tpl_vars['smarty']->value['section']['j']['last']       = ($_smart
 
 			<div class="col s6">
 				<div class="container">
-					<a class="waves-effect waves-light green lighten-1 btn boton-editar-prof">
+					<a class="waves-effect waves-light green lighten-1 btn boton-editar-prof" href="#modal-cancelar-prof">
 						<i class="material-icons left">clear</i>
 						Cancelar
 					</a>

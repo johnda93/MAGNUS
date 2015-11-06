@@ -13,6 +13,10 @@ $(document).ready(function () {
         dismissible: false
     }); //Activar modales para Crear Profesor
 
+    $('.boton-editar-prof').leanModal({
+        dismissible: false
+    }); //Activar modales para Crear Profesor
+
     $('.boton-eliminar-prof').leanModal({
         dismissible: false
     }); //Activar modales para Eliminar Profesor
@@ -20,6 +24,11 @@ $(document).ready(function () {
     if (Cookies.get("crear_profesor") === "true") {
         Cookies.remove("crear_profesor");
         Materialize.toast("Profesor creado correctamente", 60000, "rounded toast_exito");
+    }
+
+    if (Cookies.get("editar_profesor") === "true") {
+        Cookies.remove("editar_profesor");
+        Materialize.toast("Profesor editado correctamente", 60000, "rounded toast_exito");
     }
 
     if (Cookies.get("eliminar_profesor") === "true") {
@@ -440,6 +449,113 @@ $('#conf-crear-prof').on('click', function () {
 
                 if ($mensaje.id1 && $mensaje.id2 && $mensaje.id3 && $mensaje.nombre && $mensaje.escuela) {
                     Cookies.set("crear_profesor", "true");
+                    window.location.replace("index_profesor.php");
+                }
+            }    
+        });
+    
+        event.preventDefault();
+        event.stopImmediatePropagation();
+    });
+
+    $form.trigger('submit');
+    $form.off('submit');
+});
+
+//-------------------------------------------------------------------------------
+
+//-----------------------------Editar Profesor---------------------------------
+
+$('.input-editar-prof').on('blur change keyup', function () {
+    validar_campo_vacio($(this));
+});
+
+$('#div-principal-editar-prof #id').on('blur change paste keyup', function () {
+    $form = $('#div-principal-editar-prof').find('form');
+
+    $form.submit(function (event) {
+        $.ajax({
+            url     : 'editar_profesor.php?option=validar_id',
+            type    : 'post',
+            data    : $form.serialize(),
+            success : function (result) {
+                $mensaje = JSON.parse(result);
+
+                $id = $('#div-principal-editar-prof #id');
+                $label_id = $('#div-principal-editar-prof label[for="id"]');
+
+                if (!$mensaje.id1) {
+                    $id.addClass('invalid');
+                    $label_id.addClass('active');
+                    $label_id.attr('data-error', "Cédula ya asignada");
+                } else if (!$mensaje.id3) {
+                    $id.addClass('invalid');
+                    $label_id.addClass('active');
+                    $label_id.attr('data-error', "Campo Numérico");
+                }
+            }
+        });
+
+        event.preventDefault();
+        event.stopImmediatePropagation();
+    });
+
+    $form.trigger('submit');
+    $form.off('submit');
+});
+
+$('#conf-prof-edit').on('click', function () {
+    $form = $('#div-principal-editar-prof').find('form');
+
+    $form.submit(function (event) {
+        $.ajax({
+            url     : 'editar_profesor.php?option=editar',
+            method  : 'post',
+            data    : $form.serialize(),
+            success : function (result) {
+
+                $id = $('#div-principal-editar-prof #id');
+                $label_id = $('#div-principal-editar-prof label[for="id"]');
+
+                $mensaje = JSON.parse(result);
+
+                console.log($mensaje);
+
+                if (!$mensaje.id1) {
+                    $id.addClass('invalid');
+                    $label_id.addClass('active');
+                    $label_id.attr('data-error', "Cédula ya asignada");
+
+                    Materialize.toast("La cédula ya pertenece a otro profesor", 10000, "rounded toast_error");
+                }
+
+                if (!$mensaje.id4) {
+                    $id.addClass('invalid');
+                    $label_id.addClass('active');
+                    $label_id.attr('data-error', "Conflicto con grupos");
+
+                    Materialize.toast("El profesor posee grupos activos", 10000, "rounded toast_error");
+                }
+
+                if (!$mensaje.id3) {
+                    validar_campo_numerico($('#div-principal-editar-prof #id'));
+
+                    Materialize.toast('La cédula debe ser numérica', 10000, 'rounded toast_error');
+                }
+
+                if (!$mensaje.id2 || !$mensaje.nombre || !$mensaje.escuela) {
+                    if (!$mensaje.id2) {
+                        validar_campo_vacio($('#div-principal-editar-prof #id'));
+                    } 
+
+                    validar_campo_vacio($('#div-principal-editar-prof #nombre'));
+                    validar_campo_vacio($('#div-principal-editar-prof #escuela'));
+
+                    Materialize.toast('Hay campos obligatorios sin diligenciar', 10000, 'rounded toast_error');
+                }
+
+                if ($mensaje.id1 && $mensaje.id2 && $mensaje.id3 && $mensaje.id4 && $mensaje.nombre && $mensaje.escuela) {
+                    Cookies.set("editar_profesor", "true");
                     window.location.replace("index_profesor.php");
                 }
             }    
