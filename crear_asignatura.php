@@ -101,7 +101,7 @@ class c_crear_asignatura extends super_controller {
 		try {
 			if($_SERVER['REQUEST_METHOD'] === 'POST'){
 				$this->{$this->get->option}();
-			}else{
+			} else {
 				$this->display();
 			}
 		} catch (Exception $e) {

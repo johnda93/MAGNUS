@@ -63,6 +63,8 @@
 			</div>
 		</div>
 
+		<div id="div-crear-grupo"></div>
+
 		<div id="modal-crear-grupo-asig" class="modal">
 			<div class="modal-content">
 				<h5>Crear Grupo</h5>
