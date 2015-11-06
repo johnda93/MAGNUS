@@ -13,6 +13,12 @@ $(document).ready(function () {
         dismissible: false
     }); //Activar modales para Eliminar Asignatura
 
+    $permiso = $('#permiso-login').val();
+
+    if ($permiso === "true") {
+        Materialize.toast("No tiene permisos suficientes para acceder a esa página", 60000, "rounded toast_error");
+    }
+
     if (Cookies.get("crear_asignatura") === "true") {
         Cookies.remove("crear_asignatura");
         Materialize.toast("Asignatura creada correctamente", 60000, "rounded toast_exito");
@@ -62,6 +68,69 @@ function validar_campo_numerico (campo) {
     }
 }
 
+
+//--------------------------------Login-------------------------------
+function verif_datos_login(){
+
+    $contraseña = $('#div-principal-login #contraseña');
+    $label_contraseña = $('#div-principal-login label[for="contraseña"]');
+    $nombre = $('#div-principal-login #nombre');
+    $label_nombre = $('#div-principal-login label[for="nombre"]');
+    $correcto = true;
+
+     if ($nombre.val().length === 0) {
+        $nombre.addClass('invalid');
+        $label_nombre.addClass('active');
+        $label_nombre.attr('data-error', "Campo Obligatorio");
+        $correcto = false;
+    }
+
+    if ($contraseña.val().length === 0) {
+        $contraseña.addClass('invalid');
+        $label_contraseña.addClass('active');
+        $label_contraseña.attr('data-error', "Campo Obligatorio");
+        $correcto = false;
+    }
+
+    return $correcto;
+
+}
+
+$('#conf-login').on('click',function () {
+    $correcto = verif_datos_login();
+    
+    if ($correcto) {
+        $form = $('#div-principal-login').find('form');
+        $form.submit(function(e){
+            $.ajax(
+                {
+                    url: 'login.php',
+                    type: 'post',
+                    data: $form.serialize(),
+                    success: function(result){
+                        $mensaje = JSON.parse(result);
+                        
+                        if($mensaje.exito === "admin"){
+                            window.location.replace("index_asignatura.php");
+                        }else if ($mensaje.exito === "user"){
+                            window.location.replace("login.php");
+                        }else{
+                            Materialize.toast("Nombre de usuario o contraseña no valido", 60000, "rounded toast_error");
+                        }
+
+                    }
+                });
+            e.preventDefault();
+        });
+
+        $form.trigger('submit');
+    } else {
+        Materialize.toast('Hay campos obligatorios sin diligenciar', 10000, 'rounded toast_error');  
+    }
+});
+
+
+//---------------------------------------------------------------
 
 //--------------------------------Crear Asignatura-------------------------------
 
