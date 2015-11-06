@@ -96,7 +96,7 @@ $('#conf-login').on('click',function () {
     if ($correcto) {
         $form = $('#div-principal-login').find('form');
         $form.submit(function(e){
-            $form.ajaxSubmit(
+            $.ajax(
                 {
                     url: 'login.php',
                     type: 'post',

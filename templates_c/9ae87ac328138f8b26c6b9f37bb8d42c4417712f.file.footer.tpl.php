@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.9, created on 2015-11-03 22:25:10
+<?php /* Smarty version Smarty-3.0.9, created on 2015-11-06 14:50:13
          compiled from "C:/xampp/htdocs/MAGNUS/templates\footer.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:233905639263664c784-48011138%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:11096563cb0154ba6b7-89181191%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '9ae87ac328138f8b26c6b9f37bb8d42c4417712f' => 
     array (
       0 => 'C:/xampp/htdocs/MAGNUS/templates\\footer.tpl',
-      1 => 1446585763,
+      1 => 1446784815,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '233905639263664c784-48011138',
+  'nocache_hash' => '11096563cb0154ba6b7-89181191',
   'function' => 
   array (
   ),
