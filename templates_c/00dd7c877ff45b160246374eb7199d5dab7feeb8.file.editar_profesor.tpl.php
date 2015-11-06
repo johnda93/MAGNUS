@@ -1,24 +1,24 @@
-<?php /* Smarty version Smarty-3.0.9, created on 2015-10-24 02:46:56
+<?php /* Smarty version Smarty-3.0.9, created on 2015-11-06 04:16:45
          compiled from "C:/xampp/htdocs/MAGNUS/templates\editar_profesor.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:23248562ad500cf8470-50581487%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:17577563c1b9d140695-84413006%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '00dd7c877ff45b160246374eb7199d5dab7feeb8' => 
     array (
       0 => 'C:/xampp/htdocs/MAGNUS/templates\\editar_profesor.tpl',
-      1 => 1445647585,
+      1 => 1446779669,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '23248562ad500cf8470-50581487',
+  'nocache_hash' => '17577563c1b9d140695-84413006',
   'function' => 
   array (
   ),
   'has_nocache_code' => false,
 )); /*/%%SmartyHeaderCode%%*/?>
 <main>
-	<div id="prof-edit-principal-box" class="white container principal z-depth-1">
+	<div id="div-principal-editar-prof" class="white container principal z-depth-1">
 		<h5 class="center-align">Editar Profesor</h5>
 
 		<div class="row">
@@ -27,17 +27,22 @@ editar_profesor.php" method="POST">
 				<div class="row">
 					<div class="input-field col s6">
 						<input value="<?php echo $_smarty_tpl->getVariable('profesor')->value->get('id');?>
-" id="id" name="id" type="text" class="validate">
+" id="id" name="id" type="text" class="input-editar-prof validate">
           				<label for="id">Cédula</label>
 					</div>
+				</div>
+
+				<div class="row">
 					<div class="input-field col s12">
 						<input value="<?php echo $_smarty_tpl->getVariable('profesor')->value->get('nombre');?>
-" id="nombre" name="nombre" type="text" class="validate">
+" id="nombre" name="nombre" type="text" class="input-editar-prof validate">
           				<label for="nombre">Nombre</label>
 					</div>
+				</div>
+				<div class="row">
 					<div class="input-field col s12">
 						<input value="<?php echo $_smarty_tpl->getVariable('profesor')->value->get('escuela');?>
-" id="escuela" name="escuela" type="text" class="validate">
+" id="escuela" name="escuela" type="text" class="input-edita-prof validate">
           				<label for="escuela">Escuela</label>
 					</div>
 				</div>
@@ -202,19 +207,19 @@ $_smarty_tpl->tpl_vars['smarty']->value['section']['j']['last']       = ($_smart
 			</tbody>
 		</table>
 
-		<div class="row inferior-buttons">
+		<div class="row botones-inferiores">
 			<div class="col s6">
 				<div class="container">
-					<a class="waves-effect waves-light green lighten-1 btn modal-prof-trigger" href="#modal-prof-edit">
-						<i class="material-icons left">add</i>
-						Guardar Profesor
+					<a class="waves-effect waves-light green lighten-1 btn boton-editar-prof" href="#modal-prof-edit">
+						<i class="material-icons left">save</i>
+						Guardar
 					</a>
 				</div>
 			</div>
 
 			<div class="col s6">
 				<div class="container">
-					<a class="waves-effect waves-light green lighten-1 btn modal-prof-trigger">
+					<a class="waves-effect waves-light green lighten-1 btn boton-editar-prof">
 						<i class="material-icons left">clear</i>
 						Cancelar
 					</a>
@@ -230,6 +235,18 @@ $_smarty_tpl->tpl_vars['smarty']->value['section']['j']['last']       = ($_smart
 			<div class="modal-footer">
 				<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">No</a>
 				<a id="conf-prof-edit" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Sí</a>
+			</div>
+		</div>
+
+		<div id="modal-cancelar-prof" class="modal">
+			<div class="modal-content">
+				<h5>Cancelar Profesor</h5>
+				<p>¿Está seguro que desea salir y perder el progreso?</p>
+			</div>
+			<div class="modal-footer">
+				<a class="modal-action modal-close waves-effect waves-green btn-flat" href="#!">No</a>
+				<a class="modal-action modal-close waves-effect waves-green btn-flat" href="<?php echo $_smarty_tpl->getVariable('gvar')->value['l_global'];?>
+index_profesor.php">Sí</a>
 			</div>
 		</div>
 	</div>
