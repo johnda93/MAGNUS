@@ -5,6 +5,10 @@ $(document).ready(function () {
         dismissible: false
     }); //Activar modales para Crear Asignatura
 
+    $('.boton-editar-asig').leanModal({
+        dismissible: false
+    }); //Activar modales para Crear Asignatura
+
     $('.boton-eliminar-asig').leanModal({
         dismissible: false
     }); //Activar modales para Eliminar Asignatura
@@ -12,6 +16,11 @@ $(document).ready(function () {
     if (Cookies.get("crear_asignatura") === "true") {
         Cookies.remove("crear_asignatura");
         Materialize.toast("Asignatura creada correctamente", 60000, "rounded toast_exito");
+    }
+
+    if (Cookies.get("editar_asignatura") === "true") {
+        Cookies.remove("editar_asignatura");
+        Materialize.toast("Asignatura editada correctamente", 60000, "rounded toast_exito");
     }
 
     if (Cookies.get("eliminar_asignatura") === "true") {
@@ -161,6 +170,122 @@ $('#conf-guardar-asig, #conf-crear-grupo-asig').on('click', function () {
                         mostrar_crear_grupo("crear");
                     }
                     
+                }
+            }    
+        });
+    
+        event.preventDefault();
+        event.stopImmediatePropagation();
+    });
+
+    $form.trigger('submit');
+    $form.off('submit');
+});
+
+//-------------------------------------------------------------------------------
+
+//--------------------------------Editar Asignatura-------------------------------
+
+$('.input-editar-asig').on('blur change keyup', function () {
+    validar_campo_vacio($(this));
+});
+
+$('#div-principal-editar-asig #id, #div-principal-editar-asig #creditos').on('blur change paste keyup', function () {
+    $form = $('#div-principal-editar-asig').find('form');
+
+    $form.submit(function (event) {
+        $.ajax({
+            url     : 'editar_asignatura.php?option=validar_id_creditos',
+            type    : 'post',
+            data    : $form.serialize(),
+            success : function (result) {
+                $mensaje = JSON.parse(result);
+
+                $id = $('#div-principal-editar-asig #id');
+                $label_id = $('#div-principal-editar-asig label[for="id"]');
+
+                $creditos = $('#div-principal-editar-asig #creditos');
+                $label_creditos = $('#div-principal-editar-asig label[for="creditos"]');
+
+                if (!$mensaje.id1) {
+                    $id.addClass('invalid');
+                    $label_id.addClass('active');
+                    $label_id.attr('data-error', "Código ya asignado");
+                } else if (!$mensaje.id3) {
+                    $id.addClass('invalid');
+                    $label_id.addClass('active');
+                    $label_id.attr('data-error', "Campo Numérico");
+                }
+
+                if (!$mensaje.creditos2) {
+                    $creditos.addClass('invalid');
+                    $label_creditos.addClass('active');
+                    $label_creditos.attr('data-error', "Campo Numérico");
+                }
+            }
+        });
+
+        event.preventDefault();
+        event.stopImmediatePropagation();
+    });
+
+    $form.trigger('submit');
+    $form.off('submit');
+});
+
+$('#conf-editar-asig').on('click', function () {
+    $form = $('#div-principal-editar-asig').find('form');
+    $boton_id = $(this).attr('id');
+
+    $form.submit(function (event) {
+        $.ajax({
+            url     : 'editar_asignatura.php?option=editar',
+            method  : 'post',
+            data    : $form.serialize(),
+            success : function (result) {
+                $mensaje = JSON.parse(result);
+
+                $id = $('#div-principal-editar-asig #id');
+                $label_id = $('#div-principal-editar-asig label[for="id"]');
+
+                if (!$mensaje.id1) {
+                    $id.addClass('invalid');
+                    $label_id.addClass('active');
+                    $label_id.attr('data-error', "Código ya asignado");
+
+                    Materialize.toast("El código ya pertenece a otra asignatura", 10000, "rounded toast_error");
+                }
+
+                if (!$mensaje.id3) {
+                    validar_campo_numerico($('#div-principal-editar-asig #id'));
+
+                    Materialize.toast('El código debe ser numérico', 10000, 'rounded toast_error');
+                }
+
+                if (!$mensaje.creditos2) {
+                    validar_campo_numerico($('#div-principal-editar-asig #creditos'));
+
+                    Materialize.toast('Los créditos deben ser numéricos', 10000, 'rounded toast_error');
+                }
+
+                if (!$mensaje.id2 || !$mensaje.nombre || !$mensaje.escuela || !$mensaje.creditos1) {
+                    if (!$mensaje.id2) {
+                        validar_campo_vacio($('#div-principal-editar-asig #id'));
+                    }
+
+                    if (!$mensaje.creditos1) {
+                        validar_campo_vacio($('#div-principal-editar-asig #creditos'));
+                    } 
+
+                    validar_campo_vacio($('#div-principal-editar-asig #nombre'));
+                    validar_campo_vacio($('#div-principal-editar-asig #escuela'));
+
+                    Materialize.toast('Hay campos obligatorios sin diligenciar', 10000, 'rounded toast_error');
+                }
+
+                if ($mensaje.id1 && $mensaje.id2 && $mensaje.id3 && $mensaje.nombre && $mensaje.escuela && $mensaje.creditos1 && $mensaje.creditos2) {
+                    Cookies.set("editar_asignatura", "true");
+                    window.location.replace("index_asignatura.php");
                 }
             }    
         });
