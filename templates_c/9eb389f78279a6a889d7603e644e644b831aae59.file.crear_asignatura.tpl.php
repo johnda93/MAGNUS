@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.9, created on 2015-11-04 14:39:54
+<?php /* Smarty version Smarty-3.0.9, created on 2015-11-06 05:01:36
          compiled from "C:/xampp/htdocs/MAGNUS/templates\crear_asignatura.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:239845637d3c8117ce0-55056335%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:7439563c2620192ca2-64326693%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '9eb389f78279a6a889d7603e644e644b831aae59' => 
     array (
       0 => 'C:/xampp/htdocs/MAGNUS/templates\\crear_asignatura.tpl',
-      1 => 1446572871,
+      1 => 1446782425,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '239845637d3c8117ce0-55056335',
+  'nocache_hash' => '7439563c2620192ca2-64326693',
   'function' => 
   array (
   ),
@@ -51,10 +51,6 @@ crear_asignatura.php" method="POST">
           				<label for="creditos">Créditos</label>
 					</div>
 				</div>
-
-				<input id="profesor1" name="profesor1" type="hidden">
-				<input id="profesor2" name="profesor2" type="hidden">
-				<input id="horario" name="horario" type="hidden">
 			</form>
 		</div>
 
@@ -86,17 +82,6 @@ crear_asignatura.php" method="POST">
 				</div>
 			</div>
 		</div>
-
-		<div class="datos-ocultos"><?php echo $_smarty_tpl->getVariable('asignaturas')->value;?>
-</div>
-
-		<div id="div-crear-grupo">
-			<div class="datos-ocultos"><?php echo $_smarty_tpl->getVariable('profesores')->value;?>
-</div>
-		</div>
-
-		<input value=<?php echo $_smarty_tpl->getVariable('msj')->value;?>
- id="msj-crear-asig" name="msj-crear-asig" type="hidden">
 
 		<div id="modal-crear-grupo-asig" class="modal">
 			<div class="modal-content">
