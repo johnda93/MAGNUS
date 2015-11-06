@@ -38,8 +38,6 @@ $('.boton-eliminar-asig').on('click', function (e) {
                             Cookies.set("eliminar_asignatura", "false");
                         }
 
-                        
-
                         window.location.replace("index_asignatura.php");
                     }
                 }
