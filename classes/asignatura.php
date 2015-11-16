@@ -42,6 +42,23 @@ class asignatura extends object_standard implements JsonSerializable
 			'creditos' => $this->get('creditos')
 		];
 	}
+
+	public function validar_id_numerico(){
+		if(is_numeric($this->id) && ($this->id + 0 > 0)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	public function validar_creditos_numerico(){
+		if(is_numeric($this->creditos) && ($this->creditos + 0 > 0)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
 }
 
 ?>

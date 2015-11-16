@@ -23,9 +23,7 @@
                 <!--<a href="#" class="brand-logo">MAGNUS: Administración</a>-->
                 
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li><a href="{$gvar.l_global}index_asignatura.php"><i class="material-icons left">library_books</i>Asignaturas</a></li>
-                    <li><a href="{$gvar.l_global}index_profesor.php"><i class="material-icons left">face</i>Profesores</a></li>
-                    <li><a href="{$gvar.l_global}logout.php"><i class="material-icons left">power_settings_new</i>Cerrar Sesión</a></li>
+                    <li class="consultar-asignatura"><a href="#"><i class="material-icons left">search</i>Consultar Asignaturas</a></li>
                 </ul>
             </div>
         </nav>

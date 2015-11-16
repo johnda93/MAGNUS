@@ -1,226 +1,423 @@
+$.ajaxSetup({ cache:false });
+
 $(document).ready(function () {
     $('.boton-crear-asig').leanModal({
         dismissible: false
     }); //Activar modales para Crear Asignatura
 
-	$('.boton-eliminar-asig').leanModal({
+    $('.boton-editar-asig').leanModal({
+        dismissible: false
+    }); //Activar modales para Crear Asignatura
+
+    $('.boton-eliminar-asig').leanModal({
         dismissible: false
     }); //Activar modales para Eliminar Asignatura
 
-	$mensaje = $('#msj-index-asig').val();
+    $permiso = $('#permiso-login').val();
 
-    if ($mensaje === "exito-crear-asig") {
+    if ($permiso === "true") {
+        Materialize.toast("No tiene permisos suficientes para acceder a esa página", 60000, "rounded toast_error");
+    }
+
+    if (Cookies.get("crear_asignatura") === "true") {
+        Cookies.remove("crear_asignatura");
         Materialize.toast("Asignatura creada correctamente", 60000, "rounded toast_exito");
-    } else if ($mensaje === "exito-eliminar-asig") {
+    }
+
+    if (Cookies.get("editar_asignatura") === "true") {
+        Cookies.remove("editar_asignatura");
+        Materialize.toast("Asignatura editada correctamente", 60000, "rounded toast_exito");
+    }
+
+    if (Cookies.get("eliminar_asignatura") === "true") {
+        Cookies.remove("eliminar_asignatura");
         Materialize.toast("Asignatura eliminada correctamente", 60000, "rounded toast_exito");
-    } else if ($mensaje === "error-eliminar-asig") {
-    	Materialize.toast("La asignatura a eliminar no existe", 60000, "rounded toast_error");
-    }
-
-    $mensaje = $('#msj-crear-asig').val();
-
-    if ($mensaje === "error-crear-asig-id") {
-        $id = $('#div-principal-crear-asig #id');
-        $label_id = $('#div-principal-crear-asig label[for="id"]');
-    
-        $id.addClass('invalid');
-
-        Materialize.toast("El código ya pertenece a otra asignatura", 60000, "rounded toast_error");
-    } else if ($mensaje === "error-crear-asig-campos") {
-        $id = $('#div-principal-crear-asig #id');
-        $label_id = $('#div-principal-crear-asig label[for="id"]');
-        $nombre = $('#div-principal-crear-asig #nombre');
-        $label_nombre = $('#div-principal-crear-asig label[for="nombre"]');
-        $escuela = $('#div-principal-crear-asig #escuela');
-        $label_escuela = $('#div-principal-crear-asig label[for="escuela"]');
-
-        if ($id.val().length === 0) {
-            $id.addClass('invalid');
-            $label_id.addClass('active');
-            $label_id.attr('data-error', "Campo Obligatorio");
-        }
-
-        if ($nombre.val().length === 0) {
-            $nombre.addClass('invalid');
-            $label_nombre.addClass('active');
-            $label_nombre.attr('data-error', "Campo Obligatorio");
-        }
-
-        if ($escuela.val().length === 0) {
-            $escuela.addClass('invalid');
-            $label_escuela.addClass('active');
-            $label_escuela.attr('data-error', "Campo Obligatorio");
-        }
-    } else if ($mensaje === "error-crear-asig-prof") {
-        Materialize.toast("El profesor a asignar al grupo no existe", 60000, "rounded toast_error");
-    }
+    } else if (Cookies.get("eliminar_asignatura") === "false") {
+        Cookies.remove("eliminar_asignatura");
+        Materialize.toast("La asignatura a eliminar no existe", 60000, "rounded toast_error");
+    };
 });
 
-//--------------------------------Crear Asignatura-------------------------------
+function validar_campo_vacio (campo) {
+    $id_campo = campo.attr('id');
+    $label = campo.parent().parent().parent().find('label[for="' + $id_campo + '"]');
 
-function verif_datos_crear_asig () {
-    $id = $('#div-principal-crear-asig #id');
-    $label_id = $('#div-principal-crear-asig label[for="id"]');
-    $nombre = $('#div-principal-crear-asig #nombre');
-    $label_nombre = $('#div-principal-crear-asig label[for="nombre"]');
-    $escuela = $('#div-principal-crear-asig #escuela');
-    $label_escuela = $('#div-principal-crear-asig label[for="escuela"]');
-    $creditos = $('#div-principal-crear-asig #creditos');
-    $label_creditos = $('#div-principal-crear-asig label[for="creditos"]');
-    $correcto = [true, true, true, true];
-
-    if ($id.val().length === 0) {
-        $id.addClass('invalid');
-        $label_id.addClass('active');
-        $label_id.attr('data-error', "Campo Obligatorio");
-        $correcto[0] = false;
+    if (campo.val().length === 0) {
+        campo.addClass('invalid');
+        $label.addClass('active');
+        $label.attr('data-error', "Campo Obligatorio");
     } else {
-        if ($.isNumeric($id.val())) {
-            $asignaturas = JSON.parse($('#div-principal-crear-asig .datos-ocultos:first').text());
-
-            $.each($asignaturas, function (index, element) {
-                if (element.id === $id.val()) {
-                    $id.addClass('invalid');
-                    $label_id.addClass('active');
-                    $label_id.attr('data-error', "Código ya asignado");
-                    $correcto[1] = false;
-                };
-            });
-        } else {
-            $id.addClass('invalid');
-            $label_id.addClass('active');
-            $label_id.attr('data-error', "Campo Numérico");
-            $correcto[2] = false;
+        if (campo.hasClass('invalid')) {
+            campo.removeClass('invalid');
         }
-        
     }
+}
 
-    if ($nombre.val().length === 0) {
+function validar_campo_numerico (campo) {
+    $id_campo = campo.attr('id');
+    $label = campo.parent().parent().parent().find('label[for="' + $id_campo + '"]');
+
+    if (!$.isNumeric(campo.val())) {
+        campo.addClass('invalid');
+        $label.addClass('active');
+        $label.attr('data-error', "Campo Numérico");
+    } else {
+        if (campo.hasClass('invalid')) {
+            campo.removeClass('invalid');
+        }
+    }
+}
+
+
+//--------------------------------Login-------------------------------
+function verif_datos_login(){
+
+    $contraseña = $('#div-principal-login #contraseña');
+    $label_contraseña = $('#div-principal-login label[for="contraseña"]');
+    $nombre = $('#div-principal-login #nombre');
+    $label_nombre = $('#div-principal-login label[for="nombre"]');
+    $correcto = true;
+
+     if ($nombre.val().length === 0) {
         $nombre.addClass('invalid');
         $label_nombre.addClass('active');
         $label_nombre.attr('data-error', "Campo Obligatorio");
-        $correcto[0] = false;
+        $correcto = false;
     }
 
-    if ($escuela.val().length === 0) {
-        $escuela.addClass('invalid');
-        $label_escuela.addClass('active');
-        $label_escuela.attr('data-error', "Campo Obligatorio");
-        $correcto[0] = false;
-    }
-
-    if ($creditos.val().length === 0) {
-        $creditos.addClass('invalid');
-        $label_creditos.addClass('active');
-        $label_creditos.attr('data-error', "Campo Obligatorio");
-        $correcto[0] = false;
-    } else if (!$.isNumeric($creditos.val())) {
-        $creditos.addClass('invalid');
-        $label_creditos.addClass('active');
-        $label_creditos.attr('data-error', "Campo Numérico");
-        $correcto[3] = false;
+    if ($contraseña.val().length === 0) {
+        $contraseña.addClass('invalid');
+        $label_contraseña.addClass('active');
+        $label_contraseña.attr('data-error', "Campo Obligatorio");
+        $correcto = false;
     }
 
     return $correcto;
-};
 
-function verif_datos_crear_grupo(horario) {
-    $profesor1 = $('#lista_desplegable_profesor_1').val();
-    $correcto = [true, true];
+}
 
-    if ($profesor1 === null) {
-        $('.select-wrapper:first input').addClass('validate invalid');
-        $correcto[0] = false;
-    }
-
-    if (horario.length < 2) {
-        $correcto[1] = false;
-    }
-
-    return $correcto;
-};
-
-$('#conf-guardar-asig').on('click',function () {
-    $correcto = verif_datos_crear_asig();
+$('#conf-login').on('click',function () {
+    $correcto = verif_datos_login();
     
-    if ($correcto[0] && $correcto[1] && $correcto[2] && $correcto[3]) {
-        $form = $('#div-principal-crear-asig').find('form:first');
-        $form.submit();
+    if ($correcto) {
+        $form = $('#div-principal-login').find('form');
+        $form.submit(function(e){
+            $.ajax(
+                {
+                    url: 'login.php',
+                    type: 'post',
+                    data: $form.serialize(),
+                    success: function(result){
+                        $mensaje = JSON.parse(result);
+                        
+                        if($mensaje.exito === "admin"){
+                            window.location.replace("index_asignatura.php");
+                        }else if ($mensaje.exito === "user"){
+                            window.location.replace("login.php");
+                        }else{
+                            Materialize.toast("Nombre de usuario o contraseña no valido", 60000, "rounded toast_error");
+                        }
+
+                    }
+                });
+            e.preventDefault();
+        });
+
+        $form.trigger('submit');
     } else {
-        if (!$correcto[0]) {
-            Materialize.toast('Hay campos obligatorios sin diligenciar', 10000, 'rounded toast_error');  
-        }
-        
-        if (!$correcto[1]) {
-            Materialize.toast("El código ya pertenece a otra asignatura", 10000, "rounded toast_error");
-        }
-
-        if (!$correcto[2]) {
-            Materialize.toast("El código debe ser un valor numérico", 10000, "rounded toast_error");
-        }
-
-        if (!$correcto[3]) {
-            Materialize.toast("Los créditos deben ser un valor numérico", 10000, "rounded toast_error");
-        }
+        Materialize.toast('Hay campos obligatorios sin diligenciar', 10000, 'rounded toast_error');  
     }
 });
 
-$('#conf-crear-grupo-asig').on('click', function (e) {
-    $correcto_asig = verif_datos_crear_asig();
 
-    if ($correcto_asig[0] && $correcto_asig[1] && $correcto_asig[2] && $correcto_asig[3]) {
-        $('.input-crear-asig').attr('readonly', true);
-        $('.botones-inferiores').hide();
+//---------------------------------------------------------------
 
-        $.get("templates/crear_grupo.tpl", function (result) {
-            $profesores = JSON.parse($('#div-crear-grupo div:first').text());
+//--------------------------------Crear Asignatura-------------------------------
 
-            $('#div-crear-grupo').html(result);
+$('.input-crear-asig').on('blur change keyup', function () {
+    validar_campo_vacio($(this));
+});
 
-            $nombre_asignatura = $('#div-principal-crear-asig #nombre').val();
+$('#div-principal-crear-asig #id, #div-principal-crear-asig #creditos').on('blur change paste keyup', function () {
+    $form = $('#div-principal-crear-asig').find('form');
 
-            $('#div-crear-grupo div:first h5:first').html("Crear grupo para " + $nombre_asignatura);
+    $form.submit(function (event) {
+        $.ajax({
+            url     : 'crear_asignatura.php?option=validar_id_creditos',
+            type    : 'post',
+            data    : $form.serialize(),
+            success : function (result) {
+                $mensaje = JSON.parse(result);
 
-            $lista_desplegable_1 = '<option value="" disabled selected></option>'
+                $id = $('#div-principal-crear-asig #id');
+                $label_id = $('#div-principal-crear-asig label[for="id"]');
 
-            $.each($profesores, function (index, element) {
-                $lista_desplegable_1 += '<option value="' + element.id + '">' + element.nombre + ' - ' + element.escuela + '</option>';
-            });
+                $creditos = $('#div-principal-crear-asig #creditos');
+                $label_creditos = $('#div-principal-crear-asig label[for="creditos"]');
 
-            $('#lista_desplegable_profesor_1').html($lista_desplegable_1);
+                if (!$mensaje.id1) {
+                    $id.addClass('invalid');
+                    $label_id.addClass('active');
+                    $label_id.attr('data-error', "Código ya asignado");
+                } else if (!$mensaje.id3) {
+                    $id.addClass('invalid');
+                    $label_id.addClass('active');
+                    $label_id.attr('data-error', "Campo Numérico");
+                }
 
-            $lista_desplegable_2 = '<option value="" disabled selected></option>'
-
-            $.each($profesores, function (index, element) {
-                $lista_desplegable_2 += '<option value="' + element.id + '">' + element.nombre + ' - ' + element.escuela + '</option>';
-            });
-
-            $('#lista_desplegable_profesor_2').html($lista_desplegable_2);
-
-            $('select').material_select();
-
-            $('.boton-crear-grupo').leanModal({
-                dismissible: false
-            }); // Activar modales para Crear Grupo
+                if (!$mensaje.creditos2) {
+                    $creditos.addClass('invalid');
+                    $label_creditos.addClass('active');
+                    $label_creditos.attr('data-error', "Campo Numérico");
+                }
+            }
         });
-    } else {
-        if (!$correcto_asig[0]) {
-            Materialize.toast('Hay campos obligatorios sin diligenciar', 10000, 'rounded toast_error');  
-        }
-        
-        if (!$correcto_asig[1]) {
-            Materialize.toast("El código ya pertenece a otra asignatura", 10000, "rounded toast_error");
-        }
 
-        if (!$correcto_asig[2]) {
-            Materialize.toast("El código debe ser un valor numérico", 10000, "rounded toast_error");
-        }
+        event.preventDefault();
+        event.stopImmediatePropagation();
+    });
 
-        if (!$correcto_asig[3]) {
-            Materialize.toast("Los créditos deben ser un valor numérico", 10000, "rounded toast_error");
-        }
-    }
-}); //Cargar Crear Grupo por AJAX desde Crear Asignatura
+    $form.trigger('submit');
+    $form.off('submit');
+});
+
+$('#conf-guardar-asig, #conf-crear-grupo-asig').on('click', function () {
+    $form = $('#div-principal-crear-asig').find('form');
+    $boton_id = $(this).attr('id');
+
+    $form.submit(function (event) {
+        $.ajax({
+            url     : 'crear_asignatura.php?option=crear',
+            method  : 'post',
+            data    : $form.serialize(),
+            success : function (result) {
+                $mensaje = JSON.parse(result);
+
+                $id = $('#div-principal-crear-asig #id');
+                $label_id = $('#div-principal-crear-asig label[for="id"]');
+
+                if (!$mensaje.id1) {
+                    $id.addClass('invalid');
+                    $label_id.addClass('active');
+                    $label_id.attr('data-error', "Código ya asignado");
+
+                    Materialize.toast("El código ya pertenece a otra asignatura", 10000, "rounded toast_error");
+                }
+
+                if (!$mensaje.id3) {
+                    validar_campo_numerico($('#div-principal-crear-asig #id'));
+
+                    Materialize.toast('El código debe ser numérico', 10000, 'rounded toast_error');
+                }
+
+                if (!$mensaje.creditos2) {
+                    validar_campo_numerico($('#div-principal-crear-asig #creditos'));
+
+                    Materialize.toast('Los créditos deben ser numéricos', 10000, 'rounded toast_error');
+                }
+
+                if (!$mensaje.id2 || !$mensaje.nombre || !$mensaje.escuela || !$mensaje.creditos1) {
+                    if (!$mensaje.id2) {
+                        validar_campo_vacio($('#div-principal-crear-asig #id'));
+                    }
+
+                    if (!$mensaje.creditos1) {
+                        validar_campo_vacio($('#div-principal-crear-asig #creditos'));
+                    } 
+
+                    validar_campo_vacio($('#div-principal-crear-asig #nombre'));
+                    validar_campo_vacio($('#div-principal-crear-asig #escuela'));
+
+                    Materialize.toast('Hay campos obligatorios sin diligenciar', 10000, 'rounded toast_error');
+                }
+
+                if ($mensaje.id1 && $mensaje.id2 && $mensaje.id3 && $mensaje.nombre && $mensaje.escuela && $mensaje.creditos1 && $mensaje.creditos2) {
+                    if ($boton_id === "conf-guardar-asig") {
+                        Cookies.set("crear_asignatura", "true");
+                        window.location.replace("index_asignatura.php");
+                    } else if ($boton_id === "conf-crear-grupo-asig"){
+                        mostrar_crear_grupo("crear");
+                    }
+                    
+                }
+            }    
+        });
+    
+        event.preventDefault();
+        event.stopImmediatePropagation();
+    });
+
+    $form.trigger('submit');
+    $form.off('submit');
+});
+
+//-------------------------------------------------------------------------------
+
+//--------------------------------Editar Asignatura-------------------------------
+
+$('.input-editar-asig').on('blur change keyup', function () {
+    validar_campo_vacio($(this));
+});
+
+$('#div-principal-editar-asig #id, #div-principal-editar-asig #creditos').on('blur change paste keyup', function () {
+    $form = $('#div-principal-editar-asig').find('form');
+
+    $form.submit(function (event) {
+        $.ajax({
+            url     : 'editar_asignatura.php?option=validar_id_creditos',
+            type    : 'post',
+            data    : $form.serialize(),
+            success : function (result) {
+                $mensaje = JSON.parse(result);
+
+                $id = $('#div-principal-editar-asig #id');
+                $label_id = $('#div-principal-editar-asig label[for="id"]');
+
+                $creditos = $('#div-principal-editar-asig #creditos');
+                $label_creditos = $('#div-principal-editar-asig label[for="creditos"]');
+
+                if (!$mensaje.id1) {
+                    $id.addClass('invalid');
+                    $label_id.addClass('active');
+                    $label_id.attr('data-error', "Código ya asignado");
+                } else if (!$mensaje.id3) {
+                    $id.addClass('invalid');
+                    $label_id.addClass('active');
+                    $label_id.attr('data-error', "Campo Numérico");
+                }
+
+                if (!$mensaje.creditos2) {
+                    $creditos.addClass('invalid');
+                    $label_creditos.addClass('active');
+                    $label_creditos.attr('data-error', "Campo Numérico");
+                }
+            }
+        });
+
+        event.preventDefault();
+        event.stopImmediatePropagation();
+    });
+
+    $form.trigger('submit');
+    $form.off('submit');
+});
+
+$('#conf-editar-asig').on('click', function () {
+    $form = $('#div-principal-editar-asig').find('form');
+    $boton_id = $(this).attr('id');
+
+    $form.submit(function (event) {
+        $.ajax({
+            url     : 'editar_asignatura.php?option=editar',
+            method  : 'post',
+            data    : $form.serialize(),
+            success : function (result) {
+                $mensaje = JSON.parse(result);
+
+                $id = $('#div-principal-editar-asig #id');
+                $label_id = $('#div-principal-editar-asig label[for="id"]');
+
+                if (!$mensaje.id1) {
+                    $id.addClass('invalid');
+                    $label_id.addClass('active');
+                    $label_id.attr('data-error', "Código ya asignado");
+
+                    Materialize.toast("El código ya pertenece a otra asignatura", 10000, "rounded toast_error");
+                }
+
+                if (!$mensaje.id3) {
+                    validar_campo_numerico($('#div-principal-editar-asig #id'));
+
+                    Materialize.toast('El código debe ser numérico', 10000, 'rounded toast_error');
+                }
+
+                if (!$mensaje.creditos2) {
+                    validar_campo_numerico($('#div-principal-editar-asig #creditos'));
+
+                    Materialize.toast('Los créditos deben ser numéricos', 10000, 'rounded toast_error');
+                }
+
+                if (!$mensaje.id2 || !$mensaje.nombre || !$mensaje.escuela || !$mensaje.creditos1) {
+                    if (!$mensaje.id2) {
+                        validar_campo_vacio($('#div-principal-editar-asig #id'));
+                    }
+
+                    if (!$mensaje.creditos1) {
+                        validar_campo_vacio($('#div-principal-editar-asig #creditos'));
+                    } 
+
+                    validar_campo_vacio($('#div-principal-editar-asig #nombre'));
+                    validar_campo_vacio($('#div-principal-editar-asig #escuela'));
+
+                    Materialize.toast('Hay campos obligatorios sin diligenciar', 10000, 'rounded toast_error');
+                }
+
+                if ($mensaje.id1 && $mensaje.id2 && $mensaje.id3 && $mensaje.nombre && $mensaje.escuela && $mensaje.creditos1 && $mensaje.creditos2) {
+                    Cookies.set("editar_asignatura", "true");
+                    window.location.replace("index_asignatura.php");
+                }
+            }    
+        });
+    
+        event.preventDefault();
+        event.stopImmediatePropagation();
+    });
+
+    $form.trigger('submit');
+    $form.off('submit');
+});
+
+//-------------------------------------------------------------------------------
+
+//----------------------------------Crear Grupo----------------------------------
+
+function mostrar_crear_grupo (div_crear_editar) {
+    $('.input-' + div_crear_editar + '-asig').attr('readonly', true);
+    $('.botones-inferiores').hide();
+
+    $.get("templates/crear_grupo.tpl", function (result) {
+        $('#div-crear-grupo').html(result);
+
+        $.ajax({
+            url     : 'crear_grupo.php?option=listar_profesores',
+            type    : 'post',
+            success : function (result) {
+                $profesores = JSON.parse(result);
+
+                $nombre_asignatura = $('#div-principal-' + div_crear_editar + '-asig #nombre').val();
+                $id_asignatura = $('#div-principal-' + div_crear_editar + '-asig #id').val();
+                $id_grupo = $id_asignatura + '-1';
+
+                $('#div-crear-grupo #id').val($id_grupo);
+                $('#div-crear-grupo #asignatura').val($id_asignatura);
+
+                $('#div-crear-grupo div:first h5:first').html("Crear grupo para " + $nombre_asignatura);
+
+                $lista_desplegable_1 = '<option value="" disabled selected></option>'
+
+                $.each($profesores, function (index, element) {
+                    $lista_desplegable_1 += '<option value="' + element.id + '">' + element.nombre + ' - ' + element.escuela + '</option>';
+                });
+
+                $('#lista_desplegable_profesor_1').html($lista_desplegable_1);
+
+                $lista_desplegable_2 = '<option value="" disabled selected></option>'
+
+                $.each($profesores, function (index, element) {
+                    $lista_desplegable_2 += '<option value="' + element.id + '">' + element.nombre + ' - ' + element.escuela + '</option>';
+                });
+
+                $('#lista_desplegable_profesor_2').html($lista_desplegable_2);
+
+                $('select').material_select();
+
+                $('.boton-crear-grupo').leanModal({
+                    dismissible: false
+                }); // Activar modales para Crear Grupo
+            }
+        }); 
+    });
+}
 
 $('#div-crear-grupo').on('click', '.bloque-horario', function (e) {
     if (!$(this).hasClass('bloque-activo')) {
@@ -231,6 +428,7 @@ $('#div-crear-grupo').on('click', '.bloque-horario', function (e) {
 });
 
 $('#div-crear-grupo').on('click', '#conf-guardar-grupo-asig', function (e) {
+
     $horario = [];
 
     $('.bloque-activo').each(function (index, element) {
@@ -251,30 +449,53 @@ $('#div-crear-grupo').on('click', '#conf-guardar-grupo-asig', function (e) {
         $horario.push({dia : $dia, hora : $hora});
     });
 
-    $correcto_grupo = verif_datos_crear_grupo($horario);
+    $('#div-crear-grupo #profesor1').val($('#lista_desplegable_profesor_1').val());
+    $('#div-crear-grupo #profesor2').val($('#lista_desplegable_profesor_2').val());
+    $('#div-principal-crear-asig #horario').val(JSON.stringify($horario));
+    
+    $form = $('#div-crear-grupo').find('form');
+        
+    $form.submit(function (event) {
+        $.ajax({
+            url     : 'crear_grupo.php?option=crear',
+            method  : 'post',
+            data    : $form.serialize(),
+            success : function (result) {
+                $mensaje = JSON.parse(result);
 
-    if ($correcto_grupo[0] && $correcto_grupo[1]) {
-        $('#div-principal-crear-asig #profesor1').val($('#lista_desplegable_profesor_1').val());
-        $('#div-principal-crear-asig #profesor2').val($('#lista_desplegable_profesor_2').val());
-        $('#div-principal-crear-asig #horario').val(JSON.stringify($horario));
-        $('#div-principal-crear-asig').find('form:first').submit();
-    } else {
-        $offset = $('#div-crear-grupo').offset();
+                if (!$mensaje.profesor) {
+                    $('.select-wrapper:first input').addClass('validate invalid');
 
-        window.scrollTo(0, $offset.top - 20);
-    }
+                    Materialize.toast('Seleccione un Profesor 1', 10000, 'rounded toast_error');
+                }
 
-    if (!$correcto_grupo[0]) {
-        Materialize.toast('Seleccione un Profesor 1', 10000, 'rounded toast_error');
-    }
+                if (!$mensaje.horario) {
+                    Materialize.toast('Seleccione por lo menos dos bloques en el horario', 10000, 'rounded toast_error');
+                }
 
-    if (!$correcto_grupo[1]) {
-        Materialize.toast('Seleccione por lo menos dos bloques en el horario', 10000, 'rounded toast_error');
-    }
-}); //Guardar Grupo
+                if (!$mensaje.profesor || !$mensaje.horario) {
+                    $offset = $('#div-crear-grupo').offset();
+                    window.scrollTo(0, $offset.top - 20);
+                }
+
+                if ($mensaje.profesor && $mensaje.horario) {
+                    Cookies.set("crear_asignatura", "true");
+                    window.location.replace("index_asignatura.php");
+                }
+            }    
+        });
+    
+        event.preventDefault();
+        event.stopImmediatePropagation();
+    });
+
+    $form.trigger('submit');
+    $form.off('submit');
+});
 
 $('#div-crear-grupo').on('click', '#conf-cancelar-grupo-asig', function (e) {
-    $('#div-principal-crear-asig').find('form:first').submit();
+    Cookies.set("crear_asignatura", "true");
+    window.location.replace("index_asignatura.php");
 });
 
 //-------------------------------------------------------------------------------
@@ -282,11 +503,38 @@ $('#div-crear-grupo').on('click', '#conf-cancelar-grupo-asig', function (e) {
 //------------------------------Eliminar Asignatura------------------------------
 
 $('.boton-eliminar-asig').on('click', function (e) {
-	$boton_eliminar = $(this);
+    $boton_eliminar = $(this);
 
     $('#modal-eliminar-asig').on('click', '#conf-eliminar-asig', function (e) {
-        $boton_eliminar.find('form').submit();
+        $form = $boton_eliminar.find('form');
+        $form.submit(function (event) {
+            $.ajax({
+                    url     : 'eliminar_asignatura.php',
+                    type    : 'post',
+                    data    : $form.serialize(),
+                    success : function (result) {
+                        $mensaje = JSON.parse(result);
+
+                        Cookies.remove("eliminar_asignatura");
+
+                        if ($mensaje.exito) {
+                            Cookies.set("eliminar_asignatura", "true");
+                        } else if (!$mensaje.exito){
+                            Cookies.set("eliminar_asignatura", "false");
+                        }
+
+                        window.location.replace("index_asignatura.php");
+                    }
+            });
+
+            event.preventDefault();
+            event.stopImmediatePropagation();
+        });
+
+        $form.trigger('submit');
+        $form.off('submit');
     });
 });
+
 
 //-------------------------------------------------------------------------------

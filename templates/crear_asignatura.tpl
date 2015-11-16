@@ -31,10 +31,6 @@
           				<label for="creditos">Créditos</label>
 					</div>
 				</div>
-
-				<input id="profesor1" name="profesor1" type="hidden">
-				<input id="profesor2" name="profesor2" type="hidden">
-				<input id="horario" name="horario" type="hidden">
 			</form>
 		</div>
 
@@ -67,13 +63,7 @@
 			</div>
 		</div>
 
-		<div class="datos-ocultos">{$asignaturas}</div>
-
-		<div id="div-crear-grupo">
-			<div class="datos-ocultos">{$profesores}</div>
-		</div>
-
-		<input value={$msj} id="msj-crear-asig" name="msj-crear-asig" type="hidden">
+		<div id="div-crear-grupo"></div>
 
 		<div id="modal-crear-grupo-asig" class="modal">
 			<div class="modal-content">

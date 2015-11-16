@@ -13,6 +13,12 @@
 					<select id="lista_desplegable_profesor_2"></select>
 					<label>Profesor 2</label>
 				</div>
+
+				<input id="id" name="id" type="hidden">
+				<input id="asignatura" name="asignatura" type="hidden">
+				<input id="profesor1" name="profesor1" type="hidden">
+				<input id="profesor2" name="profesor2" type="hidden">
+				<input id="horario" name="horario" type="hidden">
 			</div>
 		</form>
 	</div>
