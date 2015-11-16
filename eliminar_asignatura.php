@@ -35,6 +35,8 @@ class c_eliminar_asignatura extends super_controller {
 	
 	public function run()
 	{
+
+		$this->comrpobar_permisos();
 		$this->eliminar();
 	}
 }

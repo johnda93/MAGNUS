@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Project:     Framework G - G Light
  * File:        db.php
@@ -12,7 +11,6 @@
  * @author Group Framework G  <info at frameworkg dot com>
  * @version 1.2
  */
-
 class db
 {
     var $server = C_DB_SERVER; //DB server
@@ -89,7 +87,6 @@ class db
 				break;
 			}
 			break;
-
 			case "asignatura":
 			switch($options['lvl2'])
 			{
@@ -98,12 +95,10 @@ class db
 					$nombre = $object->get('nombre');
 					$escuela = $object->get('escuela');
 					$creditos = $object->get('creditos');
-
 					$this->do_operation("INSERT INTO asignatura(id, nombre, escuela, creditos) VALUES('$id', '$nombre', '$escuela', '$creditos');");	
 				break;
 			}
 			break;
-
 			case "grupo":
 			switch($options['lvl2'])
 			{
@@ -113,7 +108,6 @@ class db
 					$horario = $object->get('horario');
 					$profesor1 = $object->get('profesor1');
 					$profesor2 = $object->get('profesor2');
-
 					if (is_empty($profesor2)) {
 						$this->do_operation("INSERT INTO grupo(id, asignatura, horario, profesor1) 
 										 VALUES('$id', '$asignatura', '$horario', '$profesor1');");
@@ -124,20 +118,6 @@ class db
 				break;
 			}
 			break;
-
-			case "dia":
-			switch($options['lvl2'])
-			{
-				case "normal":
-					$grupo = $object->get('grupo');
-					$nombre = $object->get('nombre');
-					$hora = $object->get('hora');
-
-					$this->do_operation("INSERT INTO dia(grupo, nombre, hora) VALUES('$grupo', '$nombre', '$hora');");	
-				break;
-			}
-			break;
-
 			case "profesor":
 			switch($options['lvl2'])
 			{
@@ -145,7 +125,6 @@ class db
 					$id = $object->get('id');
 					$nombre = $object->get('nombre');
 					$escuela = $object->get('escuela');
-
 					$this->do_operation("INSERT INTO profesor(id, nombre, escuela) VALUES('$id', '$nombre', '$escuela');");	
 				break;
 			}
@@ -178,12 +157,10 @@ class db
 					$escuela = $object->get('escuela');
 					$creditos = $object->get('creditos');
 					$id_viejo = $object->auxiliars['id_viejo'];
-
 					$this->do_operation("UPDATE asignatura SET id = '$id', nombre = '$nombre', escuela = '$escuela', creditos = '$creditos' WHERE id = '$id_viejo';");	
 				break;
 			}
 			break;
-
 			case "profesor":
 			switch($options['lvl2'])
 			{
@@ -191,12 +168,11 @@ class db
 					$id = $object->get('id');
 					$nombre = $object->get('nombre');
 					$escuela = $object->get('escuela');
-
-					$this->do_operation("UPDATE profesor SET id = '$id', nombre = '$nombre', escuela = '$escuela' WHERE id = '$id';");	
+					$id_viejo= $object->auxiliars['id_viejo'];
+					$this->do_operation("UPDATE profesor SET id = '$id', nombre = '$nombre', escuela = '$escuela' WHERE id = '$id_viejo';");	
 				break;
 			}
 			break;
-
 			default: break;
 		}
 	}
@@ -214,26 +190,23 @@ class db
 				break;
 			}
 			break;
-
 			case "asignatura":
 			switch($options['lvl2'])
 			{
 				case "normal": 
 					$id = $object->get('id');
-
 					$this->do_operation("DELETE FROM grupo WHERE asignatura = '$id';");
 					$this->do_operation("DELETE FROM asignatura WHERE id = '$id';");
 				break;
 			}
 			break;
-
 			case "profesor":
 			switch($options['lvl2'])
 			{
 				case "normal": 
 					$id = $object->get('id');
-
-					//$this->do_operation("DELETE FROM grupo WHERE profesor1 = '$id';");
+					$this->do_operation("DELETE FROM grupo WHERE profesor1 = '$id';");
+					$this->do_operation("UPDATE grupo SET profesor2 = NULL WHERE profesor2 = '$id';");
 					$this->do_operation("DELETE FROM profesor WHERE id = '$id';");
 				break;
 			}
@@ -267,7 +240,6 @@ class db
 				break;
 			}
 			break;
-
 			case "usuario_administrador":
 			switch($options['lvl2'])
 			{
@@ -286,14 +258,12 @@ class db
 				break;
 			}
 			break;
-
 			case "asignatura":
 			switch($options['lvl2'])
 			{
 				case "all": 
 					$info = $this->get_data("SELECT * FROM asignatura;");
 				break;
-
 				case "one": 
 					$this->escape_string($data);
 					$id = $data['id'];
@@ -301,26 +271,22 @@ class db
 				break;
 			}
 			break;
-
 			case "grupo":
 			switch($options['lvl2'])
 			{
 				case "all": 
 					$info = $this->get_data("SELECT * FROM grupo;");	
 				break;
-
 				case "one": 
 					$this->escape_string($data);
 					$id = $data['id'];
 					$info = $this->get_data("SELECT * FROM grupo WHERE id = '$id';");	
 				break;
-
 				case "by_asignatura": 
 					$this->escape_string($data);
 					$asignatura = $data['asignatura'];
 					$info = $this->get_data("SELECT * FROM grupo WHERE asignatura = '$asignatura';");
 				break;
-
 				case "by_profesor": 
 					$this->escape_string($data);
 					$profesor = $data['profesor1'];
@@ -330,7 +296,6 @@ class db
 				break;
 			}
 			break;
-
 			case "dia":
 			switch($options['lvl2'])
 			{
@@ -341,14 +306,12 @@ class db
 				break;
 			}
 			break;
-
 			case "profesor":
 			switch($options['lvl2'])
 			{
 				case "all": 
 					$info = $this->get_data("SELECT * FROM profesor;");
 				break;
-
 				case "one": 
 					$this->escape_string($data);
 					$id = $data['id'];
@@ -369,5 +332,4 @@ class db
 	}
 	
 }
-
-?>
+?>		
