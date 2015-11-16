@@ -124,6 +124,8 @@ class c_editar_profesor extends super_controller {
 	
 	public function run()
 	{
+		$this->comrpobar_permisos();
+		
 		try {
 			if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 				$this->{$this->get->option}();

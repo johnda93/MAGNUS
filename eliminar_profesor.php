@@ -34,6 +34,7 @@ class c_eliminar_profesor extends super_controller {
 	
 	public function run()
 	{
+		$this->comrpobar_permisos();
 		$this->eliminar();
 	}
 }

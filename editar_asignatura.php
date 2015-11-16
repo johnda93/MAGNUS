@@ -131,6 +131,8 @@ class c_editar_asignatura extends super_controller {
 	
 	public function run()
 	{
+		$this->comrpobar_permisos();
+		
 		try {
 			if($_SERVER['REQUEST_METHOD'] === 'POST'){
 				$this->{$this->get->option}();

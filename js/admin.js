@@ -576,7 +576,7 @@ $('.input-crear-prof').on('blur change keyup', function () {
     validar_campo_vacio($(this));
 });
 
-$('#div-principal-crear-prof #id').on('blur change paste keyup', function () {
+$('#div-principal-crear-prof #id').on('blur', function () {
     $form = $('#div-principal-crear-prof').find('form');
 
     $form.submit(function (event) {
@@ -619,6 +619,7 @@ $('#conf-crear-prof').on('click', function () {
             method  : 'post',
             data    : $form.serialize(),
             success : function (result) {
+                $mensaje=JSON.parse(result);
 
                 $id = $('#div-principal-crear-prof #id');
                 $label_id = $('#div-principal-crear-prof label[for="id"]');
@@ -665,7 +666,7 @@ $('#conf-crear-prof').on('click', function () {
 
 //-------------------------------------------------------------------------------
 
-//-----------------------------Editar Profesor---------------------------------
+//-----------------------------Editar Profesor-----------------------------------
 
 $('.input-editar-prof').on('blur change keyup', function () {
     validar_campo_vacio($(this));

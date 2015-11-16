@@ -23,6 +23,7 @@ class c_index_profesor extends super_controller {
 	
 	public function run()
 	{
+		$this->comrpobar_permisos();
 		$this->display();
 	}
 }

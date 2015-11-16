@@ -33,7 +33,7 @@ class c_crear_profesor extends super_controller {
 				}
 			} else {
 				$this->mensaje['id3'] = false;
-			}	
+			}
 		}
 		
 		echo json_encode($this->mensaje);
@@ -79,6 +79,8 @@ class c_crear_profesor extends super_controller {
 	
 	public function run()
 	{
+		$this->comrpobar_permisos();
+		
 		try {
 			if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 				$this->{$this->get->option}();
