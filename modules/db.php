@@ -91,10 +91,10 @@ class db
 			switch($options['lvl2'])
 			{
 				case "normal": 
-					$id = $object->get('id');
-					$nombre = $object->get('nombre');
-					$escuela = $object->get('escuela');
-					$creditos = $object->get('creditos');
+					$id = mysqli_real_escape_string($this->cn,$object->get('id'));
+					$nombre = mysqli_real_escape_string($this->cn,$object->get('nombre'));
+					$escuela = mysqli_real_escape_string($this->cn,$object->get('escuela'));
+					$creditos = mysqli_real_escape_string($this->cn,$object->get('creditos'));
 					$this->do_operation("INSERT INTO asignatura(id, nombre, escuela, creditos) VALUES('$id', '$nombre', '$escuela', '$creditos');");	
 				break;
 			}
@@ -103,11 +103,11 @@ class db
 			switch($options['lvl2'])
 			{
 				case "normal": 
-					$id = $object->get('id');
-					$asignatura = $object->get('asignatura');
-					$horario = $object->get('horario');
-					$profesor1 = $object->get('profesor1');
-					$profesor2 = $object->get('profesor2');
+					$id = mysqli_real_escape_string($this->cn,$object->get('id'));
+					$asignatura = mysqli_real_escape_string($this->cn,$object->get('asignatura'));
+					$horario = mysqli_real_escape_string($this->cn,$object->get('horario'));
+					$profesor1 = mysqli_real_escape_string($this->cn,$object->get('profesor1'));
+					$profesor2 = mysqli_real_escape_string($this->cn,$object->get('profesor2'));
 					if (is_empty($profesor2)) {
 						$this->do_operation("INSERT INTO grupo(id, asignatura, horario, profesor1) 
 										 VALUES('$id', '$asignatura', '$horario', '$profesor1');");
@@ -122,9 +122,9 @@ class db
 			switch($options['lvl2'])
 			{
 				case "normal": 
-					$id = $object->get('id');
-					$nombre = $object->get('nombre');
-					$escuela = $object->get('escuela');
+					$id = mysqli_real_escape_string($this->cn,$object->get('id'));
+					$nombre = mysqli_real_escape_string($this->cn,$object->get('nombre'));
+					$escuela = mysqli_real_escape_string($this->cn,$object->get('escuela'));
 					$this->do_operation("INSERT INTO profesor(id, nombre, escuela) VALUES('$id', '$nombre', '$escuela');");	
 				break;
 			}
@@ -152,11 +152,11 @@ class db
 			switch($options['lvl2'])
 			{
 				case "normal": 
-					$id = $object->get('id');
-					$nombre = $object->get('nombre');
-					$escuela = $object->get('escuela');
-					$creditos = $object->get('creditos');
-					$id_viejo = $object->auxiliars['id_viejo'];
+					$id = mysqli_real_escape_string($this->cn,$object->get('id'));
+					$nombre = mysqli_real_escape_string($this->cn,$object->get('nombre'));
+					$escuela = mysqli_real_escape_string($this->cn,$object->get('escuela'));
+					$creditos = mysqli_real_escape_string($this->cn,$object->get('creditos'));
+					$id_viejo = mysqli_real_escape_string($this->cn,$object->auxiliars['id_viejo']);
 					$this->do_operation("UPDATE asignatura SET id = '$id', nombre = '$nombre', escuela = '$escuela', creditos = '$creditos' WHERE id = '$id_viejo';");	
 				break;
 			}
@@ -165,10 +165,10 @@ class db
 			switch($options['lvl2'])
 			{
 				case "normal": 
-					$id = $object->get('id');
-					$nombre = $object->get('nombre');
-					$escuela = $object->get('escuela');
-					$id_viejo= $object->auxiliars['id_viejo'];
+					$id = mysqli_real_escape_string($this->cn,$object->get('id'));
+					$nombre = mysqli_real_escape_string($this->cn,$object->get('nombre'));
+					$escuela = mysqli_real_escape_string($this->cn,$object->get('escuela'));
+					$id_viejo= mysqli_real_escape_string($this->cn,$object->auxiliars['id_viejo']);
 					$this->do_operation("UPDATE profesor SET id = '$id', nombre = '$nombre', escuela = '$escuela' WHERE id = '$id_viejo';");	
 				break;
 			}
@@ -194,7 +194,7 @@ class db
 			switch($options['lvl2'])
 			{
 				case "normal": 
-					$id = $object->get('id');
+					$id = mysqli_real_escape_string($this->cn,$object->get('id'));
 					$this->do_operation("DELETE FROM grupo WHERE asignatura = '$id';");
 					$this->do_operation("DELETE FROM asignatura WHERE id = '$id';");
 				break;
@@ -204,7 +204,7 @@ class db
 			switch($options['lvl2'])
 			{
 				case "normal": 
-					$id = $object->get('id');
+					$id = mysqli_real_escape_string($this->cn,$object->get('id'));
 					$this->do_operation("DELETE FROM grupo WHERE profesor1 = '$id';");
 					$this->do_operation("UPDATE grupo SET profesor2 = NULL WHERE profesor2 = '$id';");
 					$this->do_operation("DELETE FROM profesor WHERE id = '$id';");
@@ -230,7 +230,7 @@ class db
 				break;
 				case "one_login_user":
 					$nombre = mysqli_real_escape_string($this->cn, $data['nombre']);
-					$contraseña = $data['contraseña'];
+					$contraseña = mysqli_real_escape_string($this->cn,$data['contraseña']);
 					//$result = $this->get_data("SELECT user, password FROM user WHERE user='$user';");
 					$info = $this->get_data("SELECT nombre, contraseña FROM usuario_registrado WHERE nombre='$nombre' AND  contraseña = '$contraseña';");
 					//$hasher = new PasswordHash(8, FALSE);
@@ -248,7 +248,7 @@ class db
 				break;
 				case "one_login_admin":
 					$nombre = mysqli_real_escape_string($this->cn, $data['nombre']);
-					$contraseña = $data['contraseña'];
+					$contraseña = mysqli_real_escape_string($this->cn,$data['contraseña']);
 					//$result = $this->get_data("SELECT user, password FROM user WHERE user='$user';");
 					$info = $this->get_data("SELECT nombre, contraseña FROM usuario_administrador WHERE nombre='$nombre' AND  contraseña = '$contraseña';");
 					//$hasher = new PasswordHash(8, FALSE);
@@ -266,7 +266,7 @@ class db
 				break;
 				case "one": 
 					$this->escape_string($data);
-					$id = $data['id'];
+					$id = mysqli_real_escape_string($this->cn,$data['id']);
 					$info = $this->get_data("SELECT * FROM asignatura WHERE id = '$id';");	
 				break;
 			}
@@ -279,17 +279,17 @@ class db
 				break;
 				case "one": 
 					$this->escape_string($data);
-					$id = $data['id'];
+					$id = mysqli_real_escape_string($this->cn,$data['id']);
 					$info = $this->get_data("SELECT * FROM grupo WHERE id = '$id';");	
 				break;
 				case "by_asignatura": 
 					$this->escape_string($data);
-					$asignatura = $data['asignatura'];
+					$asignatura = mysqli_real_escape_string($this->cn,$data['asignatura']);
 					$info = $this->get_data("SELECT * FROM grupo WHERE asignatura = '$asignatura';");
 				break;
 				case "by_profesor": 
 					$this->escape_string($data);
-					$profesor = $data['profesor1'];
+					$profesor = mysqli_real_escape_string($this->cn,$data['profesor1']);
 					$info = $this->get_data("SELECT g.*, a.nombre AS nombre_asignatura
 											 FROM grupo g, asignatura a 
 											 WHERE (profesor1 = '$profesor' OR profesor2 = '$profesor') AND g.asignatura = a.id;");	
@@ -301,7 +301,7 @@ class db
 			{
 				case "by_grupo": 
 					$this->escape_string($data);
-					$grupo = $data['grupo'];
+					$grupo = mysqli_real_escape_string($this->cn,$data['grupo']);
 					$info = $this->get_data("SELECT * FROM dia WHERE grupo = '$grupo';");	
 				break;
 			}
@@ -314,7 +314,7 @@ class db
 				break;
 				case "one": 
 					$this->escape_string($data);
-					$id = $data['id'];
+					$id = mysqli_real_escape_string($this->cn,$data['id']);
 					$info = $this->get_data("SELECT * FROM profesor WHERE id = '$id';");	
 				break;
 			}
