@@ -1,3 +1,154 @@
+body {
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+	background-image: url('../images/background.jpg');
+}
+
+main {
+	flex: 1 0 auto;
+}
+
+.logo {
+	-moz-transition:width .5s, height .5s;
+	-ms-transition:width .5s, height .5s;
+	-o-transition:width .5s, height .5s;
+	-webkit-transition:width .5s, height .5s;
+	background: no-repeat url(../images/logo_contenedor.png);
+	float: left;
+	height: 135px;
+	margin-left: 10px;
+	position: absolute;
+	text-align: center;
+	transition: width .5s, height .5s;
+	width: 234px;
+	z-index: 2;
+}
+
+.consultar-asignatura{
+	margin-left: -50%;
+}
+
+.principal {
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	border: 2px #66BB6A solid;
+	margin-top: 30px;
+	margin-bottom: 20px;
+	padding: 20px 30px 30px;
+}
+
+.principal h5 {
+	font-weight: bold;
+	color: #66BB6A;
+	margin-bottom: 30px;
+}
+
+.principal table {
+	border: 2px #66BB6A solid;
+	margin-bottom: 30px;
+}
+
+.principal thead {
+	font-weight: bold;
+	color: #66BB6A;
+}
+
+#div-principal-login {
+	margin: 25px 60px;
+}
+
+.iconos-accion {
+	color: #66BB6A;
+}
+
+.botones-inferiores .container{
+	width: 80%;
+}
+
+.botones-inferiores .container a{
+	width: 100%;
+}
+
+.datos-ocultos {
+	display: none;
+}
+
+label.active {
+	white-space: nowrap;
+}
+
+.secundario {
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	border: 2px #66BB6A solid;
+	width: 100%;
+	padding: 20px 30px 10px;
+}
+
+.secundario h5 {
+	font-weight: bold;
+	color: #66BB6A;
+	margin-bottom: 20px;
+}
+
+.secundario tbody tr td {
+	font-weight: bold;
+	color: #66BB6A;
+}
+
+.bloque-horario {
+	width: 100%;
+	border: 2px #66BB6A solid;
+}
+
+.bloque-activo {
+	background-color: #66BB6A;
+}
+
+.toast_exito {
+	background-color: white;
+	color: #66BB6A;
+	border: 2px #66BB6A solid;
+}
+
+.toast_error {
+	background-color: white;
+	color: #D50000;
+	border: 2px #D50000 solid;
+}
+
 .barra-busqueda {
 	width: 50%;
+}
+
+.login-item { 
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	border: 2px #66BB6A solid;
+	margin-bottom: 38px; 
+	
+} 
+
+.login-item b {
+	display: block; 
+	margin-top: 16px;
+	margin-bottom: 10px; 
+	text-align: center;
+	color: #66BB6A;
+}
+
+.botones-inferiores-login .container{
+	width: 80%;
+}
+
+.botones-inferiores-login .container a{
+	width: 100%;
+}
+
+.botones-inferiores-login div:nth-child(1){
+	margin-bottom: 5px;
 }
