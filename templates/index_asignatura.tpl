@@ -25,6 +25,7 @@
 							<i class="material-icons center iconos-accion">delete</i>
 							<form action="{$gvar.l_global}eliminar_asignatura.php" method="POST">
 								<input value="{$asignaturas[i]->get('id')}" id="id" name="id" type="hidden">
+								<input value="{$asignaturas[i]->get('nombre')}" id="nombre" name="nombre" type="hidden">
 							</form>
 						</a>
 					</td>

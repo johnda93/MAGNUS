@@ -526,6 +526,10 @@ $('#div-crear-grupo').on('click', '#conf-cancelar-grupo-asig', function (e) {
 //------------------------------Eliminar Asignatura------------------------------
 
 $('.boton-eliminar-asig').on('click', function (e) {
+    $id_asignatura = $(this).find('form').find('#id').val();
+    $nombre_asignatura = $(this).find('form').find('#nombre').val();
+    $('#modal-eliminar-asig div:first p').text("¿Está seguro que desea eliminar la asignatura: " + $id_asignatura + " - " + $nombre_asignatura + "?");
+
     $boton_eliminar = $(this);
 
     $('#modal-eliminar-asig').on('click', '#conf-eliminar-asig', function (e) {
