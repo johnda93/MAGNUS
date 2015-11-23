@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.0.9, created on 2015-10-24 02:46:56
+<?php /* Smarty version Smarty-3.0.9, created on 2015-10-2
          compiled from "C:/xampp/htdocs/MAGNUS/templates\editar_profesor.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:23248562ad500cf8470-50581487%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (

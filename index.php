@@ -1,6 +1,7 @@
 <?php
 
 require('configs/include.php');
+require('modules/m_phpass/PasswordHash.php');
 
 class c_index extends super_controller {
 

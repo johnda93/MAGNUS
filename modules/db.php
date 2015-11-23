@@ -81,11 +81,15 @@ class db
 	{
 		switch($options['lvl1'])
 		{																																																																																													
-			case "user":
+			case "usuario_registrado":
 			switch($options['lvl2'])
 			{
 				case "normal":
-					//
+					$hasher = new PasswordHash(8, FALSE);
+					$contraseña = $hasher->HashPassword($object->get('contraseña'));
+					unset($hasher);
+					$nombre = mysqli_real_escape_string($this->cn, $object->get('nombre'));				
+					$this->do_operation("INSERT INTO usuario_registrado(nombre, contraseña) VALUES('$nombre', '$contraseña');");						
 				break;
 			}
 			break;
@@ -246,11 +250,26 @@ class db
 		$info = array();
 		switch($options['lvl1'])
 		{																																																																																																										
-			case "user":
+			case "usuario_registrado":
 			switch($options['lvl2'])
 			{
-				case "all": 
-					//
+				case "one": 
+					$this->escape_string($data);
+					$nombre = mysqli_real_escape_string($this->cn, $data['nombre']);
+					$info = $this->get_data("SELECT * FROM usuario_registrado WHERE nombre = '$nombre';");	
+
+				break;
+			}
+			break;
+
+			case "usuario_administrador":
+			switch($options['lvl2'])
+			{
+				case "one": 
+					$this->escape_string($data);
+					$nombre = mysqli_real_escape_string($this->cn, $data['nombre']);
+					$info = $this->get_data("SELECT * FROM usuario_administrador WHERE nombre = '$nombre';");	
+
 				break;
 			}
 			break;
