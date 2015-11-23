@@ -585,10 +585,14 @@ function mostrar_crear_grupo (div_crear_editar) {
     });
 
     $div_crear_grupo.on('click', '#conf-cancelar-grupo-asig', function (e) {
-        Cookies.set("crear_asignatura", "true");
-        window.location.replace("index_asignatura.php");
+        if (div_crear_editar === "crear") {
+            Cookies.set("crear_asignatura", "true");
+            window.location.replace("index_asignatura.php");
+        } else {
+            Cookies.set("editar_asignatura", "true");
+            window.location.reload();
+        }
     });
-
 }
 
 //-------------------------------------------------------------------------------
