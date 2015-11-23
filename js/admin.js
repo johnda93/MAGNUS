@@ -13,6 +13,10 @@ $(document).ready(function () {
         dismissible: false
     }); //Activar modales para Eliminar Asignatura
 
+    $('.boton-eliminar-grupo').leanModal({
+        dismissible: false
+    }); //Activar modales para Eliminar Asignatura
+
     $('.boton-crear-prof').leanModal({
         dismissible: false
     }); //Activar modales para Crear Profesor
@@ -73,6 +77,14 @@ $(document).ready(function () {
         Cookies.remove("crear_grupo");
         Materialize.toast("Grupo creado correctamente", 60000, "rounded toast_exito");
     }
+
+    if (Cookies.get("eliminar_grupo") === "true") {
+        Cookies.remove("eliminar_grupo");
+        Materialize.toast("Grupo eliminado correctamente", 60000, "rounded toast_exito");
+    } else if (Cookies.get("eliminar_grupo") === "false") {
+        Cookies.remove("eliminar_grupo");
+        Materialize.toast("El grupo a eliminar no existe", 60000, "rounded toast_error");
+    };
 
     //-------------------------------------------------------------------------------------------------------------
 
@@ -331,7 +343,7 @@ $('#div-principal-editar-asig #id, #div-principal-editar-asig #creditos').on('bl
 });
 
 $('#conf-editar-asig, #conf-crear-grupo-editar-asig').on('click', function () {
-    $form = $('#div-principal-editar-asig').find('form');
+    $form = $('#div-principal-editar-asig').find('form:first');
     $boton_id = $(this).attr('id');
 
     $form.submit(function (event) {
@@ -340,7 +352,7 @@ $('#conf-editar-asig, #conf-crear-grupo-editar-asig').on('click', function () {
             method  : 'post',
             data    : $form.serialize(),
             success : function (result) {
-                $mensaje = JSON.parse(result);
+                $mensaje = JSON.parse(result);console.log($mensaje);
 
                 $id = $('#div-principal-editar-asig #id');
                 $label_id = $('#div-principal-editar-asig label[for="id"]');
@@ -397,6 +409,49 @@ $('#conf-editar-asig, #conf-crear-grupo-editar-asig').on('click', function () {
 
     $form.trigger('submit');
     $form.off('submit');
+});
+
+//-------------------------------------------------------------------------------
+
+//------------------------------Eliminar Asignatura------------------------------
+
+$('.boton-eliminar-asig').on('click', function (e) {
+    $id_asignatura = $(this).find('form').find('#id').val();
+    $nombre_asignatura = $(this).find('form').find('#nombre').val();
+    $('#modal-eliminar-asig div:first p').text("¿Está seguro que desea eliminar la asignatura: " + $id_asignatura + " - " + $nombre_asignatura + "?");
+
+    $boton_eliminar = $(this);
+
+    $('#modal-eliminar-asig').on('click', '#conf-eliminar-asig', function (e) {
+        $form = $boton_eliminar.find('form');
+        $form.submit(function (event) {
+            $.ajax({
+                    url     : 'eliminar_asignatura.php',
+                    type    : 'post',
+                    data    : $form.serialize(),
+                    success : function (result) {
+                        $mensaje = JSON.parse(result);
+
+                        Cookies.remove("eliminar_asignatura");
+
+                        if ($mensaje.exito) {
+                            Cookies.set("eliminar_asignatura", "true");
+                        } else if (!$mensaje.exito){
+                            Cookies.set("eliminar_asignatura", "false");
+                        }
+
+                        window.location.replace("index_asignatura.php");
+                    }
+            });
+
+            event.preventDefault();
+            event.stopImmediatePropagation();
+        });
+
+        $form.trigger('submit');
+        $form.off('submit');
+
+    });
 });
 
 //-------------------------------------------------------------------------------
@@ -536,38 +591,32 @@ function mostrar_crear_grupo (div_crear_editar) {
 
 }
 
-
-
 //-------------------------------------------------------------------------------
 
-//------------------------------Eliminar Asignatura------------------------------
+//------------------------------Eliminar Grupo------------------------------
 
-$('.boton-eliminar-asig').on('click', function (e) {
-    $id_asignatura = $(this).find('form').find('#id').val();
-    $nombre_asignatura = $(this).find('form').find('#nombre').val();
-    $('#modal-eliminar-asig div:first p').text("¿Está seguro que desea eliminar la asignatura: " + $id_asignatura + " - " + $nombre_asignatura + "?");
+$('.boton-eliminar-grupo').on('click', function (e) {
+    $id_asignatura = $('#div-principal-editar-asig #id').val();
 
     $boton_eliminar = $(this);
 
-    $('#modal-eliminar-asig').on('click', '#conf-eliminar-asig', function (e) {
+    $('#modal-eliminar-grupo').on('click', '#conf-eliminar-grupo', function (e) {
         $form = $boton_eliminar.find('form');
         $form.submit(function (event) {
             $.ajax({
-                    url     : 'eliminar_asignatura.php',
+                    url     : 'eliminar_grupo.php',
                     type    : 'post',
                     data    : $form.serialize(),
                     success : function (result) {
                         $mensaje = JSON.parse(result);
 
-                        Cookies.remove("eliminar_asignatura");
-
                         if ($mensaje.exito) {
-                            Cookies.set("eliminar_asignatura", "true");
+                            Cookies.set("eliminar_grupo", "true");
                         } else if (!$mensaje.exito){
-                            Cookies.set("eliminar_asignatura", "false");
+                            Cookies.set("eliminar_grupo", "false");
                         }
 
-                        window.location.replace("index_asignatura.php");
+                        window.location.replace("editar_asignatura.php?id=" + $id_asignatura);
                     }
             });
 
@@ -582,8 +631,6 @@ $('.boton-eliminar-asig').on('click', function (e) {
 });
 
 //-------------------------------------------------------------------------------
-
-
 
 //-------------------------------Crear Profesor-------------------------------
 

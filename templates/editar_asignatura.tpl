@@ -68,8 +68,14 @@
 						{/section}
 					</td>
 					<td>
-						<a href="#"><i class="material-icons center iconos-accion">create</i></a>
-						<a href="#"><i class="material-icons center iconos-accion">delete</i></a>
+						<i class="material-icons center iconos-accion">create</i>
+
+						<a class="boton-eliminar-grupo" href="#modal-eliminar-grupo">
+							<i class="material-icons center iconos-accion">delete</i>
+							<form action="{$gvar.l_global}eliminar_grupo.php" method="POST">
+								<input value="{$grupos[i]->get('id')}" id="id" name="id" type="hidden">
+							</form>
+						</a>
 					</td>
 				</tr>
 				{/section}
@@ -126,6 +132,17 @@
 			<div class="modal-footer">
 				<a class="modal-action modal-close waves-effect waves-green btn-flat" href="#!">No</a>
 				<a id="conf-editar-asig" class=" modal-action modal-close waves-effect waves-green btn-flat">Sí</a>
+			</div>
+		</div>
+
+		<div id="modal-eliminar-grupo" class="modal">
+			<div class="modal-content">
+				<h5>Eliminar Grupo</h5>
+				<p>¿Está seguro que desea eliminar este grupo?</p>
+			</div>
+			<div class="modal-footer">
+				<a class="modal-action modal-close waves-effect waves-green btn-flat" href="#!">No</a>
+				<a id="conf-eliminar-grupo" class="modal-action modal-close waves-effect waves-green btn-flat" href="#!">Sí</a>
 			</div>
 		</div>
 

@@ -213,22 +213,32 @@ class db
 				break;
 			}
 			break;
+
 			case "asignatura":
 			switch($options['lvl2'])
 			{
 				case "normal": 
 					$id = mysqli_real_escape_string($this->cn,$object->get('id'));
-					$this->do_operation("DELETE FROM grupo WHERE asignatura = '$id';");
 					$this->do_operation("DELETE FROM asignatura WHERE id = '$id';");
 				break;
 			}
 			break;
+
+			case "grupo":
+			switch($options['lvl2'])
+			{
+				case "normal": 
+					$id = mysqli_real_escape_string($this->cn,$object->get('id'));
+					$this->do_operation("DELETE FROM grupo WHERE id = '$id';");
+				break;
+			}
+			break;
+
 			case "profesor":
 			switch($options['lvl2'])
 			{
 				case "normal": 
 					$id = mysqli_real_escape_string($this->cn,$object->get('id'));
-					$this->do_operation("DELETE FROM grupo WHERE profesor1 = '$id';");
 					$this->do_operation("UPDATE grupo SET profesor2 = NULL WHERE profesor2 = '$id';");
 					$this->do_operation("DELETE FROM profesor WHERE id = '$id';");
 				break;
