@@ -34,7 +34,42 @@ class c_crear_grupo extends super_controller {
 		}
 
 		if ($this->mensaje['profesor'] && $this->mensaje['horario']) {
+			$cod['grupo']['asignatura'] = $this->post->asignatura;
+			$options['grupo']['lvl2'] = "by_asignatura";
+
+			$this->orm->connect();
+			$this->orm->read_data(array("grupo"), $options, $cod);
+			$grupos = $this->orm->get_objects("grupo", $components);
+			$this->orm->close();
+
+			$cont = 1;
+
+			if (!is_empty($grupos)) {
+				$ids = array();
+
+				foreach ($grupos as $grupo) {
+					$arr = explode('-', trim($grupo->get('id')));
+					$id = $arr[1] + 0;
+					array_push($ids, $id);
+				}
+
+				if (!is_empty($ids)) {
+					sort($ids);
+				}
+
+				foreach ($ids as $id) {
+					if ($cont < $id) {
+						break;
+					} else {
+						$cont++;
+					}
+				}
+			}
+
+			$id = $this->post->asignatura . "-" . $cont;
+
 			$grupo = new grupo($this->post);
+			$grupo->set('id', $id);
 
 			$this->orm->connect();
 			$this->orm->insert_data("normal", $grupo);

@@ -161,6 +161,28 @@ class db
 				break;
 			}
 			break;
+
+			case "grupo":
+			switch($options['lvl2'])
+			{
+				case "normal":
+					$id = mysqli_real_escape_string($this->cn,$object->get('id'));
+					$asignatura = mysqli_real_escape_string($this->cn,$object->get('asignatura'));
+					$horario = mysqli_real_escape_string($this->cn,$object->get('horario'));
+					$profesor1 = mysqli_real_escape_string($this->cn,$object->get('profesor1'));
+					$profesor2 = mysqli_real_escape_string($this->cn,$object->get('profesor2'));
+					$id_viejo = mysqli_real_escape_string($this->cn,$object->auxiliars['id_viejo']);
+					if (is_empty($profesor2)) {
+						$this->do_operation("UPDATE grupo SET id = '$id', asignatura = '$asignatura', horario = '$horario', profesor1 = '$profesor1' WHERE id = '$id_viejo';");
+					} else {
+						$this->do_operation("UPDATE grupo SET id = '$id', asignatura = '$asignatura', horario = '$horario', profesor1 = '$profesor1', profesor2 = '$profesor2' WHERE id = '$id_viejo';");
+					}
+					
+						
+				break;
+			}
+			break;
+
 			case "profesor":
 			switch($options['lvl2'])
 			{
@@ -173,6 +195,7 @@ class db
 				break;
 			}
 			break;
+
 			default: break;
 		}
 	}

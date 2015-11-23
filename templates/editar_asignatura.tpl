@@ -36,9 +36,9 @@
 			</form>
 		</div>
 
-		<h5 class="center-align">Grupos</h5>
+		<h5 id="titulo_tabla" class="center-align">Grupos</h5>
 
-		<table class="centered striped z-depth-1">
+		<table id="tabla_grupos" class="centered striped z-depth-1">
 			<thead>
 				<tr>
 					<th data-field="nombre">Profesor</th>
@@ -76,10 +76,12 @@
 			</tbody>
 		</table>
 
+		<div id="div-crear-grupo-editar-asig"></div>
+
 		<div class="row botones-inferiores">
 			<div class="col s4">
 				<div class="container">
-					<a class="waves-effect waves-light green lighten-1 btn boton-editar-asig" href="#modal-crear-grupo-editar">
+					<a class="waves-effect waves-light green lighten-1 btn boton-editar-asig" href="#modal-crear-grupo-editar-asig">
 						<i class="material-icons left">add</i>
 						Crear Grupo
 					</a>
@@ -105,14 +107,14 @@
 			</div>
 		</div>
 
-		<div id="modal-crear-grupo-editar" class="modal">
+		<div id="modal-crear-grupo-editar-asig" class="modal">
 			<div class="modal-content">
 				<h5>Crear Grupo</h5>
 				<p>¿Está seguro que desea editar esta asignatura y proceder a crear un grupo para ésta?</p>
 			</div>
 			<div class="modal-footer">
 				<a class="modal-action modal-close waves-effect waves-green btn-flat" href="#!">No</a>
-				<a class="modal-action modal-close waves-effect waves-green btn-flat" href="#!">Sí</a>
+				<a id="conf-crear-grupo-editar-asig" class="modal-action modal-close waves-effect waves-green btn-flat" href="#!">Sí</a>
 			</div>
 		</div>
 

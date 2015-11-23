@@ -77,6 +77,28 @@ class c_editar_asignatura extends super_controller {
 			$this->mensaje['id3'] = false;
 		} else {
 			if ($this->mensaje['nombre'] && $this->mensaje['escuela'] && $this->mensaje['creditos1'] && $this->mensaje['creditos2']) {
+				$cod['grupo']['asignatura'] = $this->post->id_viejo;
+				$options['grupo']['lvl2'] = "by_asignatura";
+
+				$this->orm->connect();
+				$this->orm->read_data(array("grupo"), $options, $cod);
+				$grupos = $this->orm->get_objects("grupo", $components);
+				$this->orm->close();
+
+				if (!is_empty($grupos)) {
+					foreach ($grupos as $grupo) {
+						$grupo->auxiliars['id_viejo'] = $grupo->get('id');
+
+						$arr = explode('-', trim($grupo->get('id')));
+						$id = $this->post->id . "-" . $arr[1];
+						$grupo->set('id', $id);
+						
+						$this->orm->connect();
+						$this->orm->update_data("normal", $grupo);
+						$this->orm->close();
+					}
+				}
+
 				$asignatura = new asignatura($this->post);
 				$asignatura->auxiliars['id_viejo'] = $this->post->id_viejo;
 
@@ -145,7 +167,7 @@ class c_editar_asignatura extends super_controller {
 
 			if ($arr[0] === "Duplicate") {
 				$this->mensaje['id1'] = false;
-			} 
+			} $this->mensaje['error'] = $mensaje;
 
 			echo json_encode($this->mensaje);
 		}

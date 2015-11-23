@@ -63,7 +63,7 @@
 			</div>
 		</div>
 
-		<div id="div-crear-grupo"></div>
+		<div id="div-crear-grupo-crear-asig"></div>
 
 		<div id="modal-crear-grupo-asig" class="modal">
 			<div class="modal-content">
