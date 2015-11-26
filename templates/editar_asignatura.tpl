@@ -68,7 +68,10 @@
 						{/section}
 					</td>
 					<td>
-						<i class="material-icons center iconos-accion">create</i>
+						<a class="boton-editar-grupo" href="#">
+							<i class="material-icons center iconos-accion">create</i>
+							<input value="{$grupos[i]->get('id')}" id="id" name="id" type="hidden">
+						</a>
 
 						<a class="boton-eliminar-grupo" href="#modal-eliminar-grupo">
 							<i class="material-icons center iconos-accion">delete</i>

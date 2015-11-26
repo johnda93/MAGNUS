@@ -15,7 +15,7 @@ $(document).ready(function () {
 
     $('.boton-eliminar-grupo').leanModal({
         dismissible: false
-    }); //Activar modales para Eliminar Asignatura
+    }); //Activar modales para Eliminar Grupo
 
     $('.boton-crear-prof').leanModal({
         dismissible: false
@@ -594,6 +594,62 @@ function mostrar_crear_grupo (div_crear_editar) {
         }
     });
 }
+
+//-------------------------------------------------------------------------------
+
+//-----------------------------------Editar Grupo--------------------------------
+
+$('.boton-editar-grupo').on('click', function (e) {
+    $('.input-editar-asig').attr('readonly', true);
+    $('.botones-inferiores').hide();
+    $('#titulo_tabla').hide();
+    $('#tabla_grupos').hide();
+
+    $boton_editar = $(this);
+
+    $.get("templates/editar_grupo.tpl", function (result) {
+        $('#div-crear-grupo-editar-asig').html(result);
+
+        $.ajax({
+            url     : 'editar_grupo.php?option=listar&id=' + $id_grupo,
+            type    : 'post',
+            success : function (result) {
+                $profesores = JSON.parse(result);
+
+                $nombre_asignatura = $('#div-principal-editar-asig #nombre').val();
+                $id_asignatura = $('#div-principal-editar-asig #id').val();
+
+                $('#div-crear-grupo-editar-asig').find('#asignatura').val($id_asignatura);
+
+                $id_grupo = $boton_editar.find('input').val();
+
+                $('#div-crear-grupo-editar-asig').find('div:first h5:first').html("Editar grupo " + $id_grupo + " para " + $nombre_asignatura);
+
+                $lista_desplegable_1 = '<option value="" disabled selected></option>'
+
+                $.each($profesores, function (index, element) {
+                    $lista_desplegable_1 += '<option value="' + element.id + '">' + element.nombre + ' - ' + element.escuela + '</option>';
+                });
+
+                $('#lista_desplegable_profesor_1').html($lista_desplegable_1);
+
+                $lista_desplegable_2 = '<option value="" disabled selected></option>'
+
+                $.each($profesores, function (index, element) {
+                    $lista_desplegable_2 += '<option value="' + element.id + '">' + element.nombre + ' - ' + element.escuela + '</option>';
+                });
+
+                $('#lista_desplegable_profesor_2').html($lista_desplegable_2);
+
+                $('select').material_select();
+
+                $('.boton-editar-grupo').leanModal({
+                    dismissible: false
+                }); // Activar modales para Crear Grupo
+            }
+        }); 
+    });
+});
 
 //-------------------------------------------------------------------------------
 
