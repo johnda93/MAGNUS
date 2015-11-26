@@ -458,6 +458,14 @@ $('.boton-eliminar-asig').on('click', function (e) {
 
 //----------------------------------Crear Grupo----------------------------------
 
+$('#div-crear-grupo-editar-asig, #div-crear-grupo-crear-asig').on('click', '.bloque-horario', function (e) {
+    if (!$(this).hasClass('bloque-activo')) {
+        $(this).addClass('bloque-activo');
+    } else {
+        $(this).removeClass('bloque-activo');
+    }
+});
+
 function mostrar_crear_grupo (div_crear_editar) {
     $('.input-' + div_crear_editar + '-asig').attr('readonly', true);
     $('.botones-inferiores').hide();
@@ -508,14 +516,6 @@ function mostrar_crear_grupo (div_crear_editar) {
                 }); // Activar modales para Crear Grupo
             }
         }); 
-    });
-
-    $div_crear_grupo.on('click', '.bloque-horario', function (e) {
-        if (!$(this).hasClass('bloque-activo')) {
-            $(this).addClass('bloque-activo');
-        } else {
-            $(this).removeClass('bloque-activo');
-        }
     });
 
     $div_crear_grupo.on('click', '#conf-guardar-grupo-asig', function (e) {
@@ -606,6 +606,7 @@ $('.boton-editar-grupo').on('click', function (e) {
     $('#tabla_grupos').hide();
 
     $boton_editar = $(this);
+    $id_grupo = $boton_editar.find('input').val();
 
     $.get("templates/editar_grupo.tpl", function (result) {
         $('#div-crear-grupo-editar-asig').html(result);
@@ -613,8 +614,13 @@ $('.boton-editar-grupo').on('click', function (e) {
         $.ajax({
             url     : 'editar_grupo.php?option=listar&id=' + $id_grupo,
             type    : 'post',
-            success : function (result) {
-                $profesores = JSON.parse(result);
+            success : function (result2) {
+                $resultado = JSON.parse(result2);
+
+                $profesores = $resultado.profesores;
+                $profesor1 = $resultado.profesor1;
+                $profesor2 = $resultado.profesor2;
+                $horario = JSON.parse($resultado.horario);
 
                 $nombre_asignatura = $('#div-principal-editar-asig #nombre').val();
                 $id_asignatura = $('#div-principal-editar-asig #id').val();
@@ -628,7 +634,11 @@ $('.boton-editar-grupo').on('click', function (e) {
                 $lista_desplegable_1 = '<option value="" disabled selected></option>'
 
                 $.each($profesores, function (index, element) {
-                    $lista_desplegable_1 += '<option value="' + element.id + '">' + element.nombre + ' - ' + element.escuela + '</option>';
+                    if (element.id === $profesor1) {
+                        $lista_desplegable_1 += '<option value="' + element.id + '" selected>' + element.nombre + ' - ' + element.escuela + '</option>';
+                    } else {
+                        $lista_desplegable_1 += '<option value="' + element.id + '">' + element.nombre + ' - ' + element.escuela + '</option>';
+                    }
                 });
 
                 $('#lista_desplegable_profesor_1').html($lista_desplegable_1);
@@ -636,10 +646,41 @@ $('.boton-editar-grupo').on('click', function (e) {
                 $lista_desplegable_2 = '<option value="" disabled selected></option>'
 
                 $.each($profesores, function (index, element) {
-                    $lista_desplegable_2 += '<option value="' + element.id + '">' + element.nombre + ' - ' + element.escuela + '</option>';
+                    if (element.id === $profesor2) {
+                        $lista_desplegable_2 += '<option value="' + element.id + '" selected>' + element.nombre + ' - ' + element.escuela + '</option>';
+                    } else {
+                        $lista_desplegable_2 += '<option value="' + element.id + '">' + element.nombre + ' - ' + element.escuela + '</option>';
+                    }
                 });
 
                 $('#lista_desplegable_profesor_2').html($lista_desplegable_2);
+
+                for (var i = 1; i <= 7; i++) {
+                    $hora = $('#horario tbody tr:nth-child(' + i + ')').find('td:first').text();
+                    
+                    $.each($horario, function (index, element) {
+                        if (element.hora === $hora) {
+                            $fila = $('#horario tbody tr:nth-child(' + i + ')');
+
+                            $nombre_dia = element.dia;
+
+                            switch($nombre_dia) {
+                                case "Lunes":       $numero_dia = 1; break;
+                                case "Martes":      $numero_dia = 2; break;
+                                case "Miercoles":   $numero_dia = 3; break;
+                                case "Jueves":      $numero_dia = 4; break;
+                                case "Viernes":     $numero_dia = 5; break;
+                                case "Sabado":      $numero_dia = 6; break;
+                                case "Domingo":     $numero_dia = 7; break;
+                            }
+
+                            $numero_dia++;
+
+                            $boton_horario = $fila.find('td:nth-child(' + $numero_dia + ')').find('a');
+                            $boton_horario.addClass('bloque-activo');
+                        };
+                    });
+                }
 
                 $('select').material_select();
 
@@ -649,7 +690,81 @@ $('.boton-editar-grupo').on('click', function (e) {
             }
         }); 
     });
+
+    $('#div-crear-grupo-editar-asig').on('click', '#conf-editar-grupo', function (e) {
+
+        $horario = [];
+
+        $('.bloque-activo').each(function (index, element) {
+
+            $hora = $(element).parent().parent().find('td:first').text();
+            $numero_dia = $(element).parent().index();
+
+            switch($numero_dia) {
+                case 1: $dia = "Lunes"; break;
+                case 2: $dia = "Martes"; break;
+                case 3: $dia = "Miercoles"; break;
+                case 4: $dia = "Jueves"; break;
+                case 5: $dia = "Viernes"; break;
+                case 6: $dia = "Sabado"; break;
+                case 7: $dia = "Domingo"; break;
+            }
+
+            $horario.push({dia : $dia, hora : $hora});
+        });
+
+        $('#div-crear-grupo-editar-asig').find('#id').val($id_grupo);
+        $('#div-crear-grupo-editar-asig').find('#profesor1').val($('#lista_desplegable_profesor_1').val());
+        $('#div-crear-grupo-editar-asig').find('#profesor2').val($('#lista_desplegable_profesor_2').val());
+        $('#div-crear-grupo-editar-asig').find('#horario').val(JSON.stringify($horario));
+
+        $form = $('#div-crear-grupo-editar-asig').find('form');
+
+        $form.submit(function (event) {
+            $.ajax({
+                url     : 'editar_grupo.php?option=editar',
+                method  : 'post',
+                data    : $form.serialize(),
+                success : function (result) {
+                    $mensaje = JSON.parse(result);
+
+                    if (!$mensaje.profesor) {
+                        $('.select-wrapper:first input').addClass('validate invalid');
+
+                        Materialize.toast('Seleccione un Profesor 1', 10000, 'rounded toast_error');
+                    }
+
+                    if (!$mensaje.horario) {
+                        Materialize.toast('Seleccione por lo menos dos bloques en el horario', 10000, 'rounded toast_error');
+                    }
+
+                    if (!$mensaje.profesor || !$mensaje.horario) {
+                        $offset = $('#div-crear-grupo-editar-asig').offset();
+                        window.scrollTo(0, $offset.top - 20);
+                    }
+
+                    if ($mensaje.profesor && $mensaje.horario) {
+                        Cookies.set("crear_grupo", "true");
+                        window.location.replace("editar_asignatura.php?id=" + $('#div-principal-editar-asig #id').val());
+                    }
+                }    
+            });
+
+            event.preventDefault();
+            event.stopImmediatePropagation();
+        });
+
+        $form.trigger('submit');
+        $form.off('submit');
+    });
+
+    $('#div-crear-grupo-editar-asig').on('click', '#conf-cancelar-editar-grupo', function (e) {
+        Cookies.set("editar_asignatura", "true");
+        window.location.reload();
+    });
 });
+
+
 
 //-------------------------------------------------------------------------------
 

@@ -171,11 +171,10 @@ class db
 					$horario = mysqli_real_escape_string($this->cn,$object->get('horario'));
 					$profesor1 = mysqli_real_escape_string($this->cn,$object->get('profesor1'));
 					$profesor2 = mysqli_real_escape_string($this->cn,$object->get('profesor2'));
-					$id_viejo = mysqli_real_escape_string($this->cn,$object->auxiliars['id_viejo']);
 					if (is_empty($profesor2)) {
-						$this->do_operation("UPDATE grupo SET id = '$id', asignatura = '$asignatura', horario = '$horario', profesor1 = '$profesor1' WHERE id = '$id_viejo';");
+						$this->do_operation("UPDATE grupo SET horario = '$horario', profesor1 = '$profesor1' WHERE id = '$id';");
 					} else {
-						$this->do_operation("UPDATE grupo SET id = '$id', asignatura = '$asignatura', horario = '$horario', profesor1 = '$profesor1', profesor2 = '$profesor2' WHERE id = '$id_viejo';");
+						$this->do_operation("UPDATE grupo SET horario = '$horario', profesor1 = '$profesor1', profesor2 = '$profesor2' WHERE id = '$id';");
 					}
 					
 						
