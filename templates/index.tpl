@@ -86,7 +86,7 @@
 
       		<ul>
       			{section loop=$carreras name=i}
-      				<a href="#"><li>{$carreras[i]->get('nombre')}</li></a>
+      				<a href="index_carrera.php?id={$carreras[i]->get('id')}"><li>{$carreras[i]->get('nombre')}</li></a>
       			{/section}
       		</ul>
       	</div>

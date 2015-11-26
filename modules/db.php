@@ -289,6 +289,18 @@ class db
 			}
 			break;
 
+			case "pensum":
+			switch($options['lvl2'])
+			{
+				case "by_carrera": 
+					$this->escape_string($data);
+					$carrera = $data['carrera'];
+					$asignatura = $data['asignatura'];
+					$info = $this->get_data("SELECT p.*, a.nombre AS nombre_asignatura FROM pensum p, asignatura a WHERE p.carrera = '$carrera' AND a.id = '$asignatura';");	
+				break;
+			}
+			break;
+
 			case "asignatura":
 			switch($options['lvl2'])
 			{
@@ -300,6 +312,12 @@ class db
 					$this->escape_string($data);
 					$id = $data['id'];
 					$info = $this->get_data("SELECT * FROM asignatura WHERE id = '$id';");	
+				break;
+
+				case "by_carrera": 
+					$this->escape_string($data);
+					$carrera = $data['carrera'];
+					$info = $this->get_data("SELECT a.*, p.componente AS componente, p.obligatoria AS obligatoria FROM asignatura a,carrera c, pensum p WHERE p.asignatura=a.id AND c.id='$carrera' AND p.carrera=c.id;");	
 				break;
 			}
 			break;

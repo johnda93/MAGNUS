@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.9, created on 2015-11-26 22:41:35
+<?php /* Smarty version Smarty-3.0.9, created on 2015-11-26 22:50:22
          compiled from "C:/xampp/htdocs/MAGNUS/templates\index.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:1754256577c8f0ea545-09455223%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:3239856577e9ee50068-96610916%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '58988c011802d67e3718843c62365fd1ea7f07ff' => 
     array (
       0 => 'C:/xampp/htdocs/MAGNUS/templates\\index.tpl',
-      1 => 1448574092,
+      1 => 1448574620,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '1754256577c8f0ea545-09455223',
+  'nocache_hash' => '3239856577e9ee50068-96610916',
   'function' => 
   array (
   ),
@@ -130,7 +130,8 @@ $_smarty_tpl->tpl_vars['smarty']->value['section']['i']['index_next'] = $_smarty
 $_smarty_tpl->tpl_vars['smarty']->value['section']['i']['first']      = ($_smarty_tpl->tpl_vars['smarty']->value['section']['i']['iteration'] == 1);
 $_smarty_tpl->tpl_vars['smarty']->value['section']['i']['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']['i']['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']['i']['total']);
 ?>
-      				<a href="#"><li><?php echo $_smarty_tpl->getVariable('carreras')->value[$_smarty_tpl->getVariable('smarty')->value['section']['i']['index']]->get('nombre');?>
+      				<a href="index_carrera.php?id=<?php echo $_smarty_tpl->getVariable('carreras')->value[$_smarty_tpl->getVariable('smarty')->value['section']['i']['index']]->get('id');?>
+"><li><?php echo $_smarty_tpl->getVariable('carreras')->value[$_smarty_tpl->getVariable('smarty')->value['section']['i']['index']]->get('nombre');?>
 </li></a>
       			<?php endfor; endif; ?>
       		</ul>
