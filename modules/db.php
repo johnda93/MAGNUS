@@ -274,6 +274,21 @@ class db
 			}
 			break;
 
+			case "carrera":
+			switch($options['lvl2'])
+			{
+				case "all": 
+					$info = $this->get_data("SELECT * FROM carrera;");
+				break;
+
+				case "one": 
+					$this->escape_string($data);
+					$id = $data['id'];
+					$info = $this->get_data("SELECT * FROM carrera WHERE id = '$id';");	
+				break;
+			}
+			break;
+
 			case "asignatura":
 			switch($options['lvl2'])
 			{

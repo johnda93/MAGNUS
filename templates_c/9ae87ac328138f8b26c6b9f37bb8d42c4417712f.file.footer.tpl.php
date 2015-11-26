@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.0.9, created on 2015-11-20 21:46:47
+<?php /* Smarty version Smarty-3.0.9, created on 2015-11-26 22:08:28
          compiled from "C:/xampp/htdocs/MAGNUS/templates\footer.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:29972564f8038373787-02539517%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_smarty_tpl->decodeProperties(array (
     '9ae87ac328138f8b26c6b9f37bb8d42c4417712f' => 
     array (
       0 => 'C:/xampp/htdocs/MAGNUS/templates\\footer.tpl',
-      1 => 1448052387,
+      1 => 1448572082,
       2 => 'file',
     ),
   ),

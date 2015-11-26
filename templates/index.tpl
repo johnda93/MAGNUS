@@ -45,6 +45,8 @@
 
       		</div>
 
+
+
       		<div style="padding-top: 324px"class="col s9 z-depth-1 login-item">
        			<label for="contraseña">MAGNUS</label>  		
       		</div>
@@ -78,6 +80,16 @@
 				<a class="modal-action modal-close waves-effect waves-green btn-flat" href="#!">Cancelar</a>
 			</div>
 		</div>
+
+		<div class="white container principal z-depth-1">
+      		<h5 class="center-align">Carreras</h5>
+
+      		<ul>
+      			{section loop=$carreras name=i}
+      				<a href="#"><li>{$carreras[i]->get('nombre')}</li></a>
+      			{/section}
+      		</ul>
+      	</div>
 
 	</div>
 </main>
