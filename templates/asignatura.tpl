@@ -13,7 +13,7 @@
 		<div style="margin-bottom: 25px;" class="row botones-inferiores">
 			<div class="col s6">
 				<div class="container">
-				<a id="opinar" class="waves-effect waves-light green lighten-1 btn">
+					<a id="opinar" class="waves-effect waves-light green lighten-1 btn">
 						<i class="material-icons left">create</i>
 						Opina!
 					</a>
@@ -22,7 +22,7 @@
 
 			<div class="col s6">
 				<div class="container">
-					<a class="waves-effect waves-light green lighten-1 btn">
+					<a href="asignatura.php?id={$asignatura->get('id')}&option=ver_recursos"class="waves-effect waves-light green lighten-1 btn">
 						<i class="material-icons left">library_books</i>
 						Ver Recursos
 					</a>

@@ -66,6 +66,7 @@ class c_asignatura extends super_controller {
 		$this->orm->close();
 
 		$this->engine->assign('titulo', "MAGNUS: " . $profesor[0]->get('nombre'));
+		$this->engine->assign('usuario', $_SESSION['usuario']['usuario']);
 		$this->engine->assign('profesor', $profesor[0]);
 		$this->engine->assign('horarios1', $horarios1);
 		$this->engine->assign('horarios2', $horarios2);

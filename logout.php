@@ -16,8 +16,7 @@ class c_logout extends super_controller {
 	public function run()
 	{
 		$this->logout();
-		header("Location: " . $gvar['l_global'] . "login.php");
-			
+		header("Location: " . $gvar['l_global'] . "index.php");	
 	}
 }
 

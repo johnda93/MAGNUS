@@ -182,6 +182,19 @@ class db
 				break;
 			}
 			break;
+
+			case "recurso":
+			switch($options['lvl2'])
+			{
+				case "normal": 
+					$nombre = $object->get('nombre');
+					$asignatura = $object->get('asignatura');
+					$usuario = $object->get('usuario');
+					
+					$this->do_operation("INSERT INTO recurso(nombre, asignatura, usuario) VALUES('$nombre', '$asignatura', '$usuario');");	
+				break;
+			}
+			break;
 			
 			default: break;
 		}
@@ -450,6 +463,17 @@ class db
 					$usuario = $data['usuario'];
 					$asignatura = $data['asignatura'];
 					$info = $this->get_data("SELECT * FROM opinion_asignatura WHERE usuario = '$usuario' AND asignatura = '$asignatura';");	
+				break;
+			}
+			break;
+
+			case "recurso":
+			switch($options['lvl2'])
+			{
+				case "by_asignatura": 
+					$this->escape_string($data);
+					$asignatura = $data['asignatura'];
+					$info = $this->get_data("SELECT * FROM recurso WHERE asignatura = '$asignatura';");	
 				break;
 			}
 			break;

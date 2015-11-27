@@ -61,7 +61,6 @@ $('#modal-registrarse #nombre_registro').on('blur', function () {
     $form.off('submit');
 });
 
-//$('#modal-registrarse').closeModal();
     
 $('#conf-registro').on('click', function () {
     $form = $('#modal-registrarse').find('form');

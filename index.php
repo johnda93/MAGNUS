@@ -15,6 +15,7 @@ class c_index extends super_controller {
 		$this->orm->close();
 
 		$this->engine->assign('titulo', "MAGNUS: Inicio");
+		$this->engine->assign('usuario', $_SESSION['usuario']['usuario']);
 		$this->engine->assign('carreras', $carreras);
 		
 		$this->engine->display('header.tpl');

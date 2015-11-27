@@ -23,9 +23,8 @@ class c_index_carrera extends super_controller {
 		$asignaturas = $this->orm->get_objects("asignatura",NULL, $auxiliars);
 		$this->orm->close();
 
-		
-
 		$this->engine->assign('titulo', "MAGNUS: " . $carrera[0]->get('nombre'));
+		$this->engine->assign('usuario', $_SESSION['usuario']['usuario']);
 		$this->engine->assign('carrera', $carrera[0]);
 		$this->engine->assign('asignaturas', $asignaturas);
 		

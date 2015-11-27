@@ -63,14 +63,7 @@ class c_login extends super_controller {
 		echo json_encode($mensaje);
 	}
 
-	public function display()
-	{
-		$this->engine->assign('title',$this->gvar['n_index']);
-		
-		$this->engine->display('user_header.tpl');
-		$this->engine->display('login.tpl');
-		$this->engine->display('footer.tpl');
-	}
+	public function display(){}
 	
 	public function run()
 	{
