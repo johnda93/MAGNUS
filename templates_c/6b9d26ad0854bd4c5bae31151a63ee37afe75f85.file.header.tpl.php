@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.9, created on 2015-11-26 22:08:27
+<?php /* Smarty version Smarty-3.0.9, created on 2015-11-27 01:30:42
          compiled from "C:/xampp/htdocs/MAGNUS/templates\header.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:29896564f807c584082-13574323%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:151235657a432a4f311-74689113%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '6b9d26ad0854bd4c5bae31151a63ee37afe75f85' => 
     array (
       0 => 'C:/xampp/htdocs/MAGNUS/templates\\header.tpl',
-      1 => 1448572082,
+      1 => 1448584208,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '29896564f807c584082-13574323',
+  'nocache_hash' => '151235657a432a4f311-74689113',
   'function' => 
   array (
   ),
@@ -23,9 +23,12 @@ $_smarty_tpl->decodeProperties(array (
   <!--Import Google Icon Font-->
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     
+        <style type="text/css">@import url(<?php echo $_smarty_tpl->getVariable('gvar')->value['l_global'];?>
+css/star-rating.min.css); </style>
         <style type="text/css">@import url(<?php echo $_smarty_tpl->getVariable('gvar')->value['l_global'];?>
 css/estilos.css); </style>
     

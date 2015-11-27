@@ -35,6 +35,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 {literal}
+	<script src="{/literal}{$gvar.l_global}{literal}js/star-rating.min.js" language="Javascript"></script>
 	<script src="{/literal}{$gvar.l_global}{literal}js/usuario.js" language="Javascript"></script>
 {/literal}
 </body>

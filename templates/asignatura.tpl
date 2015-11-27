@@ -19,7 +19,9 @@
         {section loop = $grupos name = i}
         <tr>
           <td>
-            {$grupos[i]->components['profesor']['p1_g'][0]->get('nombre')}<br />
+            <a href="profesor.php?id={$grupos[i]->components['profesor']['p1_g'][0]->get('id')}">
+              {$grupos[i]->components['profesor']['p1_g'][0]->get('nombre')}
+            </a><br />
             {if isset($grupos[i]->components['profesor']['p2_g'])}
             {$grupos[i]->components['profesor']['p2_g'][0]->get('nombre')}
             {/if}

@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.9, created on 2015-11-26 22:08:28
+<?php /* Smarty version Smarty-3.0.9, created on 2015-11-27 01:27:10
          compiled from "C:/xampp/htdocs/MAGNUS/templates\footer.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:29972564f8038373787-02539517%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:151815657a35e475f56-30208570%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '9ae87ac328138f8b26c6b9f37bb8d42c4417712f' => 
     array (
       0 => 'C:/xampp/htdocs/MAGNUS/templates\\footer.tpl',
-      1 => 1448572082,
+      1 => 1448583998,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '29972564f8038373787-02539517',
+  'nocache_hash' => '151815657a35e475f56-30208570',
   'function' => 
   array (
   ),
@@ -54,6 +54,8 @@ $_smarty_tpl->decodeProperties(array (
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
+	<script src="<?php echo $_smarty_tpl->getVariable('gvar')->value['l_global'];?>
+js/star-rating.min.js" language="Javascript"></script>
 	<script src="<?php echo $_smarty_tpl->getVariable('gvar')->value['l_global'];?>
 js/usuario.js" language="Javascript"></script>
 

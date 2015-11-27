@@ -351,17 +351,6 @@ class db
 			}
 			break;
 
-			case "dia":
-			switch($options['lvl2'])
-			{
-				case "by_grupo": 
-					$this->escape_string($data);
-					$grupo = $data['grupo'];
-					$info = $this->get_data("SELECT * FROM dia WHERE grupo = '$grupo';");	
-				break;
-			}
-			break;
-
 			case "profesor":
 			switch($options['lvl2'])
 			{
@@ -373,6 +362,17 @@ class db
 					$this->escape_string($data);
 					$id = $data['id'];
 					$info = $this->get_data("SELECT * FROM profesor WHERE id = '$id';");	
+				break;
+			}
+			break;
+
+			case "opinion_profesor":
+			switch($options['lvl2'])
+			{
+				case "by_profesor": 
+					$this->escape_string($data);
+					$profesor = $data['profesor'];
+					$info = $this->get_data("SELECT * FROM opinion_profesor WHERE profesor = '$profesor';");	
 				break;
 			}
 			break;
