@@ -101,8 +101,9 @@ class db
 					$id = $object->get('id');
 					$nombre = $object->get('nombre');
 					$escuela = $object->get('escuela');
+					$creditos = $object->get('creditos');
 
-					$this->do_operation("INSERT INTO asignatura(id, nombre, escuela) VALUES('$id', '$nombre', '$escuela');");	
+					$this->do_operation("INSERT INTO asignatura(id, nombre, escuela, creditos) VALUES('$id', '$nombre', '$escuela', '$creditos');");	
 				break;
 			}
 			break;
@@ -285,6 +286,25 @@ class db
 					$this->escape_string($data);
 					$id = $data['id'];
 					$info = $this->get_data("SELECT * FROM carrera WHERE id = '$id';");	
+				break;
+			}
+			break;
+
+			case "usuario_administrador":
+			switch($options['lvl2'])
+			{
+				case "all": 
+					//
+				break;
+				case "one_login_admin":
+					$nombre = mysqli_real_escape_string($this->cn, $data['nombre']);
+					$contraseña = $data['contraseña'];
+					//$result = $this->get_data("SELECT user, password FROM user WHERE user='$user';");
+					$info = $this->get_data("SELECT nombre, contraseña FROM usuario_administrador WHERE nombre='$nombre' AND  contraseña = '$contraseña';");
+					//$hasher = new PasswordHash(8, FALSE);
+					//if ($hasher->CheckPassword($password, $result[0]->password))
+						//$info = $this->get_data("SELECT * FROM user WHERE user = '$user';");
+					//unset($hasher);
 				break;
 			}
 			break;

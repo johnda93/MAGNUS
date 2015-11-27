@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.9, created on 2015-10-30 19:22:00
+<?php /* Smarty version Smarty-3.0.9, created on 2015-11-03 22:12:55
          compiled from "C:/xampp/htdocs/MAGNUS/templates\index_asignatura.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:233785633b5487a5712-25386511%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:5686563709080ddd85-31523683%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'c96077c8ce167299b3170a107c4ce22defe8528c' => 
     array (
       0 => 'C:/xampp/htdocs/MAGNUS/templates\\index_asignatura.tpl',
-      1 => 1446229253,
+      1 => 1446575966,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '233785633b5487a5712-25386511',
+  'nocache_hash' => '5686563709080ddd85-31523683',
   'function' => 
   array (
   ),
@@ -64,10 +64,11 @@ $_smarty_tpl->tpl_vars['smarty']->value['section']['i']['last']       = ($_smart
 						<a href="<?php echo $_smarty_tpl->getVariable('gvar')->value['l_global'];?>
 editar_asignatura.php?id=<?php echo $_smarty_tpl->getVariable('asignaturas')->value[$_smarty_tpl->getVariable('smarty')->value['section']['i']['index']]->get('id');?>
 ">
-							<i class="material-icons center action-icons">create</i>
+							<i class="material-icons center iconos-accion">create</i>
 						</a>
-						<a class="asig-delete-button" href="#modal-asig-delete">
-							<i class="material-icons center action-icons">delete</i>
+
+						<a class="boton-eliminar-asig" href="#modal-eliminar-asig">
+							<i class="material-icons center iconos-accion">delete</i>
 							<form action="<?php echo $_smarty_tpl->getVariable('gvar')->value['l_global'];?>
 eliminar_asignatura.php" method="POST">
 								<input value="<?php echo $_smarty_tpl->getVariable('asignaturas')->value[$_smarty_tpl->getVariable('smarty')->value['section']['i']['index']]->get('id');?>
@@ -80,24 +81,24 @@ eliminar_asignatura.php" method="POST">
 			</tbody>
 		</table>
 		
-		<a style="margin-top: 20px;" class="waves-effect waves-light green lighten-1 btn" href="<?php echo $_smarty_tpl->getVariable('gvar')->value['l_global'];?>
+		<a class="waves-effect waves-light green lighten-1 btn" href="<?php echo $_smarty_tpl->getVariable('gvar')->value['l_global'];?>
 crear_asignatura.php">
 			<i class="material-icons left">add</i>
 			Crear Asignatura
 		</a>
-		
-		<div id="modal-asig-delete" class="modal">
+
+		<div id="modal-eliminar-asig" class="modal">
 			<div class="modal-content">
 				<h5>Eliminar Asignatura</h5>
 				<p>¿Está seguro que desea eliminar esta asignatura?</p>
 			</div>
 			<div class="modal-footer">
 				<a class="modal-action modal-close waves-effect waves-green btn-flat" href="#!">No</a>
-				<a id="conf-asig-delete" class="modal-action modal-close waves-effect waves-green btn-flat" href="#!">Sí</a>
+				<a id="conf-eliminar-asig" class="modal-action modal-close waves-effect waves-green btn-flat" href="#!">Sí</a>
 			</div>
 		</div>
 
-		<input value=<?php echo $_smarty_tpl->getVariable('option')->value;?>
- id="option-index-asignatura" name="option-crear-asignatura" type="hidden">
+		<input value=<?php echo $_smarty_tpl->getVariable('msj')->value;?>
+ id="msj-index-asig" name="msj-index-asig" type="hidden">
 	</div>
 </main>

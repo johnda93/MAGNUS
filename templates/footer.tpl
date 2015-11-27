@@ -33,9 +33,10 @@
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 {literal}
 	<script src="{/literal}{$gvar.l_global}{literal}js/usuario.js" language="Javascript"></script>
+	<script src="{/literal}{$gvar.l_global}{literal}js/js.cookie.js" language="Javascript"></script>
+	<script src="{/literal}{$gvar.l_global}{literal}js/admin.js" language="Javascript"></script>
 {/literal}
 </body>
 </html>

@@ -1,29 +1,9 @@
-<?php /* Smarty version Smarty-3.0.9, created on 2015-11-02 22:21:12
-         compiled from "C:/xampp/htdocs/MAGNUS/templates\crear_asignatura.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:239845637d3c8117ce0-55056335%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
-$_smarty_tpl->decodeProperties(array (
-  'file_dependency' => 
-  array (
-    '9eb389f78279a6a889d7603e644e644b831aae59' => 
-    array (
-      0 => 'C:/xampp/htdocs/MAGNUS/templates\\crear_asignatura.tpl',
-      1 => 1446499135,
-      2 => 'file',
-    ),
-  ),
-  'nocache_hash' => '239845637d3c8117ce0-55056335',
-  'function' => 
-  array (
-  ),
-  'has_nocache_code' => false,
-)); /*/%%SmartyHeaderCode%%*/?>
 <main>
 	<div id="div-principal-crear-asig" class="white container principal z-depth-1">
 		<h5 class="center-align">Crear Asignatura</h5>
 
 		<div class="row">
-			<form class="col s6" action="<?php echo $_smarty_tpl->getVariable('gvar')->value['l_global'];?>
-crear_asignatura.php" method="POST">
+			<form class="col s6" action="{$gvar.l_global}crear_asignatura.php" method="POST">
 				<div class="row">
 					<div class="input-field col s6">
 						<input id="id" name="id" type="text" class="input-crear-asig validate">
@@ -87,16 +67,13 @@ crear_asignatura.php" method="POST">
 			</div>
 		</div>
 
-		<div class="datos-ocultos"><?php echo $_smarty_tpl->getVariable('asignaturas')->value;?>
-</div>
+		<div class="datos-ocultos">{$asignaturas}</div>
 
 		<div id="div-crear-grupo">
-			<div class="datos-ocultos"><?php echo $_smarty_tpl->getVariable('profesores')->value;?>
-</div>
+			<div class="datos-ocultos">{$profesores}</div>
 		</div>
 
-		<input value=<?php echo $_smarty_tpl->getVariable('msj')->value;?>
- id="msj-crear-asig" name="msj-crear-asig" type="hidden">
+		<input value={$msj} id="msj-crear-asig" name="msj-crear-asig" type="hidden">
 
 		<div id="modal-crear-grupo-asig" class="modal">
 			<div class="modal-content">
@@ -127,8 +104,7 @@ crear_asignatura.php" method="POST">
 			</div>
 			<div class="modal-footer">
 				<a class="modal-action modal-close waves-effect waves-green btn-flat" href="#!">No</a>
-				<a class="modal-action modal-close waves-effect waves-green btn-flat" href="<?php echo $_smarty_tpl->getVariable('gvar')->value['l_global'];?>
-index_asignatura.php">Sí</a>
+				<a class="modal-action modal-close waves-effect waves-green btn-flat" href="{$gvar.l_global}index_asignatura.php">Sí</a>
 			</div>
 		</div>
 	</div>
