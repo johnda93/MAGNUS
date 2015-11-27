@@ -1,22 +1,22 @@
 <?php
 
-class usuario_registrado extends object_standard 
+class carrera extends object_standard 
 {
-
-	protected $contraseña;
+	protected $id;
 	protected $nombre;
+	protected $escuela;
 
 	var $components = array();
 	var $auxiliars = array();
 
 	public function metadata()
 	{
-		return array("contraseña" => array(), "nombre" => array());
+		return array("id" => array(), "nombre" => array(), "escuela" => array());
 	}
 
 	public function primary_key()
 	{
-		return array("nombre");
+		return array("id");
 	}
 
 	public function relational_keys($class, $rel_name)

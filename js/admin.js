@@ -141,7 +141,7 @@ $('#conf-login').on('click',function () {
     $correcto = verif_datos_login();
     
     if ($correcto) {
-        $form = $('#div-principal-login').find('form');
+        $form = $('#div-principal-log').find('form');
         $form.submit(function(e){
             $.ajax(
                 {
@@ -153,12 +153,11 @@ $('#conf-login').on('click',function () {
                         
                         if($mensaje.exito === "admin"){
                             window.location.replace("index_asignatura.php");
-                        }else if ($mensaje.exito === "user"){
-                            window.location.replace("login.php");
-                        }else{
+                        } else if ($mensaje.exito === "user"){
+                            window.location.replace("index.php");
+                        } else {
                             Materialize.toast("Nombre de usuario o contraseña no valido", 60000, "rounded toast_error");
                         }
-
                     }
                 });
             e.preventDefault();

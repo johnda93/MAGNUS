@@ -24,8 +24,7 @@ class usuario_administrador extends object_standard
 		switch ($class) {
 			default: break;
 		}
-	}
-	
+	}	
 }
 
 ?>

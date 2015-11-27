@@ -79,11 +79,15 @@ class db
 	{
 		switch($options['lvl1'])
 		{																																																																																													
-			case "user":
+			case "usuario_registrado":
 			switch($options['lvl2'])
 			{
 				case "normal":
-					//
+					$hasher = new PasswordHash(8, FALSE);
+					$contraseña = $hasher->HashPassword($object->get('contraseña'));
+					unset($hasher);
+					$nombre = mysqli_real_escape_string($this->cn, $object->get('nombre'));				
+					$this->do_operation("INSERT INTO usuario_registrado(nombre, contraseña) VALUES('$nombre', '$contraseña');");						
 				break;
 			}
 			break;
@@ -126,6 +130,47 @@ class db
 					$nombre = mysqli_real_escape_string($this->cn,$object->get('nombre'));
 					$escuela = mysqli_real_escape_string($this->cn,$object->get('escuela'));
 					$this->do_operation("INSERT INTO profesor(id, nombre, escuela) VALUES('$id', '$nombre', '$escuela');");	
+				break;
+			}
+			break;
+
+			case "opinion_asignatura":
+			switch($options['lvl2'])
+			{
+				case "normal": 
+					$asignatura = $object->get('asignatura');
+					$usuario = $object->get('usuario');
+					$comentario = $object->get('comentario');
+					$rating = $object->get('rating');
+
+					$this->do_operation("INSERT INTO opinion_asignatura(asignatura, usuario, comentario, rating) VALUES('$asignatura', '$usuario', '$comentario', '$rating');");	
+				break;
+			}
+			break;
+
+			case "opinion_profesor":
+			switch($options['lvl2'])
+			{
+				case "normal": 
+					$profesor = $object->get('profesor');
+					$usuario = $object->get('usuario');
+					$comentario = $object->get('comentario');
+					$rating = $object->get('rating');
+
+					$this->do_operation("INSERT INTO opinion_profesor(profesor, usuario, comentario, rating) VALUES('$profesor', '$usuario', '$comentario', '$rating');");	
+				break;
+			}
+			break;
+
+			case "recurso":
+			switch($options['lvl2'])
+			{
+				case "normal": 
+					$nombre = $object->get('nombre');
+					$asignatura = $object->get('asignatura');
+					$usuario = $object->get('usuario');
+					
+					$this->do_operation("INSERT INTO recurso(nombre, asignatura, usuario) VALUES('$nombre', '$asignatura', '$usuario');");	
 				break;
 			}
 			break;
@@ -257,36 +302,72 @@ class db
 			case "usuario_registrado":
 			switch($options['lvl2'])
 			{
-				case "all": 
-					//
+				case "one": 
+					$this->escape_string($data);
+					$nombre = mysqli_real_escape_string($this->cn, $data['nombre']);
+					$info = $this->get_data("SELECT * FROM usuario_registrado WHERE nombre = '$nombre';");	
+
 				break;
+
 				case "one_login_user":
 					$nombre = mysqli_real_escape_string($this->cn, $data['nombre']);
 					$contraseña = mysqli_real_escape_string($this->cn,$data['contraseña']);
 					//$result = $this->get_data("SELECT user, password FROM user WHERE user='$user';");
-					$info = $this->get_data("SELECT nombre, contraseña FROM usuario_registrado WHERE nombre='$nombre' AND  contraseña = '$contraseña';");
-					//$hasher = new PasswordHash(8, FALSE);
-					//if ($hasher->CheckPassword($password, $result[0]->password))
-						//$info = $this->get_data("SELECT * FROM user WHERE user = '$user';");
-					//unset($hasher);
+					$result = $this->get_data("SELECT nombre, contraseña FROM usuario_registrado WHERE nombre='$nombre';");
+					$hasher = new PasswordHash(8, FALSE);
+					if ($hasher->CheckPassword($contraseña, $result[0]->contraseña))
+						$info = $this->get_data("SELECT * FROM usuario_registrado WHERE nombre = '$nombre';");
+					unset($hasher);
 				break;
 			}
 			break;
 			case "usuario_administrador":
 			switch($options['lvl2'])
 			{
-				case "all": 
-					//
+				case "one": 
+					$this->escape_string($data);
+					$nombre = mysqli_real_escape_string($this->cn, $data['nombre']);
+					$info = $this->get_data("SELECT * FROM usuario_administrador WHERE nombre = '$nombre';");	
+
 				break;
+
 				case "one_login_admin":
 					$nombre = mysqli_real_escape_string($this->cn, $data['nombre']);
 					$contraseña = mysqli_real_escape_string($this->cn,$data['contraseña']);
 					//$result = $this->get_data("SELECT user, password FROM user WHERE user='$user';");
-					$info = $this->get_data("SELECT nombre, contraseña FROM usuario_administrador WHERE nombre='$nombre' AND  contraseña = '$contraseña';");
-					//$hasher = new PasswordHash(8, FALSE);
-					//if ($hasher->CheckPassword($password, $result[0]->password))
-						//$info = $this->get_data("SELECT * FROM user WHERE user = '$user';");
-					//unset($hasher);
+					$result = $this->get_data("SELECT nombre, contraseña FROM usuario_administrador WHERE nombre='$nombre';");
+					$hasher = new PasswordHash(8, FALSE);
+					if ($hasher->CheckPassword($contraseña, $result[0]->contraseña))
+						$info = $this->get_data("SELECT * FROM usuario_administrador WHERE nombre = '$nombre';");
+					unset($hasher);
+				break;
+			}
+			break;
+
+			case "carrera":
+			switch($options['lvl2'])
+			{
+				case "all": 
+					$info = $this->get_data("SELECT * FROM carrera;");
+				break;
+
+				case "one": 
+					$this->escape_string($data);
+					$id = $data['id'];
+					$info = $this->get_data("SELECT * FROM carrera WHERE id = '$id';");	
+				break;
+			}
+			break;
+
+			case "pensum":
+			switch($options['lvl2'])
+			{
+				case "by_carrera": 
+					$this->escape_string($data);
+					$carrera = $data['carrera'];
+					$asignatura = $data['asignatura'];
+					$info = $this->get_data("SELECT p.*, a.nombre AS nombre_asignatura FROM pensum p, asignatura a WHERE p.carrera = '$carrera' AND a.id = '$asignatura';");	
+
 				break;
 			}
 			break;
@@ -300,6 +381,12 @@ class db
 					$this->escape_string($data);
 					$id = mysqli_real_escape_string($this->cn,$data['id']);
 					$info = $this->get_data("SELECT * FROM asignatura WHERE id = '$id';");	
+				break;
+
+				case "by_carrera": 
+					$this->escape_string($data);
+					$carrera = $data['carrera'];
+					$info = $this->get_data("SELECT a.*, p.componente AS componente, p.obligatoria AS obligatoria FROM asignatura a,carrera c, pensum p WHERE p.asignatura=a.id AND c.id='$carrera' AND p.carrera=c.id;");	
 				break;
 			}
 			break;
@@ -328,26 +415,70 @@ class db
 				break;
 			}
 			break;
-			case "dia":
-			switch($options['lvl2'])
-			{
-				case "by_grupo": 
-					$this->escape_string($data);
-					$grupo = mysqli_real_escape_string($this->cn,$data['grupo']);
-					$info = $this->get_data("SELECT * FROM dia WHERE grupo = '$grupo';");	
-				break;
-			}
-			break;
+
 			case "profesor":
 			switch($options['lvl2'])
 			{
 				case "all": 
 					$info = $this->get_data("SELECT * FROM profesor;");
 				break;
+
+				case "one": 
+					$this->escape_string($data);
+					$id = $data['id'];
+					$info = $this->get_data("SELECT * FROM profesor WHERE id = '$id';");	
+				break;
+			}
+			break;
+
+			case "opinion_profesor":
+			switch($options['lvl2'])
+			{
+				case "by_profesor": 
+					$this->escape_string($data);
+					$profesor = $data['profesor'];
+					$info = $this->get_data("SELECT * FROM opinion_profesor WHERE profesor = '$profesor';");	
+				break;
+
 				case "one": 
 					$this->escape_string($data);
 					$id = mysqli_real_escape_string($this->cn,$data['id']);
 					$info = $this->get_data("SELECT * FROM profesor WHERE id = '$id';");	
+
+				case "by_usuario_profesor": 
+					$this->escape_string($data);
+					$usuario = $data['usuario'];
+					$profesor = $data['profesor'];
+					$info = $this->get_data("SELECT * FROM opinion_profesor WHERE usuario = '$usuario' AND profesor = '$profesor';");	
+				break;
+			}
+			break;
+
+			case "opinion_asignatura":
+			switch($options['lvl2'])
+			{
+				case "by_asignatura": 
+					$this->escape_string($data);
+					$asignatura = $data['asignatura'];
+					$info = $this->get_data("SELECT * FROM opinion_asignatura WHERE asignatura = '$asignatura';");	
+				break;
+
+				case "by_usuario_asignatura": 
+					$this->escape_string($data);
+					$usuario = $data['usuario'];
+					$asignatura = $data['asignatura'];
+					$info = $this->get_data("SELECT * FROM opinion_asignatura WHERE usuario = '$usuario' AND asignatura = '$asignatura';");	
+				break;
+			}
+			break;
+
+			case "recurso":
+			switch($options['lvl2'])
+			{
+				case "by_asignatura": 
+					$this->escape_string($data);
+					$asignatura = $data['asignatura'];
+					$info = $this->get_data("SELECT * FROM recurso WHERE asignatura = '$asignatura';");	
 				break;
 			}
 			break;
@@ -362,6 +493,6 @@ class db
 	{
 		if($this->cn){mysqli_close($this->cn);}
 	}
-	
 }
+
 ?>		
