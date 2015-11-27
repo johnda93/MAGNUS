@@ -376,6 +376,17 @@ class db
 				break;
 			}
 			break;
+
+			case "opinion_asignatura":
+			switch($options['lvl2'])
+			{
+				case "by_asignatura": 
+					$this->escape_string($data);
+					$asignatura = $data['asignatura'];
+					$info = $this->get_data("SELECT * FROM opinion_asignatura WHERE asignatura = '$asignatura';");	
+				break;
+			}
+			break;
 			
 			default: break;
 		}

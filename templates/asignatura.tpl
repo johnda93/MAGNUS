@@ -41,5 +41,23 @@
         {/section}
       </tbody>
     </table>
+
+    <h5 class="center-align">Opiniones</h5>
+
+    {section loop=$opiniones name=i}
+    <div class="row">
+        <div class="col s12 m6">
+          <div class="card green">
+            <div class="card-content white-text">
+              <span class="card-title">De: {$opiniones[i]->get('usuario')}</span>
+              <p>{$opiniones[i]->get('comentario')}</p>
+            </div>
+            <div class="card-action">
+              <input id="input-id" type="number" class="rating" data-show-clear=false data-show-caption=false value={$opiniones[i]->get('rating')} min=0 max=5 step=1 data-size="xs" data-readonly="true">
+            </div>
+          </div>
+        </div>
+      </div>
+        {/section}
 	</div>
 </main>
