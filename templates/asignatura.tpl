@@ -1,9 +1,57 @@
 <main>
-	<div class="white container principal z-depth-1">
+	<div id="div-principal-asignatura" class="white container principal z-depth-1">
 		<h5 class="center-align">{$asignatura->get('nombre')}</h5>
-		<p><b>ID: </b>{$asignatura->get('id')}</p>
-		<p><b>Escuela: </b>{$asignatura->get('escuela')}</p>
-		<p><b>Creditos: </b>{$asignatura->get('creditos')}</p>
+
+		<div style="margin-bottom: 25px;">
+			<p><b>ID: </b>{$asignatura->get('id')}</p>
+			<p><b>Escuela: </b>{$asignatura->get('escuela')}</p>
+			<p><b>Creditos: </b>{$asignatura->get('creditos')}</p>
+		</div>
+		
+		<div style="margin-bottom: 25px;" class="row botones-inferiores">
+			<div class="col s6">
+				<div class="container">
+				<a id="opinar" class="waves-effect waves-light green lighten-1 btn">
+						<i class="material-icons left">create</i>
+						Opina!
+					</a>
+				</div>
+			</div>
+
+			<div class="col s6">
+				<div class="container">
+					<a class="waves-effect waves-light green lighten-1 btn">
+						<i class="material-icons left">library_books</i>
+						Ver Recursos
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<div style="margin-bottom: 30px; display: none" id="crear-opinion" class="secundario">
+			<h5 class="center-align">Crear Opinión</h5>
+			
+			<div class="row">
+    			<form class="col s12">
+      				<div class="row">
+        				<div class="input-field col s12">
+          					<textarea id="comentario" name="comentario" class="materialize-textarea"></textarea>
+          					<label for="comentario">Comentario</label>
+        				</div>
+
+						<label for="rating">Rankea la asignatura:</label>
+        				<input id="rating" name="rating" type="number" class="rating" data-show-clear=false data-show-caption=false min=0 max=5 step=1 data-size="xs">
+        				<input id="asignatura" name="asignatura" type="hidden" value={$asignatura->get('id')}>
+        				<input id="usuario" name="usuario" type="hidden" value="JohnDa">
+
+        				<a id="enviar-opinion-asignatura" class="waves-effect waves-light green lighten-1 btn">
+							<i class="material-icons left">add</i>
+							Enviar
+						</a>
+      				</div>
+   				</form>
+  			</div>
+		</div>
 
 		<h5 id="titulo_tabla" class="center-align">Grupos</h5>
 

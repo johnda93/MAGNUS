@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.9, created on 2015-11-27 04:15:08
+<?php /* Smarty version Smarty-3.0.9, created on 2015-11-27 06:11:13
          compiled from "C:/xampp/htdocs/MAGNUS/templates\footer.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:151815657a35e475f56-30208570%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:248475657e5f11f7f65-16119401%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '9ae87ac328138f8b26c6b9f37bb8d42c4417712f' => 
     array (
       0 => 'C:/xampp/htdocs/MAGNUS/templates\\footer.tpl',
-      1 => 1448593909,
+      1 => 1448600977,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '151815657a35e475f56-30208570',
+  'nocache_hash' => '248475657e5f11f7f65-16119401',
   'function' => 
   array (
   ),
@@ -52,8 +52,9 @@ $_smarty_tpl->decodeProperties(array (
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
+	<script src="<?php echo $_smarty_tpl->getVariable('gvar')->value['l_global'];?>
+js/js.cookie.js" language="Javascript"></script>
 	<script src="<?php echo $_smarty_tpl->getVariable('gvar')->value['l_global'];?>
 js/star-rating.min.js" language="Javascript"></script>
 	<script src="<?php echo $_smarty_tpl->getVariable('gvar')->value['l_global'];?>

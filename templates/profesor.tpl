@@ -1,8 +1,47 @@
 <main>
-	<div class="white container principal z-depth-1">
+	<div id="div-principal-profesor" class="white container principal z-depth-1">
 		<h5 class="center-align">{$profesor->get('nombre')}</h5>
-	    <p><b>ID: </b>{$profesor->get('id')}</p>
-	    <p><b>Escuela: </b>{$profesor->get('escuela')}</p>
+
+		<div style="margin-bottom: 25px;">
+		    <p><b>ID: </b>{$profesor->get('id')}</p>
+		    <p><b>Escuela: </b>{$profesor->get('escuela')}</p>
+	    </div>
+
+	    <div style="margin-bottom: 25px;" class="row botones-inferiores">
+			<div class="col s6 offset-s3">
+				<div class="container">
+				<a id="opinar" class="waves-effect waves-light green lighten-1 btn">
+						<i class="material-icons left">create</i>
+						Opina!
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<div style="margin-bottom: 30px; display: none" id="crear-opinion" class="secundario">
+			<h5 class="center-align">Crear Opinión</h5>
+			
+			<div class="row">
+    			<form class="col s12">
+      				<div class="row">
+        				<div class="input-field col s12">
+          					<textarea id="comentario" name="comentario" class="materialize-textarea"></textarea>
+          					<label for="comentario">Comentario</label>
+        				</div>
+
+						<label for="rating">Rankea el profesor:</label>
+        				<input id="rating" name="rating" type="number" class="rating" data-show-clear=false data-show-caption=false min=0 max=5 step=1 data-size="xs">
+        				<input id="profesor" name="profesor" type="hidden" value={$profesor->get('id')}>
+        				<input id="usuario" name="usuario" type="hidden" value="JohnDa">
+
+        				<a id="enviar-opinion-profesor" class="waves-effect waves-light green lighten-1 btn">
+							<i class="material-icons left">add</i>
+							Enviar
+						</a>
+      				</div>
+   				</form>
+  			</div>
+		</div>
 
 	    <h5 class="center-align">Grupos</h5>
 

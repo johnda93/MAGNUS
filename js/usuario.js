@@ -3,6 +3,11 @@ $(document).ready(function () {
     $('.boton-registrarse').leanModal({
         dismissible: false
     }); //Activar modales para Registrarse
+
+    if (Cookies.get("crear_opinion") === "true") {
+        Cookies.remove("crear_opinion");
+        Materialize.toast("Opinión creada correctamente", 60000, "rounded toast_exito");
+    }
 });
 
 
@@ -137,34 +142,58 @@ $('#conf-registro').on('click', function () {
     $form.trigger('submit');
     $form.off('submit');
 });
+
 //----------------------------------------------------------------------
 
-$(function() {
-    var availableTags = [
-      "ActionScript",
-      "AppleScript",
-      "Asp",
-      "BASIC",
-      "C",
-      "C++",
-      "Clojure",
-      "COBOL",
-      "ColdFusion",
-      "Erlang",
-      "Fortran",
-      "Groovy",
-      "Haskell",
-      "Java",
-      "JavaScript",
-      "Lisp",
-      "Perl",
-      "PHP",
-      "Python",
-      "Ruby",
-      "Scala",
-      "Scheme"
-    ];
-    $( "#search" ).autocomplete({
-      source: availableTags
+//----------------------------------------Crear Opinion---------------------------
+
+$('#opinar').on('click', function (event) {
+  $('#crear-opinion').show();
+  $('.botones-inferiores').hide();
+});
+
+$('#enviar-opinion-asignatura').on('click', function (event) {
+  $form = $('#div-principal-asignatura').find('form');
+
+  $form.submit(function (event) {
+        $.ajax({
+            url     : 'crear_opinion.php?option=crear_opinion_asignatura',
+            method  : 'post',
+            data    : $form.serialize(),
+            success : function (result) {
+                Cookies.set("crear_opinion", "true");
+                window.location.reload();
+            }
+        });
+    
+        event.preventDefault();
+        event.stopImmediatePropagation();
     });
-  });
+
+    $form.trigger('submit');
+    $form.off('submit');
+});
+
+$('#enviar-opinion-profesor').on('click', function (event) {
+  $form = $('#div-principal-profesor').find('form');
+
+  $form.submit(function (event) {
+        $.ajax({
+            url     : 'crear_opinion.php?option=crear_opinion_profesor',
+            method  : 'post',
+            data    : $form.serialize(),
+            success : function (result) {
+                Cookies.set("crear_opinion", "true");
+                window.location.reload();
+            }
+        });
+    
+        event.preventDefault();
+        event.stopImmediatePropagation();
+    });
+
+    $form.trigger('submit');
+    $form.off('submit');
+});
+
+//--------------------------------------------------------------------------------

@@ -153,6 +153,34 @@ class db
 				break;
 			}
 			break;
+
+			case "opinion_asignatura":
+			switch($options['lvl2'])
+			{
+				case "normal": 
+					$asignatura = $object->get('asignatura');
+					$usuario = $object->get('usuario');
+					$comentario = $object->get('comentario');
+					$rating = $object->get('rating');
+
+					$this->do_operation("INSERT INTO opinion_asignatura(asignatura, usuario, comentario, rating) VALUES('$asignatura', '$usuario', '$comentario', '$rating');");	
+				break;
+			}
+			break;
+
+			case "opinion_profesor":
+			switch($options['lvl2'])
+			{
+				case "normal": 
+					$profesor = $object->get('profesor');
+					$usuario = $object->get('usuario');
+					$comentario = $object->get('comentario');
+					$rating = $object->get('rating');
+
+					$this->do_operation("INSERT INTO opinion_profesor(profesor, usuario, comentario, rating) VALUES('$profesor', '$usuario', '$comentario', '$rating');");	
+				break;
+			}
+			break;
 			
 			default: break;
 		}
