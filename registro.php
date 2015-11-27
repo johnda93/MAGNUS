@@ -48,6 +48,32 @@ class c_registro extends super_controller {
 		
 		if (is_empty($this->post->nombre_registro)) {
 			$this->mensaje['nombre1'] = false;
+		} else {
+			$cod['usuario_registrado']['nombre'] = $this->post->nombre_registro;
+			$options['usuario_registrado']['lvl2'] = "one";
+			$this->orm->connect();
+			$this->orm->read_data(array("usuario_registrado"), $options, $cod);
+			$usuario_registrado = $this->orm->get_objects("usuario_registrado");
+			$this->orm->close();
+			if (!is_empty($usuario_registrado[0])) {
+				$this->mensaje['nombre2'] = false;		
+
+			}else{
+				$cod['usuario_administrador']['nombre'] = $this->post->nombre_registro;
+				$options['usuario_administrador']['lvl2'] = "one";
+				$this->orm->connect();
+				$this->orm->read_data(array("usuario_administrador"), $options, $cod);
+				$usuario_administrador = $this->orm->get_objects("usuario_administrador");
+				$this->orm->close();
+
+				if (!is_empty($usuario_administrador[0])) {
+					$this->mensaje['nombre2'] = false;
+				}
+			}
+		}
+		
+		if (is_empty($this->post->nombre_registro)) {
+			$this->mensaje['nombre1'] = false;
 		}
 		if (is_empty($this->post->contraseña_registro)) {
 			$this->mensaje['contraseña1'] = false;
@@ -61,7 +87,7 @@ class c_registro extends super_controller {
 				}
 			}
 
-			if ($this->mensaje['nombre1'] && $this->mensaje['contraseña1'] && $this->mensaje['contraseña2'] && $this->mensaje['contraseña3']){
+			if ($this->mensaje['nombre1'] && $this->mensaje['nombre2'] && $this->mensaje['contraseña1'] && $this->mensaje['contraseña2'] && $this->mensaje['contraseña3']){
 				$usuario_registrado = new usuario_registrado();
 				$usuario_registrado->set('nombre', $this->post->nombre_registro);
 				$usuario_registrado->set('contraseña', $this->post->contraseña_registro);

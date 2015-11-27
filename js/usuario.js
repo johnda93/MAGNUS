@@ -72,6 +72,9 @@ $('#conf-registro').on('click', function () {
             method  : 'post',
             data    : $form.serialize(),
             success : function (result) {
+
+                console.log(result);
+
                 $mensaje=JSON.parse(result);
                 
 
@@ -130,7 +133,7 @@ $('#conf-registro').on('click', function () {
 
                     $('#modal-registrarse').closeModal();
 
-                    Materialize.toast('Usuario registrado exitosamente', 10000, 'rounded toast_error');
+                    Materialize.toast('Usuario registrado exitosamente', 10000, 'rounded toast_exito');
                 }
             }    
         });
