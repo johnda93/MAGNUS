@@ -1,31 +1,17 @@
-<<<<<<< HEAD
-<?php /* Smarty version Smarty-3.0.9, created on 2015-11-27 12:51:11
+<?php /* Smarty version Smarty-3.0.9, created on 2015-11-27 13:06:30
          compiled from "C:/xampp/htdocs/MAGNUS/templates\footer.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:750565843afd15fa5-07129676%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
-=======
-<?php /* Smarty version Smarty-3.0.9, created on 2015-11-27 06:58:39
-         compiled from "C:/xampp/htdocs/MAGNUS/templates\footer.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:248475657e5f11f7f65-16119401%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
->>>>>>> consultar_asignatura
+<?php /*%%SmartyHeaderCode:424356584746d9d782-22190133%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '9ae87ac328138f8b26c6b9f37bb8d42c4417712f' => 
     array (
       0 => 'C:/xampp/htdocs/MAGNUS/templates\\footer.tpl',
-<<<<<<< HEAD
-      1 => 1448624784,
+      1 => 1448625352,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '750565843afd15fa5-07129676',
-=======
-      1 => 1448603095,
-      2 => 'file',
-    ),
-  ),
-  'nocache_hash' => '248475657e5f11f7f65-16119401',
->>>>>>> consultar_asignatura
+  'nocache_hash' => '424356584746d9d782-22190133',
   'function' => 
   array (
   ),

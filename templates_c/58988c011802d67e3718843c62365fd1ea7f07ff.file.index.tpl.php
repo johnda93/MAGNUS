@@ -1,25 +1,17 @@
-<<<<<<< HEAD
-<?php /* Smarty version Smarty-3.0.9, created on 2015-11-27 12:51:11
-=======
-<?php /* Smarty version Smarty-3.0.9, created on 2015-11-27 06:58:39
->>>>>>> consultar_asignatura
+<?php /* Smarty version Smarty-3.0.9, created on 2015-11-27 13:06:30
          compiled from "C:/xampp/htdocs/MAGNUS/templates\index.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:93755657d146627f30-85964919%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:857856584746d67665-18886753%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '58988c011802d67e3718843c62365fd1ea7f07ff' => 
     array (
       0 => 'C:/xampp/htdocs/MAGNUS/templates\\index.tpl',
-<<<<<<< HEAD
-      1 => 1448624649,
-=======
-      1 => 1448603034,
->>>>>>> consultar_asignatura
+      1 => 1448625352,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '93755657d146627f30-85964919',
+  'nocache_hash' => '857856584746d67665-18886753',
   'function' => 
   array (
   ),
