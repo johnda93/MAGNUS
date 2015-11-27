@@ -288,6 +288,17 @@ class db
 					$info = $this->get_data("SELECT * FROM usuario_registrado WHERE nombre = '$nombre';");	
 
 				break;
+
+				case "one_login_user":
+					$nombre = mysqli_real_escape_string($this->cn, $data['nombre']);
+					$contraseña = mysqli_real_escape_string($this->cn,$data['contraseña']);
+					//$result = $this->get_data("SELECT user, password FROM user WHERE user='$user';");
+					$result = $this->get_data("SELECT nombre, contraseña FROM usuario_registrado WHERE nombre='$nombre';");
+					$hasher = new PasswordHash(8, FALSE);
+					if ($hasher->CheckPassword($contraseña, $result[0]->contraseña))
+						$info = $this->get_data("SELECT * FROM usuario_registrado WHERE nombre = '$nombre';");
+					unset($hasher);
+				break;
 			}
 			break;
 
@@ -299,6 +310,17 @@ class db
 					$nombre = mysqli_real_escape_string($this->cn, $data['nombre']);
 					$info = $this->get_data("SELECT * FROM usuario_administrador WHERE nombre = '$nombre';");	
 
+				break;
+
+				case "one_login_admin":
+					$nombre = mysqli_real_escape_string($this->cn, $data['nombre']);
+					$contraseña = $data['contraseña'];
+					//$result = $this->get_data("SELECT user, password FROM user WHERE user='$user';");
+					$result = $this->get_data("SELECT nombre, contraseña FROM usuario_administrador WHERE nombre='$nombre';");
+					$hasher = new PasswordHash(8, FALSE);
+					if ($hasher->CheckPassword($contraseña, $result[0]->contraseña))
+						$info = $this->get_data("SELECT * FROM usuario_administrador WHERE nombre = '$nombre';");
+					unset($hasher);
 				break;
 			}
 			break;
@@ -314,25 +336,6 @@ class db
 					$this->escape_string($data);
 					$id = $data['id'];
 					$info = $this->get_data("SELECT * FROM carrera WHERE id = '$id';");	
-				break;
-			}
-			break;
-
-			case "usuario_administrador":
-			switch($options['lvl2'])
-			{
-				case "all": 
-					//
-				break;
-				case "one_login_admin":
-					$nombre = mysqli_real_escape_string($this->cn, $data['nombre']);
-					$contraseña = $data['contraseña'];
-					//$result = $this->get_data("SELECT user, password FROM user WHERE user='$user';");
-					$info = $this->get_data("SELECT nombre, contraseña FROM usuario_administrador WHERE nombre='$nombre' AND  contraseña = '$contraseña';");
-					//$hasher = new PasswordHash(8, FALSE);
-					//if ($hasher->CheckPassword($password, $result[0]->password))
-						//$info = $this->get_data("SELECT * FROM user WHERE user = '$user';");
-					//unset($hasher);
 				break;
 			}
 			break;

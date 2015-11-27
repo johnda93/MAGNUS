@@ -1,6 +1,7 @@
 <?php
 
 require('configs/include.php');
+require('modules/m_phpass/PasswordHash.php');
 
 class c_login extends super_controller {
 	
@@ -22,6 +23,7 @@ class c_login extends super_controller {
 
 	public function login()
 	{
+
 		$options['usuario_registrado']['lvl2'] = "one_login_user";
 		$cod['usuario_registrado']['nombre'] = $this->post->nombre;
 		$cod['usuario_registrado']['contraseña'] = $this->post->contraseña;
@@ -40,6 +42,7 @@ class c_login extends super_controller {
 		$mensaje = array();
 		$mensaje['exito'] = "user";
 
+
 		if(!is_empty($admin)){
 
 			$mensaje['exito'] = "admin";
@@ -51,6 +54,7 @@ class c_login extends super_controller {
 			$mensaje['exito'] = "user";
 			$_SESSION['usuario']['usuario'] = $user[0]->get('nombre');
 			$_SESSION['usuario']['tipo'] = "user";
+
 		}else{
 			
 			$mensaje['exito'] = "false";
@@ -74,8 +78,6 @@ class c_login extends super_controller {
 			$this->comprobar_sesion();
 			if (isset($this->post->nombre)) {
 				$this->login();
-			} else {
-				$this->display();
 			}
 		} catch (Exception $e) {
 		}

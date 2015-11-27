@@ -1,7 +1,7 @@
 <main>
-	<div id="div-principal-login">
+	<div id="div-principal-login" >
 		<div class="row">
-			<div class="col s3">
+			<div class="col s3" id="div-principal-log">
 				<div class="white login-item z-depth-1"> 
 					<b>Iniciar Sesión</b> 
 				

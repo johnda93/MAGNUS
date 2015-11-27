@@ -1,26 +1,26 @@
-<?php /* Smarty version Smarty-3.0.9, created on 2015-11-27 13:06:30
+<?php /* Smarty version Smarty-3.0.9, created on 2015-11-27 13:36:21
          compiled from "C:/xampp/htdocs/MAGNUS/templates\index.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:857856584746d67665-18886753%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:45456584e452c60f0-55708126%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '58988c011802d67e3718843c62365fd1ea7f07ff' => 
     array (
       0 => 'C:/xampp/htdocs/MAGNUS/templates\\index.tpl',
-      1 => 1448625352,
+      1 => 1448627775,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '857856584746d67665-18886753',
+  'nocache_hash' => '45456584e452c60f0-55708126',
   'function' => 
   array (
   ),
   'has_nocache_code' => false,
 )); /*/%%SmartyHeaderCode%%*/?>
 <main>
-	<div id="div-principal-login">
+	<div id="div-principal-login" >
 		<div class="row">
-			<div class="col s3">
+			<div class="col s3" id="div-principal-log">
 				<div class="white login-item z-depth-1"> 
 					<b>Iniciar Sesión</b> 
 				
