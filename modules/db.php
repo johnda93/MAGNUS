@@ -402,6 +402,13 @@ class db
 					$profesor = $data['profesor'];
 					$info = $this->get_data("SELECT * FROM opinion_profesor WHERE profesor = '$profesor';");	
 				break;
+
+				case "by_usuario_profesor": 
+					$this->escape_string($data);
+					$usuario = $data['usuario'];
+					$profesor = $data['profesor'];
+					$info = $this->get_data("SELECT * FROM opinion_profesor WHERE usuario = '$usuario' AND profesor = '$profesor';");	
+				break;
 			}
 			break;
 
@@ -412,6 +419,13 @@ class db
 					$this->escape_string($data);
 					$asignatura = $data['asignatura'];
 					$info = $this->get_data("SELECT * FROM opinion_asignatura WHERE asignatura = '$asignatura';");	
+				break;
+
+				case "by_usuario_asignatura": 
+					$this->escape_string($data);
+					$usuario = $data['usuario'];
+					$asignatura = $data['asignatura'];
+					$info = $this->get_data("SELECT * FROM opinion_asignatura WHERE usuario = '$usuario' AND asignatura = '$asignatura';");	
 				break;
 			}
 			break;

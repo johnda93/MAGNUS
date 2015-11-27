@@ -8,6 +8,8 @@
 			<p><b>Creditos: </b>{$asignatura->get('creditos')}</p>
 		</div>
 		
+		<input id="puede_opinar_asignatura" name="puede_opinar_asignatura" type="hidden" value={$puede_opinar_asignatura}>
+		{if $session == 'true'}
 		<div style="margin-bottom: 25px;" class="row botones-inferiores">
 			<div class="col s6">
 				<div class="container">
@@ -27,6 +29,7 @@
 				</div>
 			</div>
 		</div>
+
 
 		<div style="margin-bottom: 30px; display: none" id="crear-opinion" class="secundario">
 			<h5 class="center-align">Crear Opinión</h5>
@@ -52,6 +55,8 @@
    				</form>
   			</div>
 		</div>
+
+		{/if}
 
 		<h5 id="titulo_tabla" class="center-align">Grupos</h5>
 

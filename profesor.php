@@ -6,6 +6,24 @@ class c_asignatura extends super_controller {
 
 	public function display()
 	{
+
+		if(!is_empty($_SESSION)){
+			$this->engine->assign('session', "true");
+
+			$cod['opinion_profesor']['usuario'] = $_SESSION['usuario']['usuario'];
+			$cod['opinion_profesor']['profesor'] = $this->get->id;
+			$options['opinion_profesor']['lvl2'] = "by_usuario_profesor";
+			
+			$this->orm->connect();
+			$this->orm->read_data(array("opinion_profesor"), $options, $cod);
+			$opinion = $this->orm->get_objects("opinion_profesor");
+			$this->orm->close();
+
+			if(!is_empty($opinion)){
+				$this->engine->assign('puede_opinar_profesor', "false");				
+			}
+		}
+
 		//------------Filtrar grupos por profesores---------------
 		$cod['profesor']['id'] = $this->get->id;
 		$options['profesor']['lvl2'] = "one";

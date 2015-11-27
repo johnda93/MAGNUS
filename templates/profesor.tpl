@@ -7,6 +7,8 @@
 		    <p><b>Escuela: </b>{$profesor->get('escuela')}</p>
 	    </div>
 
+	    <input id="puede_opinar_profesor" name="puede_opinar_profesor" type="hidden" value={$puede_opinar_profesor}>
+		{if $session == 'true'}
 	    <div style="margin-bottom: 25px;" class="row botones-inferiores">
 			<div class="col s6 offset-s3">
 				<div class="container">
@@ -42,6 +44,8 @@
    				</form>
   			</div>
 		</div>
+
+		{/if}
 
 	    <h5 class="center-align">Grupos</h5>
 

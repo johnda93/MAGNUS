@@ -6,6 +6,24 @@ class c_asignatura extends super_controller {
 
 	public function display()
 	{
+
+		if(!is_empty($_SESSION)){
+			$this->engine->assign('session', "true");
+
+			$cod['opinion_asignatura']['usuario'] = $_SESSION['usuario']['usuario'];
+			$cod['opinion_asignatura']['asignatura'] = $this->get->id;
+			$options['opinion_asignatura']['lvl2'] = "by_usuario_asignatura";
+			
+			$this->orm->connect();
+			$this->orm->read_data(array("opinion_asignatura"), $options, $cod);
+			$opinion = $this->orm->get_objects("opinion_asignatura");
+			$this->orm->close();
+
+			if(!is_empty($opinion)){
+				$this->engine->assign('puede_opinar_asignatura', "false");				
+			}
+		}
+
 		$cod['asignatura']['id'] = $this->get->id;
 		$options['asignatura']['lvl2'] = "one";
 

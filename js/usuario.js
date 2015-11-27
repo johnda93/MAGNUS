@@ -147,53 +147,62 @@ $('#conf-registro').on('click', function () {
 
 //----------------------------------------Crear Opinion---------------------------
 
+
 $('#opinar').on('click', function (event) {
-  $('#crear-opinion').show();
-  $('.botones-inferiores').hide();
-});
 
-$('#enviar-opinion-asignatura').on('click', function (event) {
-  $form = $('#div-principal-asignatura').find('form');
+    if($('#puede_opinar_asignatura').val() === "false"){
+        Materialize.toast("Ya comentaste esta asignatura", 60000, "rounded toast_error");
+    } else if($('#puede_opinar_profesor').val() === "false"){
+        Materialize.toast("Ya comentaste esta asignatura", 60000, "rounded toast_error");
+    }else{
+        $('#crear-opinion').show();
+        $('.botones-inferiores').hide();
 
-  $form.submit(function (event) {
-        $.ajax({
-            url     : 'crear_opinion.php?option=crear_opinion_asignatura',
-            method  : 'post',
-            data    : $form.serialize(),
-            success : function (result) {
-                Cookies.set("crear_opinion", "true");
-                window.location.reload();
-            }
+        $('#enviar-opinion-asignatura').on('click', function (event) {
+        $form = $('#div-principal-asignatura').find('form');
+
+            $form.submit(function (event) {
+                $.ajax({
+                    url     : 'crear_opinion.php?option=crear_opinion_asignatura',
+                    method  : 'post',
+                    data    : $form.serialize(),
+                    success : function (result) {
+                        Cookies.set("crear_opinion", "true");
+                        window.location.reload();
+                    }
+                });
+            
+                event.preventDefault();
+                event.stopImmediatePropagation();
+            });
+
+            $form.trigger('submit');
+            $form.off('submit');
         });
-    
-        event.preventDefault();
-        event.stopImmediatePropagation();
-    });
 
-    $form.trigger('submit');
-    $form.off('submit');
-});
+        $('#enviar-opinion-profesor').on('click', function (event) {
+          $form = $('#div-principal-profesor').find('form');
 
-$('#enviar-opinion-profesor').on('click', function (event) {
-  $form = $('#div-principal-profesor').find('form');
+          $form.submit(function (event) {
+                $.ajax({
+                    url     : 'crear_opinion.php?option=crear_opinion_profesor',
+                    method  : 'post',
+                    data    : $form.serialize(),
+                    success : function (result) {
+                        Cookies.set("crear_opinion", "true");
+                        window.location.reload();
+                    }
+                });
+            
+                event.preventDefault();
+                event.stopImmediatePropagation();
+            });
 
-  $form.submit(function (event) {
-        $.ajax({
-            url     : 'crear_opinion.php?option=crear_opinion_profesor',
-            method  : 'post',
-            data    : $form.serialize(),
-            success : function (result) {
-                Cookies.set("crear_opinion", "true");
-                window.location.reload();
-            }
+            $form.trigger('submit');
+            $form.off('submit');
         });
-    
-        event.preventDefault();
-        event.stopImmediatePropagation();
-    });
+  }
 
-    $form.trigger('submit');
-    $form.off('submit');
 });
 
 //--------------------------------------------------------------------------------
