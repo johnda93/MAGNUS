@@ -74,7 +74,7 @@ class super_controller
 	{
 		if (is_empty($this->session) || $this->session['usuario']['tipo'] != 'admin') {
 			$_SESSION['permisos'] = false;
-			header("Location: " . $gvar['l_global'] . "login.php");
+			header("Location: " . $gvar['l_global'] . "index.php");
 			return;
 		}
 	}

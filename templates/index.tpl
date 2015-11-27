@@ -95,5 +95,7 @@
       			{/section}
       		</ul>
       	</div>
+
+      	<input value={$permisos} id="permiso-login" name="permiso-login" type="hidden">
 	</div>
 </main>
