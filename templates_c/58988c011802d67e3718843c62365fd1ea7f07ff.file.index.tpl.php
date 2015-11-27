@@ -1,27 +1,35 @@
+<<<<<<< HEAD
 <?php /* Smarty version Smarty-3.0.9, created on 2015-11-27 12:51:11
+=======
+<?php /* Smarty version Smarty-3.0.9, created on 2015-11-27 06:58:39
+>>>>>>> consultar_asignatura
          compiled from "C:/xampp/htdocs/MAGNUS/templates\index.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:1754256577c8f0ea545-09455223%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:93755657d146627f30-85964919%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '58988c011802d67e3718843c62365fd1ea7f07ff' => 
     array (
       0 => 'C:/xampp/htdocs/MAGNUS/templates\\index.tpl',
+<<<<<<< HEAD
       1 => 1448624649,
+=======
+      1 => 1448603034,
+>>>>>>> consultar_asignatura
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '1754256577c8f0ea545-09455223',
+  'nocache_hash' => '93755657d146627f30-85964919',
   'function' => 
   array (
   ),
   'has_nocache_code' => false,
 )); /*/%%SmartyHeaderCode%%*/?>
 <main>
-	<div id="div-principal-login" class="white">
+	<div id="div-principal-login">
 		<div class="row">
 			<div class="col s3">
-				<div class="login-item z-depth-1"> 
+				<div class="white login-item z-depth-1"> 
 					<b>Iniciar Sesión</b> 
 				
 					<div class="row"> 
@@ -44,30 +52,25 @@ login.php" method="POST">
 						<div class="row botones-inferiores-login">
 							<div class="col s12">
 								<div class="container">
-									<a id="conf-login" class="waves-effect waves-light green lighten-1 btn" >
-													<i class="material-icons left">vpn_key</i>
-													Entrar
-												</a>
+									<a id="conf-login" class="waves-effect waves-light green lighten-1 btn">
+										<i class="material-icons left">vpn_key</i>Entrar
+									</a>
 								</div>
 							</div>
 
 							<div class="col s12">
 								<div class="container">
 									<a id="conf-registrarse" class="waves-effect waves-light green lighten-1 btn boton-registrarse" href="#modal-registrarse">
-													<i class="material-icons left">person_add</i>
-													Registrarse
-												</a>
+										<i class="material-icons left">person_add</i>Registrarse
+									</a>
 								</div>
 							</div>
 						</div>
 					</div> 
 				</div>
-
       		</div>
 
-
-
-      		<div style="padding-top: 324px"class="col s9 z-depth-1 login-item">
+      		<div style="padding-top: 324px" class="col s9 white z-depth-1 login-item">
        			<label for="contraseña">MAGNUS</label>  		
       		</div>
 		</div>
@@ -75,27 +78,31 @@ login.php" method="POST">
 		<div id="modal-registrarse" class="modal" style="width: 45%;">
 			<div class="modal-content">
 				<h5>Registro</h5>
+
 				<form class="col s12" action="<?php echo $_smarty_tpl->getVariable('gvar')->value['l_global'];?>
 registro.php" method="POST"> 
-							<div class="row"> 
-								<div class="input-field col s12"> 
-									<i class="mdi-action-account-circle prefix"></i> 
-									<input id="nombre_registro" name="nombre_registro" type="text" class="validate"> 
-									<label for="nombre_registro">Nombre de usuario</label> 
-								</div> 
-								<div class="input-field col s12"> 
-									<i class="mdi-action-https prefix"></i> 
-									<input id="contraseña_registro" name="contraseña_registro" type="password" class="validate"> 
-									<label for="contraseña_registro">Contraseña</label> 
-								</div> 
-								<div class="input-field col s12"> 
-									<i class="mdi-action-https prefix"></i> 
-									<input id="contraseña2_registro" name="contraseña2_registro" type="password" class="validate"> 
-									<label for="contraseña2_registro">Repita la Contraseña</label> 
-								</div> 
-							</div> 
-						</form> 
+					<div class="row"> 
+						<div class="input-field col s12"> 
+							<i class="mdi-action-account-circle prefix"></i> 
+							<input id="nombre_registro" name="nombre_registro" type="text" class="validate"> 
+							<label for="nombre_registro">Nombre de usuario</label> 
+						</div> 
+
+						<div class="input-field col s12"> 
+							<i class="mdi-action-https prefix"></i> 
+							<input id="contraseña_registro" name="contraseña_registro" type="password" class="validate"> 
+							<label for="contraseña_registro">Contraseña</label> 
+						</div> 
+
+						<div class="input-field col s12"> 
+							<i class="mdi-action-https prefix"></i> 
+							<input id="contraseña2_registro" name="contraseña2_registro" type="password" class="validate"> 
+							<label for="contraseña2_registro">Repita la Contraseña</label> 
+						</div>
+					</div> 
+				</form> 
 			</div>
+
 			<div class="modal-footer">
 				<a id="conf-registro" class="modal-action waves-effect waves-green btn-flat" href="#!">Registrarse</a>
 				<a class="modal-action modal-close waves-effect waves-green btn-flat" href="#!">Cancelar</a>
@@ -130,11 +137,11 @@ $_smarty_tpl->tpl_vars['smarty']->value['section']['i']['index_next'] = $_smarty
 $_smarty_tpl->tpl_vars['smarty']->value['section']['i']['first']      = ($_smarty_tpl->tpl_vars['smarty']->value['section']['i']['iteration'] == 1);
 $_smarty_tpl->tpl_vars['smarty']->value['section']['i']['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']['i']['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']['i']['total']);
 ?>
-      				<a href="#"><li><?php echo $_smarty_tpl->getVariable('carreras')->value[$_smarty_tpl->getVariable('smarty')->value['section']['i']['index']]->get('nombre');?>
+      				<a href="index_carrera.php?id=<?php echo $_smarty_tpl->getVariable('carreras')->value[$_smarty_tpl->getVariable('smarty')->value['section']['i']['index']]->get('id');?>
+"><li><?php echo $_smarty_tpl->getVariable('carreras')->value[$_smarty_tpl->getVariable('smarty')->value['section']['i']['index']]->get('nombre');?>
 </li></a>
       			<?php endfor; endif; ?>
       		</ul>
       	</div>
-
 	</div>
 </main>

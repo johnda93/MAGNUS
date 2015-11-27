@@ -154,6 +154,34 @@ class db
 				break;
 			}
 			break;
+
+			case "opinion_asignatura":
+			switch($options['lvl2'])
+			{
+				case "normal": 
+					$asignatura = $object->get('asignatura');
+					$usuario = $object->get('usuario');
+					$comentario = $object->get('comentario');
+					$rating = $object->get('rating');
+
+					$this->do_operation("INSERT INTO opinion_asignatura(asignatura, usuario, comentario, rating) VALUES('$asignatura', '$usuario', '$comentario', '$rating');");	
+				break;
+			}
+			break;
+
+			case "opinion_profesor":
+			switch($options['lvl2'])
+			{
+				case "normal": 
+					$profesor = $object->get('profesor');
+					$usuario = $object->get('usuario');
+					$comentario = $object->get('comentario');
+					$rating = $object->get('rating');
+
+					$this->do_operation("INSERT INTO opinion_profesor(profesor, usuario, comentario, rating) VALUES('$profesor', '$usuario', '$comentario', '$rating');");	
+				break;
+			}
+			break;
 			
 			default: break;
 		}
@@ -309,6 +337,19 @@ class db
 			}
 			break;
 
+			case "pensum":
+			switch($options['lvl2'])
+			{
+				case "by_carrera": 
+					$this->escape_string($data);
+					$carrera = $data['carrera'];
+					$asignatura = $data['asignatura'];
+					$info = $this->get_data("SELECT p.*, a.nombre AS nombre_asignatura FROM pensum p, asignatura a WHERE p.carrera = '$carrera' AND a.id = '$asignatura';");	
+
+				break;
+			}
+			break;
+
 			case "asignatura":
 			switch($options['lvl2'])
 			{
@@ -320,6 +361,12 @@ class db
 					$this->escape_string($data);
 					$id = $data['id'];
 					$info = $this->get_data("SELECT * FROM asignatura WHERE id = '$id';");	
+				break;
+
+				case "by_carrera": 
+					$this->escape_string($data);
+					$carrera = $data['carrera'];
+					$info = $this->get_data("SELECT a.*, p.componente AS componente, p.obligatoria AS obligatoria FROM asignatura a,carrera c, pensum p WHERE p.asignatura=a.id AND c.id='$carrera' AND p.carrera=c.id;");	
 				break;
 			}
 			break;
@@ -353,17 +400,6 @@ class db
 			}
 			break;
 
-			case "dia":
-			switch($options['lvl2'])
-			{
-				case "by_grupo": 
-					$this->escape_string($data);
-					$grupo = $data['grupo'];
-					$info = $this->get_data("SELECT * FROM dia WHERE grupo = '$grupo';");	
-				break;
-			}
-			break;
-
 			case "profesor":
 			switch($options['lvl2'])
 			{
@@ -375,6 +411,42 @@ class db
 					$this->escape_string($data);
 					$id = $data['id'];
 					$info = $this->get_data("SELECT * FROM profesor WHERE id = '$id';");	
+				break;
+			}
+			break;
+
+			case "opinion_profesor":
+			switch($options['lvl2'])
+			{
+				case "by_profesor": 
+					$this->escape_string($data);
+					$profesor = $data['profesor'];
+					$info = $this->get_data("SELECT * FROM opinion_profesor WHERE profesor = '$profesor';");	
+				break;
+
+				case "by_usuario_profesor": 
+					$this->escape_string($data);
+					$usuario = $data['usuario'];
+					$profesor = $data['profesor'];
+					$info = $this->get_data("SELECT * FROM opinion_profesor WHERE usuario = '$usuario' AND profesor = '$profesor';");	
+				break;
+			}
+			break;
+
+			case "opinion_asignatura":
+			switch($options['lvl2'])
+			{
+				case "by_asignatura": 
+					$this->escape_string($data);
+					$asignatura = $data['asignatura'];
+					$info = $this->get_data("SELECT * FROM opinion_asignatura WHERE asignatura = '$asignatura';");	
+				break;
+
+				case "by_usuario_asignatura": 
+					$this->escape_string($data);
+					$usuario = $data['usuario'];
+					$asignatura = $data['asignatura'];
+					$info = $this->get_data("SELECT * FROM opinion_asignatura WHERE usuario = '$usuario' AND asignatura = '$asignatura';");	
 				break;
 			}
 			break;
