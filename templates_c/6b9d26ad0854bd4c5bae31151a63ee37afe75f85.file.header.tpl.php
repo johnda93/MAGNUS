@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.9, created on 2015-11-27 04:15:08
+<?php /* Smarty version Smarty-3.0.9, created on 2015-11-27 05:14:34
          compiled from "C:/xampp/htdocs/MAGNUS/templates\header.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:151235657a432a4f311-74689113%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:205545657d8aa011721-11329702%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '6b9d26ad0854bd4c5bae31151a63ee37afe75f85' => 
     array (
       0 => 'C:/xampp/htdocs/MAGNUS/templates\\header.tpl',
-      1 => 1448593909,
+      1 => 1448597671,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '151235657a432a4f311-74689113',
+  'nocache_hash' => '205545657d8aa011721-11329702',
   'function' => 
   array (
   ),
@@ -41,36 +41,15 @@ css/estilos.css); </style>
 
 <body class="white">
     <header>
-    <div class="logo"></div>
+    <div class="logo">
+        <a href="<?php echo $_smarty_tpl->getVariable('gvar')->value['l_global'];?>
+">
+            <img src="<?php echo $_smarty_tpl->getVariable('gvar')->value['l_global'];?>
+/images/logo.png">
+        </a>
+    </div>
 
         <nav class="green lighten-1">
-            <div class="nav-wrapper">
-                <!--<a href="#" class="brand-logo">MAGNUS: Administración</a>-->
-                
-                <ul class="right hide-on-med-and-down">
-                    <li>
-                        <a class="dropdown-button" href="#!" data-activates="dropdown1">
-                            Opción Busqueda<i class="material-icons right">arrow_drop_down</i>
-                        </a>
-                    </li>
-                </ul>
-
-                <div class="right barra-busqueda">
-                    <form>
-                        <div class="input-field">
-                            <input id="search" type="search" placeholder="Seleccione la opción de busqueda" data-activates='dropdown1' required>
-                            <label for="search"><i class="material-icons">search</i></label>
-                            <i class="material-icons">close</i>
-
-                            <ul id='dropdown1' class='dropdown-content'>
-    <li><a href="#!">one</a></li>
-    <li><a href="#!">two</a></li>
-    <li class="divider"></li>
-    <li><a href="#!">three</a></li>
-  </ul>
-                        </div>
-                    </form>
-                </div>
-            </div>
+            <div class="nav-wrapper"></div>
         </nav>
     </header>

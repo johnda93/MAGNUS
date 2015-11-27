@@ -22,7 +22,9 @@
 						{$profesor->components['grupo']['p1_g'][i]->get('id')}
 					</td>
 					<td>
-						{$profesor->components['grupo']['p1_g'][i]->auxiliars['nombre_asignatura']}
+						<a href="asignatura.php?id={$profesor->components['grupo']['p1_g'][i]->get('asignatura')}">
+							{$profesor->components['grupo']['p1_g'][i]->auxiliars['nombre_asignatura']}
+						</a>
 					</td>
 					<td>
 						{section loop = $horarios1[i] name = j}
@@ -44,7 +46,9 @@
 						{$profesor->components['grupo']['p2_g'][i]->get('id')}
 					</td>
 					<td>
-						{$profesor->components['grupo']['p2_g'][i]->auxiliars['nombre_asignatura']}
+						<a href="asignatura.php?id={$profesor->components['grupo']['p2_g'][i]->get('asignatura')}">
+							{$profesor->components['grupo']['p2_g'][i]->auxiliars['nombre_asignatura']}
+						</a>
 					</td>
 					<td>
 						{section loop = $horarios2[i] name = j}

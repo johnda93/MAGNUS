@@ -19,36 +19,13 @@
 
 <body class="white">
     <header>
-    <div class="logo"></div>
+    <div class="logo">
+        <a href="{$gvar.l_global}">
+            <img src="{$gvar.l_global}/images/logo.png">
+        </a>
+    </div>
 
         <nav class="green lighten-1">
-            <div class="nav-wrapper">
-                <!--<a href="#" class="brand-logo">MAGNUS: Administración</a>-->
-                
-                <ul class="right hide-on-med-and-down">
-                    <li>
-                        <a class="dropdown-button" href="#!" data-activates="dropdown1">
-                            Opción Busqueda<i class="material-icons right">arrow_drop_down</i>
-                        </a>
-                    </li>
-                </ul>
-
-                <div class="right barra-busqueda">
-                    <form>
-                        <div class="input-field">
-                            <input id="search" type="search" placeholder="Seleccione la opción de busqueda" data-activates='dropdown1' required>
-                            <label for="search"><i class="material-icons">search</i></label>
-                            <i class="material-icons">close</i>
-
-                            <ul id='dropdown1' class='dropdown-content'>
-    <li><a href="#!">one</a></li>
-    <li><a href="#!">two</a></li>
-    <li class="divider"></li>
-    <li><a href="#!">three</a></li>
-  </ul>
-                        </div>
-                    </form>
-                </div>
-            </div>
+            <div class="nav-wrapper"></div>
         </nav>
     </header>
